@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 import {auth} from '../../Firebase/index'
+import firebase from 'firebase'
 require('./cssForms.css')
 
 
@@ -25,6 +26,15 @@ export default class LogIn extends Component {
     handleSubmit(event) {
         event.preventDefault()
         auth.logIn(this.state.email, this.state.password)
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(()=>(
+            auth.logIn(this.state.email, this.state.password)
+        ))
+        const user = firebase.auth().currentUser
+        if(user){
+            this.props.history.push('/homepage');
+        }else{
+            this.props.history.push('/login')
+        }
     }
     render() {
             return (
