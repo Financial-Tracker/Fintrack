@@ -27,6 +27,7 @@ export default class SignUp extends Component {
     handleOnSubmit(evt){
         evt.preventDefault()
         auth.createUser(this.state.email, this.state.password)
+        this.props.history.push('/homepage')
         console.log(this.state)
 
     }
