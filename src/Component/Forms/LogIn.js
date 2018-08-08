@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
-import {auth} from '../../Firebase/index'
 import firebase from 'firebase'
+import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import {auth,googleAuth} from '../../Firebase/index'
 require('./cssForms.css')
 
 
@@ -15,6 +15,13 @@ export default class LogIn extends Component {
         }
         this.handleChanger = this.handleChanger.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleClick = this.handleClick.bind(this)
+
+    }
+    async handleClick(){
+        await googleAuth.googleLogIn() //persistent!!!
+        const user = firebase.auth().currentUser
+        user ? this.props.history.push('/homepage') : this.props.history.push('/login')
     }
 
     handleChanger(event){
@@ -24,7 +31,7 @@ export default class LogIn extends Component {
     }
 
     handleSubmit(event) {
-        event.preventDefault()
+        event.preventDefault()  
         auth.logIn(this.state.email, this.state.password)
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(()=>(
             auth.logIn(this.state.email, this.state.password)
@@ -64,7 +71,8 @@ export default class LogIn extends Component {
                             name='password'
                             value={this.state.password}
                         />
-                        <Button color='blue' fluid size='large' type='submit'>Login</Button>
+                        <Button color='blue' fluid size='large' name = "login" type='submit'>Login</Button>
+                        <Button color='green' fluid size='large' onClick={this.handleClick}>Login with Google</Button>
                     </Segment>
                         </Form>
                     <Message> New to us? <a href='#/signup'>Sign Up</a></Message>
