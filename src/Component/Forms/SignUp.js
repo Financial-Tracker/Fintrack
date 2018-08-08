@@ -6,6 +6,7 @@ export default class SignUp extends Component {
   render() {
     return (
         <div className='container'>
+        <div className='forms'>
         <Form>
         <Form.Field>
                 <label>First Name</label>
@@ -25,6 +26,7 @@ export default class SignUp extends Component {
             </Form.Field>
             {true ? <Button type='submit'>Submit</Button> : <Button basic loading type='submit'>Submit</Button>}
         </Form>
+        </div>
         </div>
     )
   }

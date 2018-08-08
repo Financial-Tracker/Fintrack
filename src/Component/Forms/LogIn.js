@@ -7,6 +7,7 @@ export default class LogIn extends Component {
     render() {
         return (
         <div className='container'>
+        <div className='forms'>
         <Form>
             <Form.Field>
                 <label>Email</label>
@@ -18,6 +19,7 @@ export default class LogIn extends Component {
             </Form.Field>
             {true ? <Button type='submit'>Submit</Button> : <Button basic loading type='submit'>Submit</Button>}
         </Form>
+        </div>
         </div>
         )
     }
