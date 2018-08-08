@@ -7,16 +7,18 @@ provider.addScope('https://www.googleapis.com/auth/calendar')
 
 export const googleLogIn = async () => {
   try {
-    await request = firebase.auth().signInWithPopup(provider);
-    // await auth.signInWithPopup(provider)
-    var token = request.credential.accessToken;
-    var user = request.user;
+   await firebase.auth().signInWithPopup(provider);
+
+    // var token = request.credential.accessToken;
+    // var user = request.user;
   } catch (error) {
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    var credential = err.credential;
+    // var errorCode = error.code;
+    // var errorMessage = error.message;
+    // var credential = error.credential;
+    console.error(error)
   }
 }
+
 
 // firebase.auth().signInWithPopup(provider).then(result => {
 //   // This gives you a Google Access Token. You can use it to access the Google API.
