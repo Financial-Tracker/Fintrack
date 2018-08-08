@@ -4,10 +4,20 @@ import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui
 require('./cssForms.css')
 
 
-
 export default class LogIn extends Component {
-    
-    render() {
+
+    constructor(){
+        super()
+        this.state = {
+
+        }
+        this.handleChanger = this.handleChanger.bind(this)
+    }
+
+    handleChanger(evt){
+        console.log(evt)
+    }
+render() {
         return (
                 <div className='login-form'>
                 <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
@@ -15,7 +25,7 @@ export default class LogIn extends Component {
                     <Header as='h2' color='blue' textAlign='center'>
                     Log-in to your account
                     </Header>
-                    <Form size='large'>
+                    <Form size='large' onChange={this.handleChanger}>
                     <Segment stacked>
                         <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' />
                         <Form.Input
@@ -25,7 +35,6 @@ export default class LogIn extends Component {
                         placeholder='Password'
                         type='password'
                         />
-            
                         <Button color='blue' fluid size='large'>
                         Login
                         </Button>
