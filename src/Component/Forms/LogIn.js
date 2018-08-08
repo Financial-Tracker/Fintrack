@@ -38,7 +38,7 @@ export default class LogIn extends Component {
     }
     render() {
             return (
-                <div className='login-form'>
+                <div className='login-form forms'>
                 <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
                 <Grid.Column style={{ maxWidth: 450 }}>
                     <Header as='h2' color='blue' textAlign='center'>
