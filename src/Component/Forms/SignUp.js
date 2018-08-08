@@ -25,7 +25,7 @@ export default class SignUp extends Component {
     handleOnSubmit(evt){
         evt.preventDefault()
         console.log(this.state)
-        
+
     }
 render() {
     return (
@@ -55,7 +55,7 @@ render() {
                 </Segment>
                 </Form>
                 <Message>
-                New to us? <a href='#'>Sign Up</a>
+                Have an account ? <a href='#'>Log in</a>
                 </Message>
             </Grid.Column>
             </Grid>
