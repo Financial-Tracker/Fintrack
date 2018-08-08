@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import {auth} from '../../Firebase/index'
+
 
 require('./cssForms.css')
 
@@ -24,6 +26,7 @@ export default class SignUp extends Component {
     }
     handleOnSubmit(evt){
         evt.preventDefault()
+        auth.createUser(this.state.email, this.state.password)
         console.log(this.state)
 
     }
@@ -50,7 +53,7 @@ render() {
                     />
         
                     <Button color='blue' fluid size='large'>
-                    Login
+                    Sign up
                     </Button>
                 </Segment>
                 </Form>
