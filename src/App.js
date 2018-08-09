@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
+import { Provider } from 'react-redux'
 import "./App.css";
 import LogIn from "./Component/Forms/LogIn";
 import SignUp from "./Component/Forms/SignUp";
@@ -11,11 +12,13 @@ import firebase from "firebase";
 import { withAuth } from "fireview";
 import HomepageLayout from "./Component/Pages/HomepageHeading";
 import Plaid from "./Component/Pages/Plaid";
+import store from './Store'
 
 class App extends Component {
   render() {
     console.log(this.props);
     return (
+      <Provider store={store}>
       <HashRouter>
         <div className="App">
           <Route exact path="/login" component={LogIn} />
@@ -35,6 +38,7 @@ class App extends Component {
           )}
         </div>
       </HashRouter>
+      </Provider>
     );
   }
 }
