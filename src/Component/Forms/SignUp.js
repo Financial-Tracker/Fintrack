@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react'
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 import {auth} from '../../Firebase/index'
@@ -7,6 +8,8 @@ import {valid} from './validation'
 
 require('./cssForms.css')
 
+
+require("./cssForms.css");
 
 export default class SignUp extends Component {
     constructor(){
@@ -58,9 +61,9 @@ export default class SignUp extends Component {
                 error : true
             })
         }
-
     }
-render() {
+  
+  render() {
     return (
             <div className='login-form'>
             <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
@@ -126,4 +129,4 @@ render() {
         </div>
         )
     }
-    }
+  }
