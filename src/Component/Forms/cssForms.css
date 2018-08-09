@@ -18,3 +18,7 @@ body > div > div > div.login-form {
 .mainPage {
     background-color: aqua;
 }
+
+.error {
+    color: red;
+} 

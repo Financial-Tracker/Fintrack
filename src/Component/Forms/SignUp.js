@@ -3,6 +3,7 @@ import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui
 import {auth} from '../../Firebase/index'
 import firebase from 'firebase'
 
+import {valid} from './validation'
 
 require('./cssForms.css')
 
@@ -14,28 +15,48 @@ export default class SignUp extends Component {
             firstName : '',
             lastName: '',
             email : '',
-            password: ''
+            password: '',
+            Cpassword : '',
+            error : false
         }
+
         this.handleOnChange = this.handleOnChange.bind(this)
         this.handleOnSubmit = this.handleOnSubmit.bind(this)
     }
 
     handleOnChange(evt){
+
+        // if (valid(evt) && evt.target.name !== 'Cpassword'){
+        //     console.log(evt.target.name)
+        //     console.log(evt.target.value)
+        // }
+        this.setState({
+            error:false
+        })
         this.setState({
             [evt.target.name] : evt.target.value
         })
     }
     handleOnSubmit(evt){
         evt.preventDefault()
+        if((valid(this.state.firstName,'firstName') && valid(this.state.lastName,"lastName")) && (valid(this.state.email,"email") && valid(this.state.password,"password") && (this.state.password === this.state.Cpassword))) {
+            // if all information are valid
         auth.createUser(this.state.email, this.state.password)
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(()=>(
             auth.logIn(this.state.email, this.state.password)
         ))
         const user = firebase.auth().currentUser
+        console.log(user)
         if(user){
             this.props.history.push('/homepage');
         }else{
             this.props.history.push('/login')
+        }
+
+        }else {
+            this.setState({
+                error : true
+            })
         }
 
     }
@@ -47,11 +68,31 @@ render() {
                 <Header as='h2' color='blue' textAlign='center'>
                 Sign up
                 </Header>
+                {this.state.error ? <h3 className='error'>Please make sure all information are valid</h3> : null}
                 <Form size='large' onChange={this.handleOnChange} onSubmit={this.handleOnSubmit}>
                 <Segment stacked>
-                    <Form.Input name='firstName' fluid icon='user' iconPosition='left' placeholder='First Name' />
-                    <Form.Input name='lastName'fluid icon='user' iconPosition='left' placeholder='Last Name' />
+                {/* first name  */}
+                    {valid(this.state.firstName,"firstName") ? null : <p className='error'>Enter a valid first name </p> }
+                    <Form.Input 
+                    name='firstName'
+                    fluid icon='user' 
+                    iconPosition='left' 
+                    placeholder='First Name' />
+
+
+                    {valid(this.state.lastName,"lastName") ? null : <p className='error'>Enter a valid first name </p>}
+                    <Form.Input 
+                    name='lastName'
+                    fluid icon='user' 
+                    iconPosition='left' 
+                    placeholder='Last Name' />
+
+
+                    {valid(this.state.email,"email") ? null : <p className='error'>Enter a valid email </p>}
                     <Form.Input name='email' fluid icon='user' iconPosition='left' placeholder='E-mail address' />
+
+
+                    {valid(this.state.password,"password") ? null : <p className='error'>Password must be within the length of 8-20</p>}
                     <Form.Input
                     fluid
                     icon='lock'
@@ -60,8 +101,19 @@ render() {
                     type='password'
                     name='password'
                     />
-        
-                    <Button color='blue' fluid size='large'>
+                    
+                    {/* <p className='error'> Password does not match</p> */}
+                    {this.state.password === this.state.Cpassword ? null :  <p className='error'> Password does not match</p>}
+                    <Form.Input
+                    fluid
+                    icon='lock'
+                    iconPosition='left'
+                    placeholder='Confirm Password'
+                    type='password'
+                    name='Cpassword'
+                    />
+    
+                    <Button  color='blue' fluid size='large'>
                     Sign up
                     </Button>
                 </Segment>
