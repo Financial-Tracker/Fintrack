@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PlaidLink from "react-plaid-link";
 import axios from "axios";
-const path = "http://172.16.21.8:8000";
+const path = "http://localhost:8000";
 
 export default class Plaid extends Component {
   state = {
