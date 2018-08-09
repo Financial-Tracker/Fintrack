@@ -9,6 +9,8 @@
     "express": "^4.16.3",
     "firebase": "^5.3.1",
     "plaid": "^2.7.0",
+    "fireview": "0.0.8",
+    "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-plaid": "^0.5.0",
@@ -17,7 +19,8 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "semantic-ui-react": "^0.82.2",
-    "volleyball": "^1.5.1"
+    "volleyball": "^1.5.1",
+    "semantic-ui-css": "^2.3.3"
   },
   "scripts": {
     "start-plaid": "nodemon ./server/index.js",
