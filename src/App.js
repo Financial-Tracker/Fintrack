@@ -20,10 +20,16 @@ class App extends Component {
         <div className="App">
           <Route exact path="/login" component={LogIn} />
           <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/api" component={Plaid} />
+
+          
+          {this.props._user ? (
+            <Route exact path="/plaid" component={Plaid} />
+          ) : (
+            <Route exact path="/" component={LogIn} />
+          )}
 
           {this.props._user ? (
-            <Route exact path="/homepage" component={HomePage} />
+            <Route exact path="/homepage" component={HomepageLayout} />
           ) : (
             <Route exact path="/" component={LogIn} />
           )}
