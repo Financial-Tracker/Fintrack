@@ -9,6 +9,8 @@ import {HashRouter, Link, Route} from 'react-router-dom'
 import {auth} from './Firebase/index'
 import firebase from 'firebase'
 import {withAuth} from 'fireview'
+import HomepageLayout from './Component/Pages /HomepageHeading'
+
 
 
 class App extends Component {
@@ -21,8 +23,6 @@ class App extends Component {
           <Route exact path = "/login" component = {LogIn} />
           <Route exact path = "/signup" component = {SignUp} />
           {this.props._user? <Route exact path = "/homepage" component = {HomePage} />: <Route exact path = "/" component = {LogIn} />}
-          
-
         </div>
       </HashRouter>
     );

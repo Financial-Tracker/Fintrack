@@ -68,6 +68,7 @@ export default class LogIn extends Component {
                             iconPosition='left'
                             placeholder='Password'
                             onChange={this.handleChanger}
+                            type='password'
                             name='password'
                             value={this.state.password}
                         />
