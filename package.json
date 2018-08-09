@@ -3,17 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
     "firebase": "^5.3.1",
+    "plaid": "^2.7.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-plaid": "^0.5.0",
     "react-plaid-link": "^1.0.2",
     "react-responsive": "^5.0.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
-    "semantic-ui-react": "^0.82.2"
+    "semantic-ui-react": "^0.82.2",
+    "volleyball": "^1.5.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start-plaid": "nodemon ./server/index.js",
+    "start": "react-scripts start ",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import PlaidLink from "react-plaid-link";
+import axios from "axios";
+const path = "http://172.16.21.8:8000";
 
 export default class Plaid extends Component {
   state = {
@@ -42,18 +44,30 @@ export default class Plaid extends Component {
   onLoadEnd = props => {
     console.log("onLoadEnd", props);
   };
-  onSuccess = (token, metadata) => {
+  onSuccess = async (token, metadata) => {
+    console.log();
     console.log("onSuccess", token);
     console.log(metadata, "arg");
-    fetch("/get_access_token", {
-      method: "POST",
-      body: {
-        public_token: public_token,
-        accounts: metadata.accounts,
-        institution: metadata.institution,
-        link_session_id: metadata.link_session_id
-      }
+
+    const { data } = await axios.post(`${path}/get_access_token`, {
+      public_token: token
+      // public_token: metadata.public_token
+      // accounts: metadata.accounts,
+      // institution: metadata.institution,
+      // link_session_id: metadata.link_session_id
     });
+
+    // console.log(data);
+
+    //   fetch(`${path}/get_access_token`, {
+    //     method: "POST",
+    //     body: {
+    //       public_token: metadata.public_token,
+    //       accounts: metadata.accounts,
+    //       institution: metadata.institution,
+    //       link_session_id: metadata.link_session_id
+    //     }
+    //   });
   };
   onMessage = data => {
     console.log(data);
@@ -84,11 +98,12 @@ export default class Plaid extends Component {
   };
 
   renderLogin() {
+    console.log("Plaid.renderLogin", this);
     return (
       <PlaidLink
         clientName="Fintrack"
         onMessage={this.onMessage}
-        publicKey="eecc6d6382543dbee6478afbc5879b"
+        publicKey="faa176d98c3dd1ab8813a01cc0bc8f"
         env="sandbox"
         product={["auth", "transactions"]}
         onLoad={this.onLoad}
