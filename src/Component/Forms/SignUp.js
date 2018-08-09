@@ -14,6 +14,7 @@ import {firestore} from '../../Firebase/firebase'
 import {valid} from "./validation"
 require("./cssForms.css");
 
+
 export default class SignUp extends Component {
     constructor(){
         super()
@@ -68,8 +69,9 @@ export default class SignUp extends Component {
                 error : true
             })
         }
+
     }
-  
+
   render() {
     return (
             <div className='login-form'>
@@ -82,7 +84,7 @@ export default class SignUp extends Component {
                 <Form size='large' onChange={this.handleOnChange} onSubmit={this.handleOnSubmit}>
                 <Segment stacked>
                 {/* first name  */}
-                    {valid(this.state.firstName,"firstName") ? null : <p className='error'>Enter a valid first name </p> }
+                    {this.state.firstName.length > 0 ? valid(this.state.firstName,"firstName") ? null : <p className='error'>Enter a valid first name </p> : null }
                     <Form.Input 
                     name='firstName'
                     fluid icon='user' 
@@ -90,7 +92,7 @@ export default class SignUp extends Component {
                     placeholder='First Name' />
 
 
-                    {valid(this.state.lastName,"lastName") ? null : <p className='error'>Enter a valid first name </p>}
+                    {this.state.lastName.length > 0 ? valid(this.state.lastName,"lastName") ? null : <p className='error'>Enter a valid first name </p> : null }
                     <Form.Input 
                     name='lastName'
                     fluid icon='user' 
@@ -98,11 +100,11 @@ export default class SignUp extends Component {
                     placeholder='Last Name' />
 
 
-                    {valid(this.state.email,"email") ? null : <p className='error'>Enter a valid email </p>}
+                    {this.state.email.length > 0 ? valid(this.state.email,"email") ? null : <p className='error'>Enter a valid email </p> : null}
                     <Form.Input name='email' fluid icon='user' iconPosition='left' placeholder='E-mail address' />
 
 
-                    {valid(this.state.password,"password") ? null : <p className='error'>Password must be within the length of 8-20</p>}
+                    {this.state.password.length > 0 ? valid(this.state.password,"password") ? null : <p className='error'>Password must be within the length of 8-20</p> : null }
                     <Form.Input
                     fluid
                     icon='lock'
@@ -136,4 +138,4 @@ export default class SignUp extends Component {
         </div>
         )
     }
-  }
+}

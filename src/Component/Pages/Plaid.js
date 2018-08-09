@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PlaidLink from "react-plaid-link";
 import axios from "axios";
-const path = "http://172.16.21.8:8000";
+const path = "http://localhost:8000";
 
 export default class Plaid extends Component {
   state = {
@@ -50,12 +50,26 @@ export default class Plaid extends Component {
     console.log(metadata, "arg");
 
     const { data } = await axios.post(`${path}/get_access_token`, {
-      public_token: token
-      // public_token: metadata.public_token
-      // accounts: metadata.accounts,
-      // institution: metadata.institution,
-      // link_session_id: metadata.link_session_id
+      public_token: metadata.public_token,
+      accounts: metadata.accounts,
+      institution: metadata.institution,
+      link_session_id: metadata.link_session_id
     });
+    const authData = await axios.post(`${path}/auth/get`);
+    const auth = authData.data;
+    console.log(auth);
+    const transactionData = await axios.post(`${path}/transaction/get`);
+    const transaction = transactionData.data;
+    console.log(transaction);
+    const balanceData = await axios.post(`${path}/accounts/balance/get`);
+    const balance = balanceData.data;
+    console.log(balance);
+    const idData = await axios.post(`${path}/identity/get`);
+    const id = idData.data;
+    console.log(id);
+    const incomeData = await axios.post(`${path}/income/get`);
+    const income = incomeData.data;
+    console.log(income);
 
     // console.log(data);
 
