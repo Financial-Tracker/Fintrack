@@ -1,14 +1,17 @@
-
-import React, { Component } from 'react'
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
-import {auth} from '../../Firebase/index'
-import firebase from 'firebase'
-
-import {valid} from './validation'
-
-require('./cssForms.css')
-
-
+import React, { Component } from "react";
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Image,
+  Message,
+  Segment
+} from "semantic-ui-react";
+import { auth } from "../../Firebase";
+import firebase from "firebase";
+import {firestore} from '../../Firebase/firebase'
+import {valid} from "./validation"
 require("./cssForms.css");
 
 export default class SignUp extends Component {
@@ -45,9 +48,13 @@ export default class SignUp extends Component {
         if((valid(this.state.firstName,'firstName') && valid(this.state.lastName,"lastName")) && (valid(this.state.email,"email") && valid(this.state.password,"password") && (this.state.password === this.state.Cpassword))) {
             // if all information are valid
         auth.createUser(this.state.email, this.state.password)
-        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(()=>(
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
             auth.logIn(this.state.email, this.state.password)
-        ))
+            firestore.collection("user").add({
+                name: this.state.firstName + " " + this.state.lastName,
+                email: this.state.email
+            })
+        })
         const user = firebase.auth().currentUser
         console.log(user)
         if(user){
