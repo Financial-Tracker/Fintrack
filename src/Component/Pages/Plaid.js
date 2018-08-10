@@ -27,7 +27,7 @@ export default class Plaid extends Component {
   renderButton = () => {
     return (
       <div>
-        <button onClick={() => this.setState({ status: "" })} />
+        <button onClick={() => this.setState({ status: "" })} >Link Account</button>
         <p>Login with Plaid</p>
       </div>
     );
