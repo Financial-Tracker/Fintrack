@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import {
   Button,
   Container,
-  Divider,
   Grid,
   Header,
   Icon,
@@ -15,6 +14,8 @@ import {
   Sidebar,
   Visibility
 } from "semantic-ui-react";
+import {Link} from "react-router-dom";
+
 
 /* eslint-disable react/no-multi-comp */
 /* Heads up! HomepageHeading uses inline styling, however it's not the best practice. Use CSS or styled components for
@@ -47,10 +48,12 @@ const HomepageHeading = ({ mobile }) => (
         marginTop: mobile ? "0.5em" : "1.5em"
       }}
     />
-    <Button primary size="huge">
-      Connect Bank
-      <Icon name="right arrow" />
-    </Button>
+    <Link to= "/plaid">  
+      <Button primary size="huge">
+          Connect Bank
+        <Icon name="right arrow" />
+      </Button>
+    </Link>
   </Container>
 );
 
