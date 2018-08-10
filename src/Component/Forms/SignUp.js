@@ -4,7 +4,6 @@ import {
   Form,
   Grid,
   Header,
-  Image,
   Message,
   Segment
 } from "semantic-ui-react";
@@ -131,7 +130,7 @@ export default class SignUp extends Component {
                 </Segment>
                 </Form>
                 <Message>
-                Have an account ? <a href='#'>Log in</a>
+                Have an account ? <a href='/'>Log in</a>
                 </Message>
             </Grid.Column>
             </Grid>
