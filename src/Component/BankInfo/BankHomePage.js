@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-class BankCard extends React.Component{
+class BankHomePage extends React.Component{
     async componentDidMount(){
         console.log("YOOOOOO: ",this.props.plaidObj)
     }
