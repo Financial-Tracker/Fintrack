@@ -1,14 +1,10 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import { Provider } from 'react-redux'
 import "./App.css";
 import LogIn from "./Component/Forms/LogIn";
 import SignUp from "./Component/Forms/SignUp";
-import HomePage from "./Component/HomePage";
 // import HomePage from './Component/Pages /FirstPage'
 import { HashRouter, Link, Route } from "react-router-dom";
-import { auth } from "./Firebase";
-import firebase from "firebase";
 import { withAuth } from "fireview";
 import HomepageLayout from "./Component/Pages/HomepageHeading";
 import Plaid from "./Component/Pages/Plaid";
@@ -21,6 +17,7 @@ class App extends Component {
       <Provider store={store}>
       <HashRouter>
         <div className="App">
+          <Route exact path="/" component={LogIn} />
           <Route exact path="/login" component={LogIn} />
           <Route exact path="/signup" component={SignUp} />
 
