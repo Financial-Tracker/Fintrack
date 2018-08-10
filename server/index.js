@@ -61,7 +61,7 @@ app.post("/auth/get", (req, res, next) => {
       // Handle EFT numbers (Canadian accounts)
       var eftNumbers = results.numbers.eft;
     }
-    console.log("ACCOUNT DATA: ", accountData);
+    // console.log("ACCOUNT DATA: ", accountData);
     res.json(accountData);
   });
 });
@@ -89,7 +89,7 @@ app.post("/accounts/balance/get", (req, res, next) => {
     // Handle err
     // Each account has up-to-date balance information associated with it
     const item = result.accounts;
-    console.log("ITEM: ", item);
+    // console.log("ITEM: ", item);
     res.json(item);
   });
 });
