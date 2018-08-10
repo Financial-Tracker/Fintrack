@@ -4,7 +4,7 @@ import "./App.css";
 import LogIn from "./Component/Forms/LogIn";
 import SignUp from "./Component/Forms/SignUp";
 // import HomePage from './Component/Pages /FirstPage'
-import { HashRouter, Link, Route } from "react-router-dom";
+import { HashRouter, Route } from "react-router-dom";
 import { withAuth } from "fireview";
 import HomepageLayout from "./Component/Pages/HomepageHeading";
 import Plaid from "./Component/Pages/Plaid";

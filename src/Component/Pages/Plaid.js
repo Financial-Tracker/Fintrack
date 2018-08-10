@@ -49,7 +49,7 @@ export default class Plaid extends Component {
     console.log("onSuccess", token);
     console.log(metadata, "arg");
 
-    const { data } = await axios.post(`${path}/get_access_token`, {
+    await axios.post(`${path}/get_access_token`, {
       public_token: metadata.public_token,
       accounts: metadata.accounts,
       institution: metadata.institution,
