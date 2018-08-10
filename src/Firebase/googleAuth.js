@@ -1,5 +1,4 @@
 import * as firebase from 'firebase'
-import {auth} from './firebase'
 
 var provider = new firebase.auth.GoogleAuthProvider()
 provider.addScope('https://www.googleapis.com/auth/calendar')
