@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import PlaidLink from "react-plaid-link";
 import axios from "axios";
+import {getPlaid} from '../../Store/plaidContainer'
+import{connect} from 'react-redux'
 const path = "http://localhost:8000";
 
-export default class Plaid extends Component {
+
+class Plaid extends Component {
   state = {
     data: {},
     status: "LOGIN_BUTTON"
@@ -45,9 +48,8 @@ export default class Plaid extends Component {
     console.log("onLoadEnd", props);
   };
   onSuccess = async (token, metadata) => {
-    console.log();
     console.log("onSuccess", token);
-    console.log(metadata, "arg");
+    console.log('METADATA: ', metadata);
 
     await axios.post(`${path}/get_access_token`, {
       public_token: metadata.public_token,
@@ -57,20 +59,23 @@ export default class Plaid extends Component {
     });
     const authData = await axios.post(`${path}/auth/get`);
     const auth = authData.data;
-    console.log(auth);
+    console.log("AUTH: ", auth);
     const transactionData = await axios.post(`${path}/transaction/get`);
     const transaction = transactionData.data;
-    console.log(transaction);
+    console.log("TRANSACTION: ", transaction);
     const balanceData = await axios.post(`${path}/accounts/balance/get`);
     const balance = balanceData.data;
-    console.log(balance);
+    console.log("BALANCE: ", balance);
     const idData = await axios.post(`${path}/identity/get`);
     const id = idData.data;
     console.log(id);
     const incomeData = await axios.post(`${path}/income/get`);
     const income = incomeData.data;
-    console.log(income);
-
+    console.log("INCOME: ", income);
+    const plaidObj = {auth, transaction, balance, id, income}
+    console.log("FINAL OBJECT: ",plaidObj)
+    this.props.getPlaid(plaidObj);
+    this.props.history.push('/bankInfo')
     // console.log(data);
 
     //   fetch(`${path}/get_access_token`, {
@@ -143,6 +148,7 @@ export default class Plaid extends Component {
     );
   }
 
+
   // onMessage = data => {
   //   console.log(data)
   //   /*
@@ -167,3 +173,11 @@ export default class Plaid extends Component {
   //   this.setState({ data, status: data.action.substr(data.action.lastIndexOf(':') + 1).toUpperCase() });
   // };
 }
+
+const mapDisaptch = (dispatch)=>{
+  return{
+    getPlaid: (data)=>dispatch(getPlaid(data))
+  }
+}
+
+export default connect(null, mapDisaptch)(Plaid)
