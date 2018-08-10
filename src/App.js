@@ -12,7 +12,6 @@ import store from './Store'
 
 class App extends Component {
   render() {
-    console.log(this.props);
     return (
       <Provider store={store}>
       <HashRouter>
