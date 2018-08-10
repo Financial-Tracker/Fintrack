@@ -23,4 +23,4 @@ const mapState = (state)=>{
     }
 }
 
-export default connect(mapState)(BankCard)
+export default connect(mapState)(BankHomePage)
