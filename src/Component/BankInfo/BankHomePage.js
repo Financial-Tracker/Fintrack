@@ -1,8 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {firestore} from '../../Firebase/firebase'
+import firebase from 'firebase'
+
 
 class BankHomePage extends React.Component{
     async componentDidMount(){
+
         console.log("YOOOOOO: ",this.props.plaidObj)
     }
     render(){
@@ -15,9 +19,7 @@ class BankHomePage extends React.Component{
     }
 }
 
-
-
-const mapState = (state)=>{
+const mapState = (state)=> {
     return {
         plaidObj: state.plaidContainer
     }
