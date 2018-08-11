@@ -28,6 +28,7 @@ class App extends Component {
           <Route exact path = "/balance" component = {Balance} />
 
 
+
           
 
           {this.props._user ? (
