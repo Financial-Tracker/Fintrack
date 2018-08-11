@@ -10,6 +10,8 @@ import { withAuth } from "fireview";
 import Plaid from "./Component/Pages/Plaid";
 import store from './Store'
 import BankHomePage from './Component/BankInfo/BankHomePage'
+import Balance from './Component/BankInfo/BalanceInfo'
+
 
 // import MyComponent from './Component/Forms/Test'
 
@@ -23,6 +25,8 @@ class App extends Component {
           <Route exact path="/login" component={LogIn} />
           <Route exact path="/signup" component={SignUp} />
           <Route exact path = "/bankInfo" component = {BankHomePage}/>
+          <Route exact path = "/balance" component = {Balance} />
+
 
           
 
