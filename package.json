@@ -11,6 +11,7 @@
     "firebase-admin": "^5.13.1",
     "fireview": "0.0.8",
     "fusioncharts": "^3.13.1",
+    "nodemon": "^1.18.3",
     "plaid": "^2.7.0",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
