@@ -1,15 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import{getDataFromFireStore} from '../../Store/plaidContainer'
-import SingleBalance from './SingleBalance'
+import CardBalance from './CardBalance'
 
 
 let counter = 0
 
 class Balance extends React.Component{
-    constructor(){
-        super()
-    }
     async componentDidMount(){
         await this.props.getFireStore();
     }
@@ -22,7 +19,7 @@ class Balance extends React.Component{
                 <h1>Balance page</h1>
                 {counter>=3?<div>{this.props.plaidObj.balance.map(elem=>{
                     return(
-                        <SingleBalance 
+                        <CardBalance 
                         available={elem.balances.available} 
                         currency={elem.balances.iso_currency_code}
                         subtype={elem.subtype}
