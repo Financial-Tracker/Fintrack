@@ -15,6 +15,7 @@ import {
   Visibility
 } from "semantic-ui-react";
 import {Link} from "react-router-dom";
+import { auth } from "../../Firebase";
 
 
 /* eslint-disable react/no-multi-comp */
@@ -66,7 +67,16 @@ HomepageHeading.propTypes = {
     * It can be more complicated, but you can create really flexible markup.
     */
 class DesktopContainer extends Component {
-  state = {};
+  constructor(){
+    super()
+    this.state = {};
+    this.logOutHandler = this.logOutHandler.bind(this)
+  }
+
+  logOutHandler = () => {
+    console.log('Desktop Container')
+    auth.signOut();
+  }
 
   hideFixedMenu = () => this.setState({ fixed: false });
   showFixedMenu = () => this.setState({ fixed: true });
@@ -108,6 +118,7 @@ class DesktopContainer extends Component {
                     inverted={!fixed}
                     primary={fixed}
                     style={{ marginLeft: "0.5em" }}
+                    onClick={this.logOutHandler}
                   >
                     Log out
                   </Button>
@@ -130,6 +141,11 @@ DesktopContainer.propTypes = {
 
 class MobileContainer extends Component {
   state = {};
+
+  logOutHandler = () => {
+    console.log('Mobile Container', this.props)
+    auth.signOut();
+  }
 
   handlePusherClick = () => {
     const { sidebarOpened } = this.state;
@@ -160,7 +176,7 @@ class MobileContainer extends Component {
             <Menu.Item as="a">Place1</Menu.Item>
             <Menu.Item as="a">Place2</Menu.Item>
             <Menu.Item as="a">Place3</Menu.Item>
-            <Menu.Item as="a">Log out</Menu.Item>
+            <Menu.Item as="a" onClick={this.logOutHandler}>Log out</Menu.Item>
           </Sidebar>
 
           <Sidebar.Pusher
@@ -180,7 +196,7 @@ class MobileContainer extends Component {
                     <Icon name="sidebar" />
                   </Menu.Item>
                   <Menu.Item position="right">
-                    <Button as="a" inverted>
+                    <Button as="a" inverted onClick={this.logOutHandler}>
                       Log out
                     </Button>
                   </Menu.Item>

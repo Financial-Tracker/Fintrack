@@ -10,11 +10,13 @@
     "firebase": "^5.3.1",
     "firebase-admin": "^5.13.1",
     "fireview": "0.0.8",
+    "fusioncharts": "^3.13.1",
     "nodemon": "^1.18.3",
     "plaid": "^2.7.0",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-fusioncharts": "^2.0.1",
     "react-plaid": "^0.5.0",
     "react-plaid-link": "^1.0.2",
     "react-redux": "^5.0.7",
@@ -35,5 +37,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "ember-cli-materialize": "^0.22.0-beta.0"
   }
 }
