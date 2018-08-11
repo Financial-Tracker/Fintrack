@@ -7,8 +7,8 @@ export const getPlaid = (data)=>{
         payload: data
     }
 }
-
 const initialState = {}
+
 
 const reducer = (state=initialState, action)=>{
     switch(action.type){

@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import PlaidLink from "react-plaid-link";
 import axios from "axios";
+import firebase from 'firebase'
 import {getPlaid} from '../../Store/plaidContainer'
 import{connect} from 'react-redux'
 const path = "http://localhost:8000";
+const firestore = firebase.firestore();
+const settings = {/* your settings... */ timestampsInSnapshots: true};
+firestore.settings(settings);
 
 
 class Plaid extends Component {
@@ -14,7 +18,7 @@ class Plaid extends Component {
 
   render() {
     console.log(this.state.status);
-
+  
     switch (this.state.status) {
       case "CONNECTED":
         console.log("connected");
@@ -73,6 +77,27 @@ class Plaid extends Component {
     const income = incomeData.data;
     console.log("INCOME: ", income);
     const plaidObj = {auth, transaction, balance, id, income}
+
+
+    const userEmail = firebase.auth().currentUser.email
+    console.log('user email: ', userEmail)
+   
+    const userRef = await firestore.collection('user').where('email',"==",userEmail.toString()).get()
+    console.log("user Ref:", userRef)
+
+    const docRefId = userRef.docs[0].id;
+    console.log("doc ref Id: ", docRefId)
+
+
+    firestore.collection('user').doc(""+docRefId+"").set({
+      hello: "yellow"
+    }).then(() => {
+      console.log("YEAH BABY")
+    }).catch(() => {
+      console.log("error")
+    })
+
+
     console.log("FINAL OBJECT: ",plaidObj)
     this.props.getPlaid(plaidObj);
     this.props.history.push('/bankInfo')
