@@ -3,13 +3,15 @@ import { Provider } from 'react-redux'
 import "./App.css";
 import LogIn from "./Component/Forms/LogIn";
 import SignUp from "./Component/Forms/SignUp";
-// import HomePage from './Component/Pages /FirstPage'
-import { HashRouter, Route } from "react-router-dom";
+import HomePage from './Component/HomePage'
+import { HashRouter, Route, Switch } from "react-router-dom";
 import { withAuth } from "fireview";
-import HomepageLayout from "./Component/Pages/HomepageHeading";
+// import HomepageLayout from "./Component/Pages/HomepageHeading";
 import Plaid from "./Component/Pages/Plaid";
 import store from './Store'
 import BankCard from './Component/BankInfo/BankCard'
+
+// import MyComponent from './Component/Forms/Test'
 
 class App extends Component {
   render() {
@@ -21,8 +23,8 @@ class App extends Component {
           <Route exact path="/login" component={LogIn} />
           <Route exact path="/signup" component={SignUp} />
           <Route exact path = "/bankInfo" component = {BankCard}/>
-
           
+
           {this.props._user ? (
             <Route exact path="/plaid" component={Plaid} />
           ) : (
@@ -30,13 +32,18 @@ class App extends Component {
           )}
 
           {this.props._user ? (
-            <Route exact path="/homepage" component={HomepageLayout} />
+            <Route exact path="/homepage" component={HomePage} />
           ) : (
-            <Route exact path="/" component={LogIn} />
+            <Switch>
+              <Route exact path="/" component={LogIn} />
+              <Route component={LogIn} />
+            </Switch>
           )}
         </div>
+    
       </HashRouter>
       </Provider>
+      // <MyComponent />
     );
   }
 }

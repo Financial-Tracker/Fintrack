@@ -11,6 +11,7 @@ import {
 import { auth } from "../Firebase";
 import HomepageLayout from './Pages/HomepageHeading'
 
+
 export default class Homepage extends React.Component {
   constructor() {
     super();
@@ -18,15 +19,16 @@ export default class Homepage extends React.Component {
   }
 
   handleClick(event) {
-    event.preventDefault();
-    auth.signOut();
-    this.props.history.push("/");
+    console.log('hello')
+    // event.preventDefault();
+    // auth.signOut();
+    // this.props.history.push("/");
   }
 
   render() {
     return (
       <div>
-      <HomepageLayout />
+      <HomepageLayout logout={()=>(this.handleClick())}/>
       </div>
     );
   }
