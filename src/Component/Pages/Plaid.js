@@ -81,59 +81,32 @@ class Plaid extends Component {
 
     const userEmail = firebase.auth().currentUser.email
     console.log('user email: ', userEmail)
-   
+
+    const newPlaid = {...plaidObj, email: userEmail}
+
     const userRef = await firestore.collection('user').where('email',"==",userEmail.toString()).get()
     console.log("user Ref:", userRef)
+    
 
     const docRefId = userRef.docs[0].id;
     console.log("doc ref Id: ", docRefId)
+    
 
 
-    firestore.collection('user').doc(""+docRefId+"").set({
-      hello: "yellow"
-    }).then(() => {
+    firestore.collection('user').doc(""+docRefId+"").set(newPlaid).then(() => {
       console.log("YEAH BABY")
     }).catch(() => {
       console.log("error")
     })
+    const dataAPI = await firestore.collection('user').doc(""+docRefId+"").get().then(user=>user.data())
+    console.log(dataAPI, "AFTER BABY")
 
-
-    console.log("FINAL OBJECT: ",plaidObj)
-    this.props.getPlaid(plaidObj);
+    this.props.getPlaid(dataAPI);
     this.props.history.push('/bankInfo')
-    // console.log(data);
-
-    //   fetch(`${path}/get_access_token`, {
-    //     method: "POST",
-    //     body: {
-    //       public_token: metadata.public_token,
-    //       accounts: metadata.accounts,
-    //       institution: metadata.institution,
-    //       link_session_id: metadata.link_session_id
-    //     }
-    //   });
   };
   onMessage = data => {
     console.log(data);
 
-    /*
-      Response example for success
-      {
-        "action": "plaid_link-undefined::connected",
-        "metadata": {
-          "account": {
-            "id": null,
-            "name": null
-          },
-          "account_id": null,
-          "public_token": "public-sandbox-e697e666-9ac2-4538-b152-7e56a4e59365",
-          "institution": {
-            "name": "Chase",
-            "institution_id": "ins_3"
-          }
-        }
-      }
-    */
 
     this.setState({
       data,
@@ -173,30 +146,7 @@ class Plaid extends Component {
     );
   }
 
-
-  // onMessage = data => {
-  //   console.log(data)
-  //   /*
-  //     Response example for success
-  //     {
-  //       "action": "plaid_link-undefined::connected",
-  //       "metadata": {
-  //         "account": {
-  //           "id": null,
-  //           "name": null
-  //         },
-  //         "account_id": null,
-  //         "public_token": "public-sandbox-e697e666-9ac2-4538-b152-7e56a4e59365",
-  //         "institution": {
-  //           "name": "Chase",
-  //           "institution_id": "ins_3"
-  //         }
-  //       }
-  //     }
-  //   */
-
-  //   this.setState({ data, status: data.action.substr(data.action.lastIndexOf(':') + 1).toUpperCase() });
-  // };
+  
 }
 
 const mapDisaptch = (dispatch)=>{
