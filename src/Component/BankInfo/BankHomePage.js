@@ -19,7 +19,7 @@ class BankHomePage extends React.Component {
         counter++
         return (
             <div>
-                {counter >= 3 ? <div><Income income={this.props.plaidObj.income} /></div> : <div></div>}
+                {Object.keys(this.props.plaidObj).length!==0? <div><h1>hi</h1></div> : <div></div>}
             </div>
         )
     }
