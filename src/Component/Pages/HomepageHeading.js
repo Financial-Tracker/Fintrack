@@ -112,8 +112,8 @@ class DesktopContainer extends Component {
                 <Menu.Item as="a">Place2</Menu.Item>
                 <Menu.Item as="a">Place3</Menu.Item>
                 <Menu.Item position="right">
+                <Link to = "/">
                   <Button
-                    as="a"
                     inverted={!fixed}
                     primary={fixed}
                     style={{ marginLeft: "0.5em" }}
@@ -121,6 +121,7 @@ class DesktopContainer extends Component {
                   >
                     Log out
                   </Button>
+                </Link>
                 </Menu.Item>
               </Container>
             </Menu>
