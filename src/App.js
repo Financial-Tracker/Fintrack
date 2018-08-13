@@ -12,6 +12,8 @@ import store from './Store'
 import BankHomePage from './Component/BankInfo/BankHomePage'
 import Balance from './Component/BankInfo/BalanceInfo'
 import SingleBalance from "./Component/BankInfo/SingleBalance"
+import Income from './Component/BankInfo/Income'
+import Nav from './Component/Forms/Navbar'
 
 // import MyComponent from './Component/Forms/Test'
 
@@ -20,32 +22,33 @@ class App extends Component {
     return (
       <Provider store={store}>
       <HashRouter>
+        
         <div className="App">
-          <Route exact path="/" component={LogIn} />
+          <Nav />
           <Route exact path="/login" component={LogIn} />
           <Route exact path="/signup" component={SignUp} />
-          <Route exact path = "/bankInfo" component = {BankHomePage}/>
-          <Route exact path = "/balance" component = {Balance} />
-          <Route exact path = "/balance/:id" component = {SingleBalance} />
-
-
-
-
-          
-
           {this.props._user ? (
             <Switch>
+              
               <Route exact path="/plaid" component={Plaid} />
               <Route exact path = "/bankInfo" component = {BankHomePage}/>
+              <Route exact path = "/balance" component = {Balance} />
+              <Route exact path = "/balance/:id" component = {SingleBalance} />
+              <Route exact path = "/income" component = {Income} />
             </Switch>
           ) : (
+            
             <Route exact path="/" component={LogIn} />
           )}
-
           {this.props._user ? (
-            <Route exact path="/homepage" component={HomePage} />
+            <Switch>
+            
+              <Route exact path="/" component={HomePage} />
+              <Route exact path = "/homepage" component = {HomePage} />
+            </Switch>
           ) : (
             <Switch>
+              
               <Route exact path="/" component={LogIn} />
               <Route component={LogIn} />
             </Switch>
@@ -54,7 +57,6 @@ class App extends Component {
     
       </HashRouter>
       </Provider>
-      // <MyComponent />
     );
   }
 }
