@@ -22,12 +22,15 @@ class App extends Component {
           <Route exact path="/" component={LogIn} />
           <Route exact path="/login" component={LogIn} />
           <Route exact path="/signup" component={SignUp} />
-          <Route exact path = "/bankInfo" component = {BankHomePage}/>
+
 
           
 
           {this.props._user ? (
-            <Route exact path="/plaid" component={Plaid} />
+            <Switch>
+              <Route exact path="/plaid" component={Plaid} />
+              <Route exact path = "/bankInfo" component = {BankHomePage}/>
+            </Switch>
           ) : (
             <Route exact path="/" component={LogIn} />
           )}
