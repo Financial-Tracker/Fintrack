@@ -8,13 +8,14 @@ import registerServiceWorker from './registerServiceWorker';
 import {AuthProvider} from 'fireview'
 import * as firebase from 'firebase'
 
-ReactDOM.render(<AuthProvider auth={firebase.auth()}><AlertProvider template={AlertTemplate} {...options}><App /></AlertProvider></AuthProvider>, document.getElementById('root'));
-registerServiceWorker();
-
-
 const options = {
   position: 'bottom center',
   timeout: 5000,
   offset: '30px',
   transition: 'scale'
 }
+
+ReactDOM.render(<AuthProvider auth={firebase.auth()}><AlertProvider template={AlertTemplate} {...options}><App /></AlertProvider></AuthProvider>, document.getElementById('root'));
+registerServiceWorker();
+
+
