@@ -4,7 +4,6 @@ import{getDataFromFireStore} from '../../Store/plaidContainer'
 import CardBalance from './CardBalance'
 
 
-let counter = 0
 
 class Balance extends React.Component{
     async componentDidMount(){
@@ -12,12 +11,10 @@ class Balance extends React.Component{
     }
 
     render(){
-        counter++
-        console.log("Counter: ", counter, "=>",this.props.plaidObj)
         return(
             <div className="center">
                 <h1>Balance page</h1>
-                {counter>=3?<div>{this.props.plaidObj.balance.map(elem=>{
+                {Object.keys(this.props.plaidObj).length !==0?<div>{this.props.plaidObj.balance.map(elem=>{
                     return(
                         <CardBalance 
                         available={elem.balances.available} 
@@ -26,6 +23,7 @@ class Balance extends React.Component{
                         type={elem.type}
                         officialName = {elem.official_name}
                         id={elem.account_id}
+                        key = {elem.account_id}
                         />
                     )
                 })} </div>
