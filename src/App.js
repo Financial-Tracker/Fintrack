@@ -8,10 +8,11 @@ import { HashRouter, Route, Switch } from "react-router-dom";
 import { withAuth } from "fireview";
 // import HomepageLayout from "./Component/Pages/HomepageHeading";
 import Plaid from "./Component/Pages/Plaid";
-import BankCard from "./Component/BankInfo/BankCard";
-import BankPage from "./Component/Pages/BankPage";
 import store from "./Store";
 import BankHomePage from "./Component/BankInfo/BankHomePage";
+import Balance from "./Component/BankInfo/BalanceInfo";
+import SingleBalance from "./Component/BankInfo/SingleBalance";
+import BankPage from "./Component/Pages/BankPage";
 
 // import MyComponent from './Component/Forms/Test'
 
@@ -26,6 +27,8 @@ class App extends Component {
             <Route exact path="/login" component={LogIn} />
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/bankInfo" component={BankHomePage} />
+            <Route exact path="/balance" component={Balance} />
+            <Route exact path="/balance/:id" component={SingleBalance} />
 
             {this.props._user ? (
               <Route exact path="/plaid" component={Plaid} />

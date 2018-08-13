@@ -1,28 +1,39 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {firestore} from '../../Firebase/firebase'
-import firebase from 'firebase'
+import { connect } from 'react-redux'
+import { getPlaid, getDataFromFireStore } from '../../Store/plaidContainer'
+import Income from './Income'
 
-
-class BankHomePage extends React.Component{
-    async componentDidMount(){
-
-        console.log("YOOOOOO: ",this.props.plaidObj)
+let counter = 0
+class BankHomePage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            open: false
+        }
     }
-    render(){
-        return(
+    componentDidMount() {
+        // this.props.getPlaid(this.props.plaidObj)
+        this.props.getFireStore()
+    }
+    render() {
+        counter++
+        return (
             <div>
-                <h1>This is homepage after logging into bank account </h1>
-                {/* <h1> auth obj looks like: {this.props.plaidObj.auth[0].name}</h1> */}
+                {counter >= 3 ? <div><Income income={this.props.plaidObj.income} /></div> : <div></div>}
             </div>
         )
     }
 }
 
-const mapState = (state)=> {
+const mapState = (state) => {
     return {
         plaidObj: state.plaidContainer
     }
 }
-
-export default connect(mapState)(BankHomePage)
+const mapDispatch = (dispatch) => {
+    return {
+        getPlaid: (data) => dispatch(getPlaid(data)),
+        getFireStore: () => dispatch(getDataFromFireStore())
+    }
+}
+export default connect(mapState, mapDispatch)(BankHomePage)
