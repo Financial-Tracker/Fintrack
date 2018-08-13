@@ -9,7 +9,9 @@ import {
   Message,
   Segment
 } from "semantic-ui-react";
+
 import { auth } from "../../Firebase";
+
 import {valid} from './validation'
 
 require("./cssForms.css");
@@ -25,7 +27,12 @@ class LogIn extends Component {
     };
     this.handleChanger = this.handleChanger.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-   
+  }
+  async handleClick() {
+    const user = firebase.auth().currentUser;
+    user
+      ? this.props.history.push("/homepage")
+      : this.props.history.push("/login");
   }
 
   handleChanger(event) {
