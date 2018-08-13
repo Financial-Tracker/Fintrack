@@ -9,7 +9,7 @@ import {
   Message,
   Segment
 } from "semantic-ui-react";
-import { auth, googleAuth } from "../../Firebase";
+import { auth } from "../../Firebase";
 import {valid} from './validation'
 
 require("./cssForms.css");
@@ -25,15 +25,7 @@ class LogIn extends Component {
     };
     this.handleChanger = this.handleChanger.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-  }
-  async handleClick() {
-    await googleAuth.googleLogIn(); //persistent!!!
-    const user = firebase.auth().currentUser;
-    console.log(user)
-    user
-      ? this.props.history.push("/homepage")
-      : this.props.history.push("/login");
+   
   }
 
   handleChanger(event) {
@@ -45,14 +37,10 @@ class LogIn extends Component {
     });
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
     if(valid(this.state.email,'email') && valid(this.state.password,'password')){
-      auth.logIn(this.state.email, this.state.password);
-      firebase
-        .auth()
-        .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-        .then(() => auth.logIn(this.state.email, this.state.password));
+      await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => auth.logIn(this.state.email, this.state.password));
       const user = firebase.auth().currentUser;
       if (user) {
         this.props.alert.success('Log in success!')
@@ -113,14 +101,6 @@ class LogIn extends Component {
                   type="submit"
                 >
                   Login
-                </Button>
-                <Button
-                  color="green"
-                  fluid
-                  size="large"
-                  onClick={this.handleClick}
-                >
-                  Login with Google
                 </Button>
               </Segment>
             </Form>
