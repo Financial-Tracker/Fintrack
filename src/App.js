@@ -12,6 +12,7 @@ import store from './Store'
 import BankHomePage from './Component/BankInfo/BankHomePage'
 import Balance from './Component/BankInfo/BalanceInfo'
 import SingleBalance from "./Component/BankInfo/SingleBalance"
+import Income from './Component/BankInfo/Income'
 
 // import MyComponent from './Component/Forms/Test'
 
@@ -27,6 +28,8 @@ class App extends Component {
           <Route exact path = "/bankInfo" component = {BankHomePage}/>
           <Route exact path = "/balance" component = {Balance} />
           <Route exact path = "/balance/:id" component = {SingleBalance} />
+          <Route exact path = "/income" component = {Income} />
+
 
 
 
