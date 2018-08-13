@@ -7,9 +7,6 @@ let counter = 0
 class BankHomePage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            open: false
-        }
     }
     componentDidMount() {
         // this.props.getPlaid(this.props.plaidObj)

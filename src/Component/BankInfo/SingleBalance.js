@@ -1,27 +1,27 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import{getDataFromFireStore} from '../../Store/plaidContainer'
+import { connect } from 'react-redux'
+import { getDataFromFireStore } from '../../Store/plaidContainer'
 import { Card } from 'semantic-ui-react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-class SingleBalance extends React.Component{
-    constructor(){
+class SingleBalance extends React.Component {
+    constructor() {
         super()
     }
-    async componentDidMount(){
+    async componentDidMount() {
         await this.props.getFireStore();
     }
-    render(props){
-        return(
+    render() {
+        return (
             <Link to={`/balance/${this.props.id}`}>
-                <Card 
-                header = {this.props.officialName}
-                meta = {this.props.currency}
-                description = {[
-                    `Available: ${this.props.available} `,
-                    `type: ${this.props.type} `,
-                    `subtype: ${this.props.subtype} `,
-                ].join('')}
+                <Card
+                    header={this.props.officialName}
+                    meta={this.props.currency}
+                    description={[
+                        `Available: ${this.props.available} `,
+                        `type: ${this.props.type} `,
+                        `subtype: ${this.props.subtype} `,
+                    ].join('')}
                 />
 
             </Link>
@@ -29,14 +29,14 @@ class SingleBalance extends React.Component{
     }
 }
 
-const mapState =(state)=>{
-    return{
+const mapState = (state) => {
+    return {
         plaidObj: state.plaidContainer
     }
 }
-const mapDispatch=(dispatch)=>{
-    return{
-        getFireStore: ()=>dispatch(getDataFromFireStore())
+const mapDispatch = (dispatch) => {
+    return {
+        getFireStore: () => dispatch(getDataFromFireStore())
     }
 }
 
