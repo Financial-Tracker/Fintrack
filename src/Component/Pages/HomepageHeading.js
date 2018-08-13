@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import {withAlert} from 'react-alert'
 import {
   Button,
   Container,
@@ -75,8 +74,6 @@ class DesktopContainer extends Component {
   }
 
   logOutHandler = () => {
-    console.log('Desktop Container')
-    this.props.alert.show('Logged out')
     auth.signOut();
   }
 
@@ -296,4 +293,4 @@ const HomepageLayout = () => (
     </Segment>
   </ResponsiveContainer>
 );
-export default HomepageLayout;
+export default HomepageLayout
