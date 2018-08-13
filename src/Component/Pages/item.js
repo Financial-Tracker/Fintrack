@@ -14,6 +14,18 @@
   ))}
 </ul>; */
 }
+function goodData(array) {
+  let newArray = [];
+  for (let i = 0; i < array.length; i++) {
+    let element = array[i];
+    let obj = {};
+    if (newArray.indexOf(obj[element.date])) {
+      obj[element.date].amount += element.amount;
+    }
+    obj[element.date] = element.amount;
+    newArray.push(obj);
+  }
+}
 export const items = [
   {
     account_id: "A8D8mKXLQ3SaweJeJNRLTnLALdEGqgu1QdbVd",

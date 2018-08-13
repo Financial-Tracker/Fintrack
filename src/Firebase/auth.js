@@ -22,6 +22,7 @@ export const logIn = async (email, password) => {
 export const signOut = async () => {
  try {
   await auth.signOut().then(() => {console.log('logged out!')})
+
  } catch (error) {
    console.error(error)
  }
