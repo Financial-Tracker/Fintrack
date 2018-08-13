@@ -9,7 +9,7 @@ import {
   Message,
   Segment
 } from "semantic-ui-react";
-import { auth, googleAuth } from "../../Firebase";
+import { auth} from "../../Firebase";
 import {valid} from './validation'
 
 require("./cssForms.css");
@@ -28,7 +28,6 @@ class LogIn extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
   async handleClick() {
-    await googleAuth.googleLogIn(); //persistent!!!
     const user = firebase.auth().currentUser;
     console.log(user)
     user
@@ -113,14 +112,6 @@ class LogIn extends Component {
                   type="submit"
                 >
                   Login
-                </Button>
-                <Button
-                  color="green"
-                  fluid
-                  size="large"
-                  onClick={this.handleClick}
-                >
-                  Login with Google
                 </Button>
               </Segment>
             </Form>
