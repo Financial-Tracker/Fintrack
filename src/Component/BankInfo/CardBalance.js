@@ -5,9 +5,6 @@ import { Card } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 
 class CardBalance extends React.Component{
-    constructor(){
-        super()
-    }
     async componentDidMount(){
         await this.props.getFireStore();
     }
@@ -23,7 +20,6 @@ class CardBalance extends React.Component{
                     `subtype: ${this.props.subtype} `,
                 ].join('')}
                 />
-
             </Link>
         )
     }
