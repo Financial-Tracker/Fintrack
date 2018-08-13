@@ -1,19 +1,15 @@
-{
-  /* <ul class="collapsible">
-  {arr.map(item => (
-    <li>
-      <div class="collapsible-header">
-        <i class="material-icons">filter_drama</i>
-        First
-        <span class="new badge">4</span>
+import React, { Component } from "react";
+
+export default class item extends Component {
+  render() {
+    return (
+      <div>
+        <h1>Tacos per Day</h1>
       </div>
-      <div class="collapsible-body">
-        <p>Lorem ipsum dolor sit amet.</p>
-      </div>
-    </li>
-  ))}
-</ul>; */
+    );
+  }
 }
+
 function goodData(array) {
   let newArray = [];
   for (let i = 0; i < array.length; i++) {

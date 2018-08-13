@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import firebase from "firebase";
+import {withAlert} from "react-alert"
 import {
   Button,
   Form,
@@ -14,7 +15,7 @@ import {valid} from './validation'
 require("./cssForms.css");
 
 
-export default class LogIn extends Component {
+class LogIn extends Component {
   constructor() {
     super();
     this.state = {
@@ -29,6 +30,7 @@ export default class LogIn extends Component {
   async handleClick() {
     await googleAuth.googleLogIn(); //persistent!!!
     const user = firebase.auth().currentUser;
+    console.log(user)
     user
       ? this.props.history.push("/homepage")
       : this.props.history.push("/login");
@@ -53,8 +55,10 @@ export default class LogIn extends Component {
         .then(() => auth.logIn(this.state.email, this.state.password));
       const user = firebase.auth().currentUser;
       if (user) {
+        this.props.alert.success('Log in success!')
         this.props.history.push("/homepage");
       } else {
+        this.props.alert.error('Invalid login credentials!')
         this.props.history.push("/login");
       }
     }else {
@@ -129,3 +133,6 @@ export default class LogIn extends Component {
     );
   }
 }
+
+
+export default withAlert(LogIn)
