@@ -5,6 +5,7 @@ import firebase from 'firebase'
 import {LineChart} from 'react-easy-chart';
 import account from '../dummyData/account'
 import transaction from '../dummyData/transactions'
+import { getPlaid, getDataFromFireStore } from '../../Store/plaidContainer'
 import 
     {Button, 
     Icon,
@@ -23,6 +24,12 @@ import
 require('./account.css')
 
 class BankHomePage extends Component {
+
+  componentDidMount() {
+    // this.props.getPlaid(this.props.plaidObj)
+    this.props.getFireStore()
+  }
+
   render() {
     console.log(transaction,account)
     return (
@@ -88,10 +95,15 @@ class BankHomePage extends Component {
   }
 }
 
-const mapState = (state)=> {
+const mapState = (state) => {
     return {
         plaidObj: state.plaidContainer
     }
 }
-
-export default connect(mapState)(BankHomePage)
+const mapDispatch = (dispatch) => {
+    return {
+        getPlaid: (data) => dispatch(getPlaid(data)),
+        getFireStore: () => dispatch(getDataFromFireStore())
+    }
+}
+export default connect(mapState, mapDispatch)(BankHomePage)
