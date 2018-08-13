@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Card } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { getPlaid } from "../../Store/plaidContainer";
+import { getPlaid, getDataFromFireStore } from "../../Store/plaidContainer";
 import { items } from "./item";
 // import Moment from "react-moment";
 // import { LineChart, Line } from "recharts";
@@ -23,12 +23,10 @@ let otherArr = [];
 class BankPage extends Component {
   constructor(props) {
     super(props);
-    // header name
-    // meta price date
-    // description category
   }
   componentDidMount() {
-    console.log(items);
+    this.props.getDataFromFireStore();
+    console.log(this.props);
     for (let i = 0; i < items.length; i++) {
       let obj = {};
       let newObj = {};
@@ -99,7 +97,8 @@ const MapStateToProps = state => ({
   getPlaid: state.plaidContainer
 });
 const MapDispatchToProps = dispatch => ({
-  getPlaid: () => dispatch(getPlaid())
+  getPlaid: () => dispatch(getPlaid()),
+  getDataFromFireStore: () => dispatch(getDataFromFireStore())
 });
 
 export default connect(
