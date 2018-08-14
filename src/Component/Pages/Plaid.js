@@ -4,6 +4,7 @@ import axios from "axios";
 import firebase from 'firebase'
 import {getPlaid} from '../../Store/plaidContainer'
 import{connect} from 'react-redux'
+import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react'
 const path = "http://localhost:8000";
 const firestore = firebase.firestore();
 const settings = {/* your settings... */ timestampsInSnapshots: true};
@@ -26,9 +27,25 @@ class Plaid extends Component {
       case "LOGIN_BUTTON":
       case "EXIT":
         return this.renderButton();
+      case "LOADING":
+        return this.loading()
       default:
         return this.renderLogin();
     }
+  }
+
+  loading=()=>{
+    return(
+      <div>
+        <Segment>
+          <Dimmer active>
+            <Loader indeterminate>Preparing Files</Loader>
+          </Dimmer>
+
+          <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
+        </Segment>
+      </div>
+    )
   }
 
   renderButton = () => {
@@ -91,7 +108,7 @@ class Plaid extends Component {
     })
     const dataAPI = await firestore.collection('user').doc(""+docRefId+"").get().then(user=>user.data())
     console.log("Now persistent")
-
+    
     this.props.getPlaid(dataAPI);
     this.props.history.push('/bankInfo')
   };
@@ -118,6 +135,7 @@ class Plaid extends Component {
         onLoadStart={this.onLoadStart}
         onLoadEnd={this.onLoadEnd}
         onSuccess={this.onSuccess}
+        onClick={() => this.setState({ status: "LOADING" })}
       >
         Open and connect to plaid
       </PlaidLink>
