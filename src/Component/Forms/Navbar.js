@@ -1,37 +1,43 @@
 
-import { HashRouter, Route, Switch, Link } from "react-router-dom";
+import {Link } from "react-router-dom";
 import {getDataFromFireStore} from '../../Store/plaidContainer'
-import logo from '../../pictures/fintracklogo.png'
 import {connect} from 'react-redux'
-
-import {Button,
-        Icon,
-        Navbar,
+import { auth } from "../../Firebase";
+import {Navbar,
         NavItem
     } from 'react-materialize'
 
 import React, { Component } from 'react'
 
- class Nav extends Component {
-render() {
-    return (
-    <div>
-        <Navbar fixed brand='FinTrack' className='grey' right>
-        <NavItem >Add Accounts</NavItem>
-        <NavItem  >Settings</NavItem>
-        <NavItem  href='components.html'>Profile</NavItem>
-        <NavItem  href='components.html'>Log out</NavItem>
-        </Navbar>
-        <Navbar className='light-green' right>
-        <NavItem >Overview</NavItem>
-        <NavItem  >Transactions</NavItem>
-        <NavItem  href='components.html'>Budgets</NavItem>
-        <NavItem  href='components.html'>Goals</NavItem>
-        <NavItem  href='components.html'>Ways to save</NavItem>
-        </Navbar>
-    </div>
-    )
-}
+class Nav extends Component {
+    constructor(){
+        super()
+        this.handleClick = this.handleClick.bind(this)
+    }
+    handleClick(){
+        auth.signOut()
+    }
+    render() {
+        return (
+        <div>
+            <Navbar fixed brand='FinTrack' className='grey' right >
+                <NavItem><Link to = "/accounts">Add Accounts</Link></NavItem>
+                <NavItem><Link to = "/settings">Settings</Link></NavItem>
+                <NavItem><Link to = "/profile">Profile</Link></NavItem>
+                <NavItem onClick = {this.handleClick}><Link to = "/">Log out</Link></NavItem>
+            </Navbar>
+            <Navbar className='light-green' right>
+                <NavItem ><Link to = "/bankInfo">Overview</Link></NavItem>
+                <NavItem ><Link to = "/transactionTable">Transactions</Link></NavItem>
+                <NavItem ><Link to = "/balance">Balance</Link></NavItem>
+                <NavItem ><Link to = "/income">Income</Link></NavItem>
+                <NavItem ><Link to = "/budgets">Budgets</Link></NavItem>
+                <NavItem ><Link to = "/goals">Goals</Link></NavItem>
+                <NavItem ><Link to = "/saves">Ways to save</Link></NavItem>
+            </Navbar>
+        </div>
+        )
+    }
 }
 
 
