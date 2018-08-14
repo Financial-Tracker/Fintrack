@@ -24,6 +24,7 @@ class BankPage extends Component {
   async componentDidMount() {
     this.props.getDataFromFireStore();
     let items = this.props.plaidInfo.transaction;
+    console.log(this.props.plaidInfo);
     if (items) {
       await this.setState({
         items: items
