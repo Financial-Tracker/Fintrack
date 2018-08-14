@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import firebase from "firebase";
 import {withAlert} from "react-alert"
+import {Link} from 'react-router-dom'
 import {
   Button,
   Form,
@@ -112,7 +113,7 @@ class LogIn extends Component {
               </Segment>
             </Form>
             <Message>
-              New to us? <a href="#/signup">Sign Up</a>
+              New to us? <Link to="/signup">Sign Up</Link>
             </Message>
           </Grid.Column>
         </Grid>
