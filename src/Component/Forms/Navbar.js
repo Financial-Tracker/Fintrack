@@ -1,6 +1,7 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import { render } from "react-dom";
+import {connect} from 'react-redux'
 import {
 Container,
 Icon,
@@ -10,6 +11,7 @@ Sidebar,
 Responsive
 } from "semantic-ui-react";
 import { HashRouter, Route, Switch, Link } from "react-router-dom";
+import {getDataFromFireStore} from '../../Store/plaidContainer'
 
 import logo from '../../pictures/fintracklogo.png'
 
@@ -122,24 +124,60 @@ render() {
 }
 }
 
-const leftItems = false ? [
-    { as: "a", content: "Bank Information", key: "bankinfo" },
-    { as: "a", content: "All Transactions", key: "alltransactions" },
-] : [
-{ as: "a", content: "Home", key: "home" },
-{ as: "a", content: "About us", key: "Aboutus" },
-]  ;
-const rightItems = false ? [
-    { as: "a", content: "Log out", key: "logout" },
-    { as: "a", content: "User", key: "User" },
-    ] : [
-        { as: "a", content: "Login", key: "login" },
-        { as: "a", content: "Register", key: "register" },
-        ];
 
-const Nav = () => (
-<NavBar leftItems={leftItems} rightItems={rightItems} />
 
-);
 
-export default Nav
+
+class Nav extends Component {
+    constructor(){
+        super()
+        this.state = {
+            isLogedInLeftItems : [
+                { as: "a", content: "Bank Information", key: "bankinfo" },
+                { as: "a", content: "All Transactions", key: "alltransactions" },
+            ],
+            isLogedInRightItems : [ { as: "a", content: "Log out", key: "logout" },
+            { as: "a", content: "User", key: "User" },
+            ],
+            isLogedOutRightItems : [
+                { as: "a", content: "Login", key: "login" },
+                { as: "a", content: "Register", key: "register" },
+                ],
+            isLogOutLeftItems : [
+                { as: "a", content: "Home", key: "home" },
+                { as: "a", content: "About us", key: "Aboutus" },
+                ] 
+        }
+    }
+
+    componentDidMount(){
+        this.props.getFireStore()
+    }
+    render() {
+        const log = this.props.plaidObj['email'] ? true : false 
+        return (
+            <div>
+                {
+                    log ? <NavBar leftItems={this.state.isLogedInLeftItems} rightItems={this.state.isLogedInRightItems} /> 
+                    :  <NavBar leftItems={this.state.isLogOutLeftItems} rightItems={this.state.isLogedOutRightItems} /> 
+                }
+                
+            </div>
+        )
+    }
+    }
+
+
+const mapState =(state)=>{
+    return{
+        plaidObj: state.plaidContainer
+    }
+}
+const mapDispatch=(dispatch)=>{
+    return{
+        getFireStore: ()=>dispatch(getDataFromFireStore())
+    }
+}
+
+
+export default connect(mapState, mapDispatch)(Nav)

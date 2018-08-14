@@ -24,37 +24,26 @@ class App extends Component {
       <HashRouter>
         
         <div className="App">
-          <Nav />
-          <Route exact path="/login" component={LogIn} />
-          <Route exact path="/signup" component={SignUp} />
+        <Nav />
           {this.props._user ? (
             <Switch>
-              
+              <Route exact path="/" component={HomePage} />
               <Route exact path="/plaid" component={Plaid} />
               <Route exact path = "/bankInfo" component = {BankHomePage}/>
               <Route exact path = "/balance" component = {Balance} />
               <Route exact path = "/balance/:id" component = {SingleBalance} />
               <Route exact path = "/income" component = {Income} />
-            </Switch>
-          ) : (
-            
-            <Route exact path="/" component={LogIn} />
-          )}
-          {this.props._user ? (
-            <Switch>
-            
-              <Route exact path="/" component={HomePage} />
               <Route exact path = "/homepage" component = {HomePage} />
             </Switch>
           ) : (
             <Switch>
-              
-              <Route exact path="/" component={LogIn} />
-              <Route component={LogIn} />
+
+              <Route  path="/" component={LogIn} />
+              <Route exact path="/login" component={LogIn} />
+              <Route exact path="/signup" component={SignUp} />
             </Switch>
           )}
         </div>
-    
       </HashRouter>
       </Provider>
     );
