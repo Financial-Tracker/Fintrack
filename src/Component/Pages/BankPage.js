@@ -76,7 +76,7 @@ class BankPage extends Component {
               <VictoryLine
                 labelComponent={<VictoryTooltip />}
                 data={this.state.graphData}
-                domain={{ y: [-1000, 5500] }}
+                domain={{ y: [-1000, 6500] }}
               />
             </VictoryChart>
           </div>
