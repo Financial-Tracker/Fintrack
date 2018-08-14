@@ -1,9 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { getPlaid, getDataFromFireStore } from '../../Store/plaidContainer'
-import Income from './Income'
 
-let counter = 0
 class BankHomePage extends React.Component {
     constructor(props) {
         super(props);
@@ -13,10 +11,9 @@ class BankHomePage extends React.Component {
         this.props.getFireStore()
     }
     render() {
-        counter++
         return (
             <div>
-                {counter >= 3 ? <div><Income income={this.props.plaidObj.income} /></div> : <div></div>}
+                {Object.keys(this.props.plaidObj).length!==0? <div><h1>hi</h1></div> : <div></div>}
             </div>
         )
     }

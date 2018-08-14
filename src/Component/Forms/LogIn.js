@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import firebase from "firebase";
+import {withAlert} from "react-alert"
 import {
   Button,
   Form,
@@ -8,13 +9,15 @@ import {
   Message,
   Segment
 } from "semantic-ui-react";
-import { auth, googleAuth } from "../../Firebase";
+
+import { auth } from "../../Firebase";
+
 import {valid} from './validation'
 
 require("./cssForms.css");
 
 
-export default class LogIn extends Component {
+class LogIn extends Component {
   constructor() {
     super();
     this.state = {
@@ -24,10 +27,8 @@ export default class LogIn extends Component {
     };
     this.handleChanger = this.handleChanger.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleClick = this.handleClick.bind(this);
   }
   async handleClick() {
-    await googleAuth.googleLogIn(); //persistent!!!
     const user = firebase.auth().currentUser;
     user
       ? this.props.history.push("/homepage")
@@ -43,18 +44,16 @@ export default class LogIn extends Component {
     });
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
     if(valid(this.state.email,'email') && valid(this.state.password,'password')){
-      auth.logIn(this.state.email, this.state.password);
-      firebase
-        .auth()
-        .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-        .then(() => auth.logIn(this.state.email, this.state.password));
+      await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => auth.logIn(this.state.email, this.state.password));
       const user = firebase.auth().currentUser;
       if (user) {
+        this.props.alert.success('Log in success!')
         this.props.history.push("/homepage");
       } else {
+        this.props.alert.error('Invalid login credentials!')
         this.props.history.push("/login");
       }
     }else {
@@ -110,14 +109,6 @@ export default class LogIn extends Component {
                 >
                   Login
                 </Button>
-                <Button
-                  color="green"
-                  fluid
-                  size="large"
-                  onClick={this.handleClick}
-                >
-                  Login with Google
-                </Button>
               </Segment>
             </Form>
             <Message>
@@ -129,3 +120,6 @@ export default class LogIn extends Component {
     );
   }
 }
+
+
+export default withAlert(LogIn)
