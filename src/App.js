@@ -35,6 +35,8 @@ class App extends Component {
               <Route exact path = "/income" component = {Income} />
               <Route exact path = "/homepage" component = {HomePage} />
               <Route exact path = "/transactiontable" component = {TransactionTable} />
+              <Route exact path = "/bankpage" component = {BankPage} />
+
 
             </Switch>
           ) : (
