@@ -6,7 +6,6 @@ import SignUp from "./Component/Forms/SignUp";
 import HomePage from "./Component/HomePage";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import { withAuth } from "fireview";
-// import HomepageLayout from "./Component/Pages/HomepageHeading";
 import Plaid from "./Component/Pages/Plaid";
 import store from './Store'
 import BankHomePage from './Component/BankInfo/BankHomePage'
@@ -17,8 +16,6 @@ import Nav from './Component/Forms/Navbar'
 import TransactionTable from './Component/BankInfo/TransactionTable'
 import BankPage from "./Component/Pages/BankPage";
 
-
-// import MyComponent from './Component/Forms/Test'
 
 class App extends Component {
   render() {
