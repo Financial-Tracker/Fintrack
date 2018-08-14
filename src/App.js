@@ -13,6 +13,7 @@ import BankHomePage from './Component/BankInfo/BankHomePage'
 import Balance from './Component/BankInfo/BalanceInfo'
 import SingleBalance from "./Component/BankInfo/SingleBalance"
 import Income from './Component/BankInfo/Income'
+import TransactionTable from './Component/BankInfo/TransactionTable'
 
 // import MyComponent from './Component/Forms/Test'
 
@@ -31,6 +32,7 @@ class App extends Component {
               <Route exact path = "/balance" component = {Balance} />
               <Route exact path = "/balance/:id" component = {SingleBalance} />
               <Route exact path = "/income" component = {Income} />
+              <Route exact path = "/transactiontable" component = {TransactionTable}/>
             </Switch>
           ) : (
             <Route exact path="/" component={LogIn} />
