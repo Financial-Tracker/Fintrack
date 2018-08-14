@@ -18,7 +18,7 @@ class TransactionHeader extends React.Component{
                         options={this.props.size()}
                         search
                         name = "size"
-                        text= {this.props.state.sizeFilter}
+                        text= {this.props.state.sizeFilter.toString()}
                         onChange = {this.props.handleChange}
                     />
                     <Dropdown

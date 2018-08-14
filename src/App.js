@@ -34,6 +34,8 @@ class App extends Component {
               <Route exact path = "/balance/:id" component = {SingleBalance} />
               <Route exact path = "/income" component = {Income} />
               <Route exact path = "/homepage" component = {HomePage} />
+              <Route exact path = "/transactiontable" component = {TransactionTable} />
+
             </Switch>
           ) : (
             <Switch>
