@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Provider } from 'react-redux'
+import { Provider } from "react-redux";
 import "./App.css";
 import LogIn from "./Component/Forms/LogIn";
 import SignUp from "./Component/Forms/SignUp";
-import HomePage from './Component/HomePage'
+import HomePage from "./Component/HomePage";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import { withAuth } from "fireview";
 // import HomepageLayout from "./Component/Pages/HomepageHeading";
@@ -14,6 +14,9 @@ import Balance from './Component/BankInfo/BalanceInfo'
 import SingleBalance from "./Component/BankInfo/SingleBalance"
 import Income from './Component/BankInfo/Income'
 import Nav from './Component/Forms/Navbar'
+import TransactionTable from './Component/BankInfo/TransactionTable'
+import BankPage from "./Component/Pages/BankPage";
+
 
 // import MyComponent from './Component/Forms/Test'
 
@@ -49,7 +52,5 @@ class App extends Component {
     );
   }
 }
-
-
 
 export default withAuth(App);
