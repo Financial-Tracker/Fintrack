@@ -76,7 +76,7 @@ export default class SignUp extends Component {
             <div className='login-form'>
             <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
             <Grid.Column style={{ maxWidth: 450 }}>
-                <Header as='h2' color='blue' textAlign='center'>
+                <Header as='h2' textAlign='center'>
                 Sign up
                 </Header>
                 {this.state.error ? <h3 className='error'>Please make sure all information are valid</h3> : null}

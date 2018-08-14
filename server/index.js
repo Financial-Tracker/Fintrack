@@ -89,7 +89,7 @@ app.post("/accounts/balance/get", (req, res, next) => {
     // Handle err
     // Each account has up-to-date balance information associated with it
     const item = result.accounts;
-    // console.log("ITEM: ", item);
+    console.log("ITEM: ", item);
     res.json(item);
   });
 });
