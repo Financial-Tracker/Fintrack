@@ -52,8 +52,6 @@ class Plaid extends Component {
     console.log("onLoadEnd", props);
   };
   onSuccess = async (token, metadata) => {
-    console.log("onSuccess", token);
-    console.log('METADATA: ', metadata);
 
     await axios.post(`${path}/get_access_token`, {
       public_token: metadata.public_token,
@@ -63,43 +61,36 @@ class Plaid extends Component {
     });
     const authData = await axios.post(`${path}/auth/get`);
     const auth = authData.data;
-    console.log("AUTH: ", auth);
     const transactionData = await axios.post(`${path}/transaction/get`);
     const transaction = transactionData.data;
-    console.log("TRANSACTION: ", transaction);
     const balanceData = await axios.post(`${path}/accounts/balance/get`);
     const balance = balanceData.data;
-    console.log("BALANCE: ", balance);
     const idData = await axios.post(`${path}/identity/get`);
     const id = idData.data;
-    console.log(id);
     const incomeData = await axios.post(`${path}/income/get`);
     const income = incomeData.data;
-    console.log("INCOME: ", income);
     const plaidObj = {auth, transaction, balance, id, income}
 
 
     const userEmail = firebase.auth().currentUser.email
-    console.log('user email: ', userEmail)
+
 
     const newPlaid = {...plaidObj, email: userEmail}
 
     const userRef = await firestore.collection('user').where('email',"==",userEmail.toString()).get()
-    console.log("user Ref:", userRef)
     
 
     const docRefId = userRef.docs[0].id;
-    console.log("doc ref Id: ", docRefId)
     
 
 
     firestore.collection('user').doc(""+docRefId+"").set(newPlaid).then(() => {
-      console.log("YEAH BABY")
+      console.log("Connected")
     }).catch(() => {
       console.log("error")
     })
     const dataAPI = await firestore.collection('user').doc(""+docRefId+"").get().then(user=>user.data())
-    console.log(dataAPI, "AFTER BABY")
+    console.log("Now persistent")
 
     this.props.getPlaid(dataAPI);
     this.props.history.push('/bankInfo')
