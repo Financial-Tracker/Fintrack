@@ -36,7 +36,6 @@ class Plaid extends Component {
 
   loading=()=>{
     return(
-      <div>
         <Segment>
           <Dimmer active>
             <Loader indeterminate>Preparing Files</Loader>
@@ -44,7 +43,6 @@ class Plaid extends Component {
 
           <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
         </Segment>
-      </div>
     )
   }
 
