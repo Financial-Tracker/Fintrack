@@ -1,6 +1,5 @@
 
 import {Link } from "react-router-dom";
-import {getDataFromFireStore} from '../../Store/plaidContainer'
 import {connect} from 'react-redux'
 import { auth } from "../../Firebase";
 import {Navbar,
@@ -8,6 +7,7 @@ import {Navbar,
     } from 'react-materialize'
 
 import React, { Component } from 'react'
+import {removeDataFromFireStore} from '../../Store/plaidContainer'
 
 class Nav extends Component {
     constructor(){
@@ -16,6 +16,7 @@ class Nav extends Component {
     }
     handleClick(){
         auth.signOut()
+        this.props.deleteFireStore()
     }
     render() {
         return (
@@ -49,7 +50,7 @@ const mapState =(state)=>{
 }
 const mapDispatch=(dispatch)=>{
     return{
-        getFireStore: ()=>dispatch(getDataFromFireStore())
+        deleteFireStore: ()=>dispatch(removeDataFromFireStore())
     }
 }
 
