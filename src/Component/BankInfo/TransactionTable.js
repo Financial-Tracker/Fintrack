@@ -119,7 +119,7 @@ class TransactionTable extends React.Component{
                                         {idx<this.state.sizeFilter 
                                         && (this.state.accountFilter=== "All" || this.state.accountFilter === this.getSingleBalance(elem.account_id))
                                         && (this.state.priceFilter==="AllPrice" || this.state.priceFilter > elem.amount)
-                                        &&(this.state.categoryFilter === "AllCategories" || this.state.categoryFilter == elem.category[0])? 
+                                        &&(this.state.categoryFilter === "AllCategories" || this.state.categoryFilter === elem.category[0])? 
                                         <Table.Row key = {idx}>
                                             <Table.Cell>
                                             <Header as='h4' image>
