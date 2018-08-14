@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 
-class Budget extends Component {
+class Budgets extends Component {
   render() {
-    return <div />;
+    return (
+      <React.Fragment>
+        <h1>hi</h1>
+        <h2>work</h2>
+      </React.Fragment>
+    );
   }
 }
 const MapStateToProps = state => ({
@@ -16,4 +21,4 @@ const MapDispatchToProps = dispatch => ({
 export default connect(
   MapStateToProps,
   MapDispatchToProps
-)(BankPage);
+)(Budgets);
