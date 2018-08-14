@@ -34,6 +34,9 @@ class LineGraph extends Component {
         let element = this.props.plaidInfo.transaction[i];
         let graphCordinate = {};
         if (element.account_id === account && filterData.length < numberLimit) {
+          if (filterData.indexOf()) {
+            console.log();
+          }
           graphCordinate.x = element.date;
           graphCordinate.y = element.amount;
           graphCordinate.label = `Category: ${element.category[0]}; Date: ${
