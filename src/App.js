@@ -15,6 +15,19 @@ import Income from './Component/BankInfo/Income'
 import Nav from './Component/Forms/Navbar'
 import TransactionTable from './Component/BankInfo/TransactionTable'
 import BankPage from "./Component/Pages/BankPage";
+// New Components imports 
+// import AddAccount from './allComponents/AddAccount'
+// import Balance from './allComponents/Balance'
+// import Budgets from './allComponents/Budgets'
+// import Goals from './allComponents/Goals'
+// import Income from './allComponents/Income'
+// import Overview from './allComponents/Overview'
+// import Profile from './allComponents/Profile'
+// import Settings from './allComponents/Settings'
+// import Transactions from './allComponents/Transactions'
+// import WaysToSave from './allComponents/WaysToSave'
+
+
 
 
 class App extends Component {
@@ -25,6 +38,35 @@ class App extends Component {
         
         <div className="App">
         <Nav />
+          {/* {
+            this.props._user ? 
+            <Switch>
+              <Route exact path="/!" component={Overview} />
+              <Route exact path="/" component={Overview} />
+              <Route exact path="/homepage" component={Overview} />
+              <Route exact path='/overview' component={Overview} />
+              <Route exact path="/plaid" component={Plaid} />
+              <Route exact path="/balance" component={Balance} />
+              <Route exact path='/income' component={Income} />
+              <Route exact path='/account' component={AddAccount} />
+              <Route exact path='/budgets' component={Budgets} />
+              <Route exact path='/goals' component={Goals} />
+              <Route exact path='/profile' component={Profile} />   
+              <Route exact path='/settings' component={Settings} />   
+              <Route exact path='/transaction' component={Transactions} />  
+              <Route exact path='/saves' component={WaysToSave} />
+            </Switch>
+            
+            : 
+            <Switch>
+            <Route exact path="/" component={LogIn} />
+            <Route exact path="/login" component={LogIn} />
+            <Route exact path="/signup" component={SignUp} />
+          </Switch>
+          } */}
+
+
+
           {this.props._user ? (
             <Switch>
               <Route exact path="/" component={HomePage} />
@@ -41,7 +83,6 @@ class App extends Component {
             </Switch>
           ) : (
             <Switch>
-
               <Route exact path="/" component={LogIn} />
               <Route exact path="/login" component={LogIn} />
               <Route exact path="/signup" component={SignUp} />
