@@ -21,7 +21,7 @@ const client = new plaid.Client(
 
 app.use(volleyball);
 app.use(cors());
-app.use(express.static(path.join(__dirname, '..', 'public')))
+app.use(express.static(path.join(__dirname, '..', 'build')))
 
 app.post("/get_access_token", async function(request, response, next) {
   console.log(request.body);
