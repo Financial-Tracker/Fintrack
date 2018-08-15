@@ -66,8 +66,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy": "script/deploy"
-    "test-spec": "mocha \"./src/**/*.spec.js\"",
+    "deploy": "script/deploy",
+    "test-spec": "mocha \"./src/**/*.spec.js\""
 
   },
   "devDependencies": {
