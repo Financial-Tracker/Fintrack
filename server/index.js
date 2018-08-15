@@ -6,6 +6,7 @@ const volleyball = require("volleyball");
 const cors = require("cors");
 const PORT = process.env.PORT || 8000
 const app = express();
+require('../secret')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
