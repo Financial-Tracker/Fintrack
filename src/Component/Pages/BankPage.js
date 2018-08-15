@@ -24,6 +24,7 @@ class BankPage extends Component {
   async componentDidMount() {
     this.props.getDataFromFireStore();
     let items = this.props.plaidInfo.transaction;
+    console.log(this.props.plaidInfo);
     if (items) {
       await this.setState({
         items: items
@@ -76,7 +77,7 @@ class BankPage extends Component {
               <VictoryLine
                 labelComponent={<VictoryTooltip />}
                 data={this.state.graphData}
-                domain={{ y: [-1000, 5500] }}
+                domain={{ y: [-1000, 6500] }}
               />
             </VictoryChart>
           </div>

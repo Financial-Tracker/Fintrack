@@ -69,8 +69,8 @@ app.post("/auth/get", (req, res, next) => {
 app.post("/transaction/get", (req, res, next) => {
   client.getTransactions(
     ACCESS_TOKEN,
-    "2017-01-01",
-    "2017-02-15",
+    "2018-01-01",
+    "2018-09-15",
     {
       count: 250,
       offset: 0
