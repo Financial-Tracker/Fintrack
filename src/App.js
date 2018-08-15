@@ -7,28 +7,29 @@ import HomePage from "./Component/HomePage";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import { withAuth } from "fireview";
 import Plaid from "./Component/Pages/Plaid";
-import store from './Store'
-import BankHomePage from './Component/BankInfo/BankHomePage'
-import Balance from './Component/BankInfo/BalanceInfo'
-import SingleBalance from "./Component/BankInfo/SingleBalance"
-import Income from './Component/BankInfo/Income'
-import Nav from './Component/Forms/Navbar'
-import TransactionTable from './Component/BankInfo/TransactionTable'
-import BankPage from "./Component/Pages/BankPage";
+import store from "./Store";
+// import BankHomePage from "./Component/BankInfo/BankHomePage";
+// import Balance from "./Component/BankInfo/BalanceInfo";
+// import SingleBalance from "./Component/BankInfo/SingleBalance";
+// import Income from "./Component/BankInfo/Income";
+// import TransactionTable from "./Component/BankInfo/TransactionTable";
+// import BankPage from "./Component/Pages/BankPage";
 // New Components imports 
-// import AddAccount from './allComponents/AddAccount'
-// import Balance from './allComponents/Balance'
-// import Budgets from './allComponents/Budgets'
-// import Goals from './allComponents/Goals'
-// import Income from './allComponents/Income'
-// import Overview from './allComponents/Overview'
-// import Profile from './allComponents/Profile'
-// import Settings from './allComponents/Settings'
-// import Transactions from './allComponents/Transactions'
-// import WaysToSave from './allComponents/WaysToSave'
+import Nav from "./Component/Forms/Navbar";
+import AddAccount from './allComponents/AddAccount'
+import Balance from './allComponents/Balance'
+import Budgets from './allComponents/Budgets'
+import Goals from './allComponents/Goals'
+import Income from './allComponents/Income'
+import Overview from './allComponents/Overview'
+import Profile from './allComponents/Profile'
+import Settings from './allComponents/Settings'
+import Transactions from './allComponents/Transactions'
+import WaysToSave from './allComponents/WaysToSave'
 import Bills from './allComponents/Bills'
 
 
+// import Budgets from "./Component/BankInfo/Budgets";
 
 class App extends Component {
   render() {
@@ -38,7 +39,7 @@ class App extends Component {
         
         <div className="App">
         <Nav />
-          {/* {
+          {
             this.props._user ? 
             <Switch>
               <Route exact path="/!" component={Overview} />
@@ -59,11 +60,12 @@ class App extends Component {
             
             : 
             <Switch>
-            <Route exact path="/" component={LogIn} />
+            <Route exact path="/!" component={LogIn} />
             <Route exact path="/login" component={LogIn} />
             <Route exact path="/signup" component={SignUp} />
+            <Route component={LogIn} />
           </Switch>
-          } */}
+          }
 
 
 
@@ -88,7 +90,7 @@ class App extends Component {
               <Route exact path="/signup" component={SignUp} />
             </Switch>
           )} */}
-          <Bills />
+          {/* <Bills /> */}
         </div>
       </HashRouter>
       </Provider>

@@ -1,6 +1,5 @@
 
 import {Link } from "react-router-dom";
-import {getDataFromFireStore} from '../../Store/plaidContainer'
 import {connect} from 'react-redux'
 import { auth } from "../../Firebase";
 import {Navbar,
@@ -14,6 +13,7 @@ import React, { Component } from 'react'
 import { withAuth } from "fireview";
 import navlogo from './navbar.jpg'
 
+import {removeDataFromFireStore} from '../../Store/plaidContainer'
 
 class Nav extends Component {
     constructor(){
@@ -27,12 +27,16 @@ class Nav extends Component {
     
     handleClick(){
         console.log('log out')
-        // auth.signOut()
+        auth.signOut()
+        this.props.deleteFireStore()
     }
     render() {
         console.log(this.props._user)
         return (
         <div>
+
+    {this.props._user ?
+    
     <SideNav
     // trigger={<Button>SIDE NAV DEMO</Button>}
     options={{ closeOnClick: true }}
@@ -47,10 +51,7 @@ class Nav extends Component {
         // }}
     />
     <h3>FinTrack</h3>
-
-
     <SideNavItem href='#account'>Add Account</SideNavItem>
-
     <SideNavItem href='#settings'>Settings</SideNavItem>
     <SideNavItem href='#profile'>Profile</SideNavItem>
     <SideNavItem onClick={this.handleClick}>Log out</SideNavItem>
@@ -63,7 +64,29 @@ class Nav extends Component {
     <SideNavItem href='#goals'>Goals</SideNavItem>
     <SideNavItem href='#saves'>Ways to save</SideNavItem>
     </SideNav>
-            
+    
+    
+    : 
+    <SideNav
+    // trigger={<Button>SIDE NAV DEMO</Button>}
+    options={{ closeOnClick: true }}
+    fixed={true}
+    >
+    <SideNavItem userView
+        // user={{
+        // background: {navlogo},
+        // image: '',
+        // name: 'John Doe',
+        // email: 'jdandturk@gmail.com'
+        // }}
+    />
+    <h3>FinTrack</h3>
+    <SideNavItem href='#login'>Login</SideNavItem>
+    <SideNavItem href='#signup '>Sign up</SideNavItem>
+    <SideNavItem divider />
+    </SideNav>
+    }
+
             {/* {
                 this.props._user ?
                 <div>
@@ -108,7 +131,7 @@ const mapState =(state)=>{
 }
 const mapDispatch=(dispatch)=>{
     return{
-        getFireStore: ()=>dispatch(getDataFromFireStore())
+        deleteFireStore: ()=>dispatch(removeDataFromFireStore())
     }
 }
 
