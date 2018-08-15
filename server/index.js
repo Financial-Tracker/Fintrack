@@ -5,6 +5,7 @@ const express = require("express");
 const plaid = require("plaid");
 const volleyball = require("volleyball");
 const cors = require("cors");
+const PORT = process.env.PORT || 8000
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -109,6 +110,6 @@ app.post("/income/get", (req, res, next) => {
   });
 });
 
-app.listen(8000, () => {
-  console.log("listening to server 8000");
+app.listen(PORT, () => {
+  console.log("listening to server "+PORT);
 });
