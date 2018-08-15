@@ -17,7 +17,6 @@ const client = new plaid.Client(
   secretKey,
   publicKey,
   plaid.environments.sandbox
-  // { version: "2018-05-22" }
 );
 
 app.use(volleyball);
