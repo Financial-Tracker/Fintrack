@@ -39,12 +39,12 @@ class Nav extends Component {
     fixed={true}
     >
     <SideNavItem userView
-        user={{
-        background: {navlogo},
-        image: '',
-        name: 'John Doe',
-        email: 'jdandturk@gmail.com'
-        }}
+        // user={{
+        // background: {navlogo},
+        // image: '',
+        // name: 'John Doe',
+        // email: 'jdandturk@gmail.com'
+        // }}
     />
     <h3>FinTrack</h3>
 

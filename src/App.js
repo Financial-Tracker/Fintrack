@@ -26,7 +26,7 @@ import BankPage from "./Component/Pages/BankPage";
 // import Settings from './allComponents/Settings'
 // import Transactions from './allComponents/Transactions'
 // import WaysToSave from './allComponents/WaysToSave'
-
+import Bills from './allComponents/Bills'
 
 
 
@@ -67,7 +67,7 @@ class App extends Component {
 
 
 
-          {this.props._user ? (
+          {/* {this.props._user ? (
             <Switch>
               <Route exact path="/" component={HomePage} />
               <Route exact path="/plaid" component={Plaid} />
@@ -87,7 +87,8 @@ class App extends Component {
               <Route exact path="/login" component={LogIn} />
               <Route exact path="/signup" component={SignUp} />
             </Switch>
-          )}
+          )} */}
+          <Bills />
         </div>
       </HashRouter>
       </Provider>
