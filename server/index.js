@@ -1,5 +1,5 @@
 const { clientId, publicKey, secretKey } = require("../secret");
-
+const path = require('path')
 const bodyParser = require("body-parser");
 const express = require("express");
 const plaid = require("plaid");
@@ -22,9 +22,8 @@ const client = new plaid.Client(
 
 app.use(volleyball);
 app.use(cors());
-// app.get("/get_access_token", (req, res) => {
-//   res.json("hello ef");
-// });
+app.use(express.static(path.join(__dirname, '..', 'public')))
+
 app.post("/get_access_token", async function(request, response, next) {
   console.log(request.body);
   PUBLIC_TOKEN = await request.body.public_token;
