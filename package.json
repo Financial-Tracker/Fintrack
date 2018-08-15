@@ -60,9 +60,10 @@
   },
   "scripts": {
     "start-plaid": "nodemon ./server/index.js",
-    "start": "react-scripts start ",
+    "start": "react-scripts start  && nodemon ./server/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "test-spec": "mocha \"./src/**/*.spec.js\"",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
