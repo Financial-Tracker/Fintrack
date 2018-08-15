@@ -3,11 +3,18 @@ const firestore = firebase.firestore();
 
 const GET_PLAID = "GET_PLAID";
 const GET_TRANSACTIONS = "GET_TRANSACTIONS";
+const REMOVE_PLAID = "REMOVE_PLAID";
 
 export const getPlaid = data => {
   return {
     type: GET_PLAID,
     payload: data
+  };
+};
+const removePlaid = () => {
+  return {
+    type: REMOVE_PLAID,
+    payload: {}
   };
 };
 
@@ -44,6 +51,26 @@ export const getDataFromFireStore = () => async dispatch => {
     console.error(error);
   }
 };
+export const removeDataFromFireStore = () => {
+  return async dispatch => {
+    const userEmail = firebase.auth().currentUser.email;
+    const userRef = await firestore
+      .collection("user")
+      .where("email", "==", userEmail.toString())
+      .get();
+    const docRefId = await userRef.docs[0].id;
+    const dataAPI = await firestore.collection("user").doc("" + docRefId + "");
+    const deletePLaid = await dataAPI.update({
+      auth: firebase.firestore.FieldValue.delete(),
+      balance: firebase.firestore.FieldValue.delete(),
+      income: firebase.firestore.FieldValue.delete(),
+      transaction: firebase.firestore.FieldValue.delete()
+    });
+    console.log("REMOVE PLAID: ", deletePLaid);
+    const action = removePlaid(deletePLaid);
+    dispatch(action);
+  };
+};
 
 export const getTransactionsByCurrentMonth = () => async dispatch => {
   firebase.auth().onAuthStateChanged(async user => {
@@ -63,7 +90,7 @@ export const getTransactionsByCurrentMonth = () => async dispatch => {
       const currentDate = new Date();
       const month = currentDate.getMonth() + 1;
       const year = currentDate.getFullYear();
-      const transMonth = dataAPI.transaction.filter(transaction => {
+      const transMonth = await dataAPI.transaction.filter(transaction => {
         if (
           transaction.date.substring(0, 4) == year &&
           transaction.date.substring(5, 7) == month
@@ -73,8 +100,10 @@ export const getTransactionsByCurrentMonth = () => async dispatch => {
           return false;
         }
       });
+      //   const transMonth = dataAPI;
+      //   console.log(transMonth);
       // dataAPI.transactions
-
+      console.log(transMonth);
       const action = getPlaid(transMonth);
       dispatch(action);
     }
@@ -87,6 +116,8 @@ const reducer = (state = initialState, action) => {
     case GET_PLAID:
       return action.payload;
     case GET_TRANSACTIONS:
+      return action.payload;
+    case REMOVE_PLAID:
       return action.payload;
     default:
       return state;
