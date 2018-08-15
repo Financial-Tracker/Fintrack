@@ -39,13 +39,13 @@ class App extends Component {
                   component={TransactionTable}
                 />
                 <Route exact path="/bankpage" component={BankPage} />
-                <Route exact path="/budgets" component={Budgets} />
               </Switch>
             ) : (
               <Switch>
-                <Route path="/" component={LogIn} />
+                <Route exact path="/" component={LogIn} />
                 <Route exact path="/login" component={LogIn} />
                 <Route exact path="/signup" component={SignUp} />
+                <Route component={LogIn} />
               </Switch>
             )}
           </div>
