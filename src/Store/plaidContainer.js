@@ -100,11 +100,9 @@ export const getTransactionsByCurrentMonth = () => async dispatch => {
           return false;
         }
       });
-      //   const transMonth = dataAPI;
-      //   console.log(transMonth);
-      // dataAPI.transactions
-      console.log(transMonth);
-      const action = getPlaid(transMonth);
+      const income = dataAPI.income.income_streams[0].monthly_income
+      const budget = {transMonth, monthlyIncome: income}
+      const action = getPlaid(budget);
       dispatch(action);
     }
   });

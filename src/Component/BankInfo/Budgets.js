@@ -6,20 +6,35 @@ import {
   getTransactionsByCurrentMonth
 } from "../../Store/plaidContainer";
 class Budgets extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
+  componentWillMount() { 
     this.props.getTransactions();
-    console.log("Transactions: ", this.props);
+    this.forceUpdate()
   }
 
-  render() {
+  render() { 
+    let total
+    let transMonthArray;
+    let spending
+    if(this.props.plaidInfo.transMonth) {
+      transMonthArray = this.props.plaidInfo.transMonth
+      spending = transMonthArray.map((transaction) => {
+        return (transaction.amount)
+      })
+      const reducer = (accumulator, currentVal) => accumulator + currentVal
+      total = spending.reduce(reducer)
+    }
+
     return (
       <React.Fragment>
-        <h1>Your income is {}</h1>
-        <h2>Your budget is {}</h2>
+        {(this.props.plaidInfo.transMonth)?
+        (
+          <div>
+            <h1>Your income is {this.props.plaidInfo.monthlyIncome}</h1>
+            <h2>You spent {total} this month</h2>
+          </div>
+        ) : (
+          <h1>No budget data here :(</h1>
+        )}
       </React.Fragment>
     );
   }
