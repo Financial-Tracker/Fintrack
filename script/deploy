@@ -15,7 +15,7 @@
 set -e
 
 # If our deploy fails partway through we want to clean up after ourselves.
-# This next block is like a try/catch for our entire script.
+# This next block is like a try/catch for our entire script. Do not forget to change permission with chmod 755 dirname/file
 
 # We trap any program EXIT and run this function.
 # Whether the deploy succeeds or fails, we'll clean up the deploy branch.
