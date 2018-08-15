@@ -1,4 +1,3 @@
-const { clientId, publicKey, secretKey } = require("../secret");
 const path = require('path')
 const bodyParser = require("body-parser");
 const express = require("express");
@@ -14,9 +13,9 @@ let ACCESS_TOKEN = null;
 let PUBLIC_TOKEN = null;
 
 const client = new plaid.Client(
-  clientId,
-  secretKey,
-  publicKey,
+  process.env.CLIENT_ID,
+  process.env.SECRET_KEY,
+  process.env.PUBLIC_KEY,
   plaid.environments.sandbox
 );
 
