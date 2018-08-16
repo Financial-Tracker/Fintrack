@@ -5,7 +5,7 @@ import firebase from 'firebase'
 import {getPlaid} from '../../Store/plaidContainer'
 import{connect} from 'react-redux'
 import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react'
-const path = "http://localhost:8000";
+const path = process.env.NODE_ENV==="production"?"": "http://localhost:8000";
 const firestore = firebase.firestore();
 const settings = {/* your settings... */ timestampsInSnapshots: true};
 firestore.settings(settings);
