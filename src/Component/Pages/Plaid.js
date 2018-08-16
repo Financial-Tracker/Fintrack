@@ -36,13 +36,7 @@ class Plaid extends Component {
 
   loading=()=>{
     return(
-        <Segment>
-          <Dimmer active>
-            <Loader indeterminate>Preparing Files</Loader>
-          </Dimmer>
-
-          <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
-        </Segment>
+            <Loader active>Preparing Files</Loader>
     )
   }
 
