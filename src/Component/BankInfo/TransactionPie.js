@@ -87,12 +87,12 @@ class TransactionPie extends React.PureComponent{
     categoryChart(){
         let catArr = []
         let hash = {}
-        for (let i=0; i<this.props.plaidData.transaction.length;i++){
-            if(!hash[this.props.plaidData.transaction[i].category[0]]){
-                hash[this.props.plaidData.transaction[i].category[0]] = this.props.plaidData.transaction[i].amount
+        for (let i=0; i<this.props.filter.length;i++){
+            if(!hash[this.props.filter[i].category[0]]){
+                hash[this.props.filter[i].category[0]] = this.props.filter[i].amount
             }
             else{
-                hash[this.props.plaidData.transaction[i].category[0]] += this.props.plaidData.transaction[i].amount
+                hash[this.props.filter[i].category[0]] += this.props.filter[i].amount
             }
         }
         for(let key in hash){
@@ -103,12 +103,12 @@ class TransactionPie extends React.PureComponent{
     accountChart(){
         let arr = []
         let hash = {}
-        for(let i =0; i<this.props.plaidData.transaction.length; i++){
-            if(!hash[this.getSingleAccount(this.props.plaidData.transaction[i].account_id)]){
-                hash[this.getSingleAccount(this.props.plaidData.transaction[i].account_id)] = this.props.plaidData.transaction[i].amount
+        for(let i =0; i<this.props.filter.length; i++){
+            if(!hash[this.getSingleAccount(this.props.filter[i].account_id)]){
+                hash[this.getSingleAccount(this.props.filter[i].account_id)] = this.props.filter[i].amount
             }
             else{
-                hash[this.getSingleAccount(this.props.plaidData.transaction[i].account_id)] = this.props.plaidData.transaction[i].amount
+                hash[this.getSingleAccount(this.props.filter[i].account_id)] = this.props.filter[i].amount
             }
         }
         for(let key in hash){
