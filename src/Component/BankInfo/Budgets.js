@@ -55,6 +55,7 @@ class Budgets extends Component {
       const docRefId = userRef.docs[0].id; 
       //update
       firestore.collection('user').doc(""+docRefId+"").update({budget:budget})
+      this.props.history.push('/budgets')
     }
     else {
       alert("Error: Please check your budget!")
@@ -102,16 +103,17 @@ class Budgets extends Component {
           <h1>No budget data here :^(</h1>
         )}
         <div>
-          {(this.props.plaidInfo.budget)?(
-            <form onSubmit={this.handleSubmit}>
-              <label>Set up a monthly budget!</label>
-              <input type="number" onChange={this.handleChange} name="budget" value={this.state.budget} placeholder="Please enter an amount to budget"/>
-              <button type="submit">Save</button>
-            </form>
-          ):(<div>
+          {(this.props.plaidInfo.budget)?
+          (<div>
             <p>Monthly budget for this month is ${this.props.plaidInfo.budget}</p>
             <button>Modify budget</button>
-          </div>)}
+          </div>) : (
+             <form onSubmit={this.handleSubmit}>
+             <label>Set up a monthly budget!</label>
+             <input type="number" onChange={this.handleChange} name="budget" value={this.state.budget} placeholder="Please enter an amount to budget"/>
+             <button type="submit">Save</button>
+           </form>
+          )}
         </div>
       </React.Fragment>
     );
