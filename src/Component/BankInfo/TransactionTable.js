@@ -5,6 +5,8 @@ import { Header, Table } from 'semantic-ui-react'
 import {Switch} from 'react-router-dom'
 import TransactionHeader from './TransactionHeader'
 import TransactionFooter from './TransactionFilter'
+// import { PieChart } from 'react-easy-chart';
+import TransactionPie  from './TransactionPie'
 
 class TransactionTable extends React.Component{
     constructor(){
@@ -119,20 +121,20 @@ class TransactionTable extends React.Component{
                                         {idx<this.state.sizeFilter 
                                         && (this.state.accountFilter=== "All" || this.state.accountFilter === this.getSingleBalance(elem.account_id))
                                         && (this.state.priceFilter==="AllPrice" || this.state.priceFilter > elem.amount)
-                                        &&(this.state.categoryFilter === "AllCategories" || this.state.categoryFilter === elem.category[0])? 
-                                        <Table.Row key = {idx}>
-                                            <Table.Cell>
-                                            <Header as='h4' image>
-                                                <Header.Content>
-                                                {elem.name}
-                                                <Header.Subheader>Date: {elem.date}</Header.Subheader>
-                                                </Header.Content>
-                                            </Header>
-                                            </Table.Cell>
-                                            <Table.Cell> USD: {elem.amount}</Table.Cell>
-                                            <Table.Cell> {elem.category.map(item=>item)}</Table.Cell>
-                                            <Table.Cell> {this.getSingleBalance(elem.account_id)}</Table.Cell>
-                                        </Table.Row>
+                                        &&(this.state.categoryFilter === "AllCategories" || this.state.categoryFilter === elem.category[0])?
+                                            <Table.Row key = {idx}>
+                                                <Table.Cell>
+                                                <Header as='h4' image>
+                                                    <Header.Content>
+                                                    {elem.name}
+                                                    <Header.Subheader>Date: {elem.date}</Header.Subheader>
+                                                    </Header.Content>
+                                                </Header>
+                                                </Table.Cell>
+                                                <Table.Cell> USD: {elem.amount}</Table.Cell>
+                                                <Table.Cell> {elem.category.map(item=>item)}</Table.Cell>
+                                                <Table.Cell> {this.getSingleBalance(elem.account_id)}</Table.Cell>
+                                            </Table.Row>
                                         : <Switch> </Switch>}
                                     </Switch>
                                 )
@@ -146,6 +148,7 @@ class TransactionTable extends React.Component{
                         price = {this.priceOption}
                         category = {this.categoryOption}/>
                     </Table>
+                    <TransactionPie plaidData={this.props.plaidObj}/>
                 </div>
             : <h3>Loading....</h3>}
             </div>
