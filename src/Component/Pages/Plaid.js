@@ -88,8 +88,7 @@ class Plaid extends Component {
 
 
     const userEmail = firebase.auth().currentUser.email
-
-
+    
     const newPlaid = {...plaidObj, email: userEmail}
 
     const userRef = await firestore.collection('user').where('email',"==",userEmail.toString()).get()
@@ -99,8 +98,8 @@ class Plaid extends Component {
     
 
 
-    firestore.collection('user').doc(""+docRefId+"").set(newPlaid).then(() => {
-      console.log("Connected")
+    firestore.collection('user').doc(""+docRefId+"").update(newPlaid).then(() => {
+      console.log("Connected")``
     }).catch(() => {
       console.log("error")
     })
@@ -112,8 +111,6 @@ class Plaid extends Component {
   };
   onMessage = data => {
     console.log(data);
-
-
     this.setState({
       data,
       status: data.action.substr(data.action.lastIndexOf(":") + 1).toUpperCase()
