@@ -26,7 +26,6 @@ export default class SignUp extends Component {
             Cpassword : '',
             error : false
         }
-
         this.handleOnChange = this.handleOnChange.bind(this)
         this.handleOnSubmit = this.handleOnSubmit.bind(this)
     }

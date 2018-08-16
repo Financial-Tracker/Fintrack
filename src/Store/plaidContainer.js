@@ -100,10 +100,10 @@ export const getTransactionsByCurrentMonth = () => async dispatch => {
           return false;
         }
       });
+      const budget = dataAPI.budget
       const income = dataAPI.income.income_streams[0].monthly_income
-      const budget = {transMonth, monthlyIncome: income}
-      const action = getPlaid(budget);
-      dispatch(action);
+      const action = {transMonth, monthlyIncome: income, budget: budget}
+      dispatch(getPlaid(action));
     }
   });
 };
