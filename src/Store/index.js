@@ -4,10 +4,12 @@ import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import plaidContainer from './plaidContainer'
 import userContainer from './userContainer'
-
+import BillReducer from './BillReducer'
 const reducer = combineReducers({
   plaidContainer,
-  userContainer
+  userContainer,
+  bills : BillReducer
+  
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
