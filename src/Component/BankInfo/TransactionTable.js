@@ -110,6 +110,13 @@ class TransactionTable extends React.Component{
             <div>
                 {Object.keys(this.props.plaidObj).length !==0?
                 <div>
+                        <TransactionFooter 
+                        state = {this.state}
+                        size = {this.sizeOption} 
+                        handleChange= {this.handleChange} 
+                        account={this.accountOption}
+                        price = {this.priceOption}
+                        category = {this.categoryOption}/>
                     <Table basic='very' celled collapsing>
                         <TransactionHeader />
                         <Table.Body>
@@ -138,13 +145,7 @@ class TransactionTable extends React.Component{
                                 )
                             })}
                         </Table.Body>
-                        <TransactionFooter 
-                        state = {this.state}
-                        size = {this.sizeOption} 
-                        handleChange= {this.handleChange} 
-                        account={this.accountOption}
-                        price = {this.priceOption}
-                        category = {this.categoryOption}/>
+
                     </Table>
                 </div>
             : <h3>Loading....</h3>}

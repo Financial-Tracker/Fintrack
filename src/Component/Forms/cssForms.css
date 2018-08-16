@@ -8,6 +8,7 @@
 .forms {
     width: 100%;
     text-align: center;
+    margin: 12vw 0vw;
     /* background-color: aqua; */
 }
 body > div,
@@ -22,3 +23,4 @@ body > div > div > div.login-form {
 .error {
     color: red;
 } 
+
