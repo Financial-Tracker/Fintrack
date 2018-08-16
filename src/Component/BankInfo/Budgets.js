@@ -3,12 +3,11 @@ import { connect } from "react-redux";
 import {
   getPlaid,
   getDataFromFireStore,
-  getTransactionsByCurrentMonth
+  getTransactionsByCurrentMonth,
+  updateBudget
 } from "../../Store/plaidContainer";
-import firebase from 'firebase'
 import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react'
 
-const firestore = firebase.firestore()
 
 class Budgets extends Component {
   constructor(){
@@ -51,11 +50,7 @@ class Budgets extends Component {
   async handleSubmit(event) {
     event.preventDefault()
     if(this.state.validated) {
-      const userEmail = firebase.auth().currentUser.email
-      const userRef = await firestore.collection('user').where('email',"==",userEmail.toString()).get()
-      const docRefId = userRef.docs[0].id; 
-      //update
-      await firestore.collection('user').doc(""+docRefId+"").update({budget:this.state.budget})
+      await this.props.updateBudget(this.state.budget)
       this.setState({
         set: true
       })
@@ -68,11 +63,7 @@ class Budgets extends Component {
 
   //MODIFY BUDGET
   async handleClick() {
-    const userEmail = firebase.auth().currentUser.email
-    const userRef = await firestore.collection('user').where('email',"==",userEmail.toString()).get()
-    const docRefId = userRef.docs[0].id; 
-      //update
-    await firestore.collection('user').doc(""+docRefId+"").update({budget: 0})
+    await this.props.updateBudget(0)
     this.setState({
       set: false,
       budget: ""
@@ -81,18 +72,10 @@ class Budgets extends Component {
   }
 
   render() { 
-
-    console.log(this.props.plaidInfo)
     let total
     let transMonthArray;
     let spending
 
-
-    // if(this.props.plaidInfo.budget){
-    //   this.setState({
-    //     budget: this.props.plaidInfo.budget
-    //   })
-    // }
     if(this.props.plaidInfo.transMonth) {
       transMonthArray = this.props.plaidInfo.transMonth
       spending = transMonthArray.map((transaction) => {
@@ -143,7 +126,8 @@ const MapStateToProps = state => ({
 const MapDispatchToProps = dispatch => ({
   getPlaid: data => dispatch(getPlaid(data)),
   getDataFromFireStore: () => dispatch(getDataFromFireStore()),
-  getTransactions: () => dispatch(getTransactionsByCurrentMonth())
+  getTransactions: () => dispatch(getTransactionsByCurrentMonth()),
+  updateBudget: (newBudget) => dispatch(updateBudget(newBudget))
 });
 
 export default connect(
