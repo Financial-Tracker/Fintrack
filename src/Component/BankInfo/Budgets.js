@@ -6,6 +6,7 @@ import {
   getTransactionsByCurrentMonth
 } from "../../Store/plaidContainer";
 import firebase from 'firebase'
+import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react'
 
 const firestore = firebase.firestore()
 
@@ -13,6 +14,7 @@ class Budgets extends Component {
   constructor(){
     super()
     this.state = {
+      set: false,
       budget: "",
       validated: false
     }
@@ -26,7 +28,6 @@ class Budgets extends Component {
     this.props.getTransactions();
   }
 
-  componentDidMount
   //Component action handlers
   handleChange(event) {
     this.setState({
@@ -46,27 +47,37 @@ class Budgets extends Component {
     }
   }
 
+  //SAVE 
   async handleSubmit(event) {
     event.preventDefault()
     if(this.state.validated) {
-      const budget = this.state.budget
       const userEmail = firebase.auth().currentUser.email
       const userRef = await firestore.collection('user').where('email',"==",userEmail.toString()).get()
       const docRefId = userRef.docs[0].id; 
       //update
-      firestore.collection('user').doc(""+docRefId+"").update({budget:budget})
-      this.props.history.push('/budgets')
+      await firestore.collection('user').doc(""+docRefId+"").update({budget:this.state.budget})
+      this.setState({
+        set: true
+      })
+      window.location.reload();
     }
     else {
       alert("Error: Please check your budget!")
     }
   }
 
-  handleClick() {
+  //MODIFY BUDGET
+  async handleClick() {
+    const userEmail = firebase.auth().currentUser.email
+    const userRef = await firestore.collection('user').where('email',"==",userEmail.toString()).get()
+    const docRefId = userRef.docs[0].id; 
+      //update
+    await firestore.collection('user').doc(""+docRefId+"").update({budget: 0})
     this.setState({
-      budget: "",
-      validated: false
+      set: false,
+      budget: ""
     })
+    window.location.reload();
   }
 
   render() { 
@@ -93,20 +104,27 @@ class Budgets extends Component {
 
     return (
       <React.Fragment>
-        {(this.state.budget)?
+        {(this.props.plaidInfo.monthlyIncome)?
         (
           <div>
             <h3>Your monthly income is ${this.props.plaidInfo.monthlyIncome}</h3>
             <h4>You spent ${total} this month</h4>
           </div>
         ) : (
-          <h1>No budget data here :^(</h1>
+          <div>
+          <Segment>
+            <Dimmer active>
+              <Loader size='medium'>Preparing Files</Loader>
+            </Dimmer>
+            <Image src='/images/wireframe/short-paragraph.png' />
+          </Segment>
+        </div>
         )}
         <div>
           {(this.props.plaidInfo.budget)?
           (<div>
             <p>Monthly budget for this month is ${this.props.plaidInfo.budget}</p>
-            <button>Modify budget</button>
+            <button onClick={this.handleClick}>Modify budget</button>
           </div>) : (
              <form onSubmit={this.handleSubmit}>
              <label>Set up a monthly budget!</label>
