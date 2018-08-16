@@ -40,73 +40,108 @@ class TransactionPie extends React.PureComponent{
             };
         }
         
-        mouseOverHandler(d, e) {
-            this.setState({
-            showToolTip: true,
-            top: `${e.y - 10}px`,
-            left: `${e.x + 10}px`,
-            value: d.value,
-            key: d.data.key });
+    mouseOverHandler(d, e) {
+        this.setState({
+        showToolTip: true,
+        top: `${e.y - 10}px`,
+        left: `${e.x + 10}px`,
+        value: d.value,
+        key: d.data.key });
+    }
+    
+    mouseMoveHandler(e) {
+        if (this.state.showToolTip) {
+        this.setState({ top: `${e.y}px`, left: `${e.x + 10}px` });
         }
-        
-        mouseMoveHandler(e) {
-            if (this.state.showToolTip) {
-            this.setState({ top: `${e.y}px`, left: `${e.x + 10}px` });
+    }
+    
+    mouseOutHandler() {
+        this.setState({ showToolTip: false });
+    }
+    toggleState() {
+        this.setState({
+        active: !this.state.active
+        });
+    }
+    
+    createTooltipForCategories() {
+        if (this.state.showToolTip) {
+        return (
+            <ToolTip
+            top={this.state.top}
+            left={this.state.left}
+            >
+            ${this.state.value} on {this.state.key}
+            </ToolTip>
+        );
+        }
+        return false;
+    }
+    getSingleAccount(accountId){
+        for(let i =0;i<this.props.plaidData.balance.length; i++){
+            if(this.props.plaidData.balance[i].account_id=== accountId){
+                return this.props.plaidData.balance[i].name
             }
         }
-        
-        mouseOutHandler() {
-            this.setState({ showToolTip: false });
-        }
-        toggleState() {
-            this.setState({
-            active: !this.state.active
-            });
-        }
-        
-        createTooltipForCategories() {
-            if (this.state.showToolTip) {
-            return (
-                <ToolTip
-                top={this.state.top}
-                left={this.state.left}
-                >
-                You spend ${this.state.value} on {this.state.key}
-                </ToolTip>
-            );
+    }  
+    categoryChart(){
+        let catArr = []
+        let hash = {}
+        for (let i=0; i<this.props.plaidData.transaction.length;i++){
+            if(!hash[this.props.plaidData.transaction[i].category[0]]){
+                hash[this.props.plaidData.transaction[i].category[0]] = this.props.plaidData.transaction[i].amount
             }
-            return false;
-        }
-        categoryChart(){
-            let catArr = []
-            let hash = {}
-            for (let i=0; i<this.props.plaidData.transaction.length;i++){
-                if(!hash[this.props.plaidData.transaction[i].category[0]]){
-                    hash[this.props.plaidData.transaction[i].category[0]] = this.props.plaidData.transaction[i].amount
-                }
-                else{
-                    hash[this.props.plaidData.transaction[i].category[0]] += this.props.plaidData.transaction[i].amount
-                }
+            else{
+                hash[this.props.plaidData.transaction[i].category[0]] += this.props.plaidData.transaction[i].amount
             }
-            for(let key in hash){
-                catArr.push({key: key, value: hash[key]})
-            }
-            return catArr
         }
+        for(let key in hash){
+            catArr.push({key: key, value: hash[key]})
+        }
+        return catArr
+    }
+    accountChart(){
+        let arr = []
+        let hash = {}
+        for(let i =0; i<this.props.plaidData.transaction.length; i++){
+            if(!hash[this.getSingleAccount(this.props.plaidData.transaction[i].account_id)]){
+                hash[this.getSingleAccount(this.props.plaidData.transaction[i].account_id)] = this.props.plaidData.transaction[i].amount
+            }
+            else{
+                hash[this.getSingleAccount(this.props.plaidData.transaction[i].account_id)] = this.props.plaidData.transaction[i].amount
+            }
+        }
+        for(let key in hash){
+            arr.push({key: key, value: hash[key]})
+        }
+        return arr
+    }
     
     render(){
-        console.log('GOT IT! ', this.props.plaidData)
         return(
-            <div>
+            <span>
                 {this.createTooltipForCategories()}
+                <label> Categories </label>
                 <PieChart
                 size={200} 
                 innerHoleSize = {100}
                 data={this.categoryChart()}
                 mouseOverHandler={this.mouseOverHandler}
                 mouseOutHandler={this.mouseOutHandler}
-                mouseMoveHandler={this.mouseMoveHandler}/>
-            </div>
+                mouseMoveHandler={this.mouseMoveHandler}
+                />
+
+                <label> Accounts </label>
+                <PieChart
+                size={200} 
+                innerHoleSize = {100}
+                data={this.accountChart()}
+                mouseOverHandler={this.mouseOverHandler}
+                mouseOutHandler={this.mouseOutHandler}
+                mouseMoveHandler={this.mouseMoveHandler}
+                />
+
+            </span>
         )
     }
 }

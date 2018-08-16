@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import{getDataFromFireStore} from '../../Store/plaidContainer'
 import CardBalance from './CardBalance'
+import{ProgressBar, Col} from 'react-materialize'
 
 
 
@@ -27,7 +28,7 @@ class Balance extends React.Component{
                         />
                     )
                 })} </div>
-                :<h1>Loading...</h1>
+                :<Col s={12}><ProgressBar /></Col>
                 }
 
             </div>
