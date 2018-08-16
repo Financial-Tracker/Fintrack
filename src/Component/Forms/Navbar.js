@@ -59,6 +59,7 @@ class Nav extends Component {
     <SideNavItem href='#overview'>Overview</SideNavItem>
     <SideNavItem href='#transaction'>Transactions</SideNavItem>
     <SideNavItem href='#balance'>Balance</SideNavItem>
+    <SideNavItem href='#bills'>Bills</SideNavItem>
     <SideNavItem href='#income'>Income</SideNavItem>
     <SideNavItem href='#budgets'>Budgets</SideNavItem>
     <SideNavItem href='#goals'>Goals</SideNavItem>

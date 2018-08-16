@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import {Row, Icon, Input, Button} from 'react-materialize'
 import { Header, Image, Modal, Dropdown } from 'semantic-ui-react'
+import {getAllBill} from '../Store/BillReducer'
+import {connect} from 'react-redux'
 
 const typeOfBill = [
   { key: 'none', text: 'none', value: 'none' },
@@ -34,11 +36,12 @@ class Bills extends Component {
       howOften : '',
       date: '',
       paid: false
-
-
-
     }
   }
+  componentDidMount(){
+    this.props.getAllBill()
+  }
+  
   onSubmitHandler = (evt) => {
     // evt.preventDefault()
     console.log(this.state)
@@ -101,4 +104,16 @@ class Bills extends Component {
   }
 }
 
-export default Bills
+const mapState =(state)=>{
+  return{
+      plaidObj: state.plaidContainer
+  }
+}
+const mapDispatch=(dispatch)=>{
+  return{
+  getAllBill : () => dispatch(getAllBill()) 
+  }
+}
+
+
+export default connect(mapState,mapDispatch)(Bills)

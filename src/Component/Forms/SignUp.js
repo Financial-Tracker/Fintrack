@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Link} from 'react-router-dom'
 import {
   Button,
   Form,
@@ -73,7 +74,7 @@ export default class SignUp extends Component {
 
   render() {
     return (
-            <div className='login-form'>
+            <div className='login-form forms' >
             <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
             <Grid.Column style={{ maxWidth: 450 }}>
                 <Header as='h2' textAlign='center'>
@@ -130,7 +131,7 @@ export default class SignUp extends Component {
                 </Segment>
                 </Form>
                 <Message>
-                Have an account ? <a href='/'>Log in</a>
+                Have an account ? <Link to="/">Log in</Link>
                 </Message>
             </Grid.Column>
             </Grid>
