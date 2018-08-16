@@ -1,11 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import BudgetPage from "../Component/BankInfo/Budgets";
 
 export default class Budgets extends Component {
   render() {
     return (
       <div>
-        This is Budgets page
+        <BudgetPage />
       </div>
-    )
+    );
   }
 }
