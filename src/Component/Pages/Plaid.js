@@ -4,7 +4,7 @@ import axios from "axios";
 import firebase from 'firebase'
 import {getPlaid} from '../../Store/plaidContainer'
 import{connect} from 'react-redux'
-import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react'
+import { Loader } from 'semantic-ui-react'
 const path = process.env.NODE_ENV==="production"?"": "http://localhost:8000";
 const firestore = firebase.firestore();
 const settings = {/* your settings... */ timestampsInSnapshots: true};
@@ -36,13 +36,7 @@ class Plaid extends Component {
 
   loading=()=>{
     return(
-        <Segment>
-          <Dimmer active>
-            <Loader indeterminate>Preparing Files</Loader>
-          </Dimmer>
-
-          <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
-        </Segment>
+            <Loader active>Preparing Files</Loader>
     )
   }
 

@@ -1,9 +1,6 @@
-import React, { PureComponent } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import ToolTip from './ToolTip'
-import { escapeHTML } from './Util'
 import { PieChart } from 'react-easy-chart';
-import Scrollspy from 'react-scrollspy';
 
 const brandColors = {
     greyBlueOne: '#1e313c',
@@ -119,7 +116,7 @@ class TransactionPie extends React.PureComponent{
     
     render(){
         return(
-            <span>
+            <div>
                 {this.createTooltipForCategories()}
                 <label> Categories </label>
                 <PieChart
@@ -130,7 +127,6 @@ class TransactionPie extends React.PureComponent{
                 mouseOutHandler={this.mouseOutHandler}
                 mouseMoveHandler={this.mouseMoveHandler}
                 />
-
                 <label> Accounts </label>
                 <PieChart
                 size={200} 
@@ -141,7 +137,7 @@ class TransactionPie extends React.PureComponent{
                 mouseMoveHandler={this.mouseMoveHandler}
                 />
 
-            </span>
+            </div>
         )
     }
 }
