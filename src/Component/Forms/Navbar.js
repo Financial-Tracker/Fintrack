@@ -12,8 +12,9 @@ import {Navbar,
 import React, { Component } from 'react'
 import { withAuth } from "fireview";
 import navlogo from './navbar.jpg'
-
-import {removeDataFromFireStore} from '../../Store/plaidContainer'
+import {removeDataFromFireStore, getDataFromFireStore} from '../../Store/plaidContainer'
+import {stack as Menu} from 'react-burger-menu'
+require('./cssForms.css')
 
 class Nav extends Component {
     constructor(){
@@ -23,7 +24,9 @@ class Nav extends Component {
         };
         this.handleClick = this.handleClick.bind(this)
     }
-
+    componentDidMount(){
+        this.props.getPlaidData()
+    }
     
     handleClick(){
         console.log('log out')
@@ -33,97 +36,32 @@ class Nav extends Component {
     render() {
         console.log(this.props._user)
         return (
-        <div>
+            <div>
+            {
+                !this.props._user ? null :
+                <Menu className='center' burgerButtonClassName={ "my-burger-button"} > 
+            <h3>FinTrack</h3>
+            <h3><Link to='/account'>Add Account </Link></h3>
+            <h3><Link to = "/profile">Profile</Link> </h3>
+            <h3> <Link to='/settings'> Settings</Link></h3>
+            <h3 onClick={this.handleClick}><Link to='/'>Log out</Link></h3>
+            <hr />
+            <h4><Link to='/overview'> Overview </Link></h4>
+            <h4> <Link to='/transaction'>Transactions </Link> </h4>
+            <h4><Link to='/balance'> Balance </Link></h4>
+            <h4><Link to='/income'> Income </Link></h4>
+            <h4><Link to='/budgets'> Budgets </Link></h4>
+            <h4><Link to='/goals'> Goals </Link></h4>
+            <h4><Link to='/saves'> Ways to save </Link></h4>
+        </Menu>
+            }
 
-    {this.props._user ?
-    
-    <SideNav
-    // trigger={<Button>SIDE NAV DEMO</Button>}
-    options={{ closeOnClick: true }}
-    fixed={true}
-    >
-    <SideNavItem userView
-        // user={{
-        // background: {navlogo},
-        // image: '',
-        // name: 'John Doe',
-        // email: 'jdandturk@gmail.com'
-        // }}
-    />
-    <h3>FinTrack</h3>
-    <SideNavItem href='#account'>Add Account</SideNavItem>
-    <SideNavItem href='#settings'>Settings</SideNavItem>
-    <SideNavItem href='#profile'>Profile</SideNavItem>
-    <SideNavItem onClick={this.handleClick}>Log out</SideNavItem>
-    <SideNavItem divider />
-    <SideNavItem href='#overview'>Overview</SideNavItem>
-    <SideNavItem href='#transaction'>Transactions</SideNavItem>
-    <SideNavItem href='#balance'>Balance</SideNavItem>
-    <SideNavItem href='#bills'>Bills</SideNavItem>
-    <SideNavItem href='#income'>Income</SideNavItem>
-    <SideNavItem href='#budgets'>Budgets</SideNavItem>
-    <SideNavItem href='#goals'>Goals</SideNavItem>
-    <SideNavItem href='#saves'>Ways to save</SideNavItem>
-    </SideNav>
-    
-    
-    : 
-    <SideNav
-    // trigger={<Button>SIDE NAV DEMO</Button>}
-    options={{ closeOnClick: true }}
-    fixed={true}
-    >
-    <SideNavItem userView
-        // user={{
-        // background: {navlogo},
-        // image: '',
-        // name: 'John Doe',
-        // email: 'jdandturk@gmail.com'
-        // }}
-    />
-    <h3>FinTrack</h3>
-    <SideNavItem href='#login'>Login</SideNavItem>
-    <SideNavItem href='#signup '>Sign up</SideNavItem>
-    <SideNavItem divider />
-    </SideNav>
-    }
-
-            {/* {
-                this.props._user ?
-                <div>
-                <Navbar fixed brand='FinTrack' className='grey' right >
-                <NavItem><Link to = "/account">Add Account</Link></NavItem>
-                <NavItem><Link to = "/settings">Settings</Link></NavItem>
-                <NavItem><Link to = "/profile">Profile</Link></NavItem>
-                <NavItem onClick = {this.handleClick}><Link to = "/">Log out</Link></NavItem>
-            </Navbar>
-            <Navbar className='light-green' right>
-                <NavItem ><Link to = "/overview">Overview</Link></NavItem>
-                <NavItem ><Link to = "/transaction">Transactions</Link></NavItem>
-                <NavItem ><Link to = "/balance">Balance</Link></NavItem>
-                <NavItem ><Link to = "/income">Income</Link></NavItem>
-                <NavItem ><Link to = "/budgets">Budgets</Link></NavItem>
-                <NavItem ><Link to = "/goals">Goals</Link></NavItem>
-                <NavItem ><Link to = "/saves">Ways to save</Link></NavItem>
-            </Navbar>
-                </div>
-                
-                : 
-                    <div>
-            <Navbar fixed className='grey' right >
-                <NavItem><Link to = "/">Login</Link></NavItem>
-                <NavItem><Link to = "/signup">Sign up</Link></NavItem>
-            </Navbar>
-                    </div>
-            } */}
-
-
-        </div>
+        
+            </div>
+            
         )
     }
 }
-
-
 
 const mapState =(state)=>{
     return{
@@ -132,7 +70,7 @@ const mapState =(state)=>{
 }
 const mapDispatch=(dispatch)=>{
     return{
-        deleteFireStore: ()=>dispatch(removeDataFromFireStore())
+        getPlaidData : ()=> dispatch(getDataFromFireStore())
     }
 }
 

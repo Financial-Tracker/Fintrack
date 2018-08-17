@@ -4,6 +4,9 @@ const firestore = firebase.firestore();
 const GET_PLAID = "GET_PLAID";
 const GET_TRANSACTIONS = "GET_TRANSACTIONS";
 const REMOVE_PLAID = "REMOVE_PLAID";
+const LOADING = 'LOADING'
+
+const startLoading = () => ({type : LOADING})
 
 export const getPlaid = data => {
   return {
@@ -26,6 +29,7 @@ export const getTransactions = plaidData => {
 };
 
 export const getDataFromFireStore = () => async dispatch => {
+  dispatch(startLoading())
   try {
     firebase.auth().onAuthStateChanged(async user => {
       if (user) {
@@ -52,7 +56,9 @@ export const getDataFromFireStore = () => async dispatch => {
   }
 };
 export const removeDataFromFireStore = () => {
+  
   return async dispatch => {
+    dispatch(startLoading())
     const userEmail = firebase.auth().currentUser.email;
     const userRef = await firestore
       .collection("user")
@@ -73,6 +79,7 @@ export const removeDataFromFireStore = () => {
 };
 
 export const getTransactionsByCurrentMonth = () => async dispatch => {
+ 
   firebase.auth().onAuthStateChanged(async user => {
     if (user) {
       // User is signed in.
@@ -107,10 +114,19 @@ export const getTransactionsByCurrentMonth = () => async dispatch => {
     }
   });
 };
-const initialState = {};
+const initialState = {
+  isLoading: false,
+  plaidInfo : {}
+
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case  LOADING:
+    return {
+      ...state, 
+      isLoading : true
+    }
     case GET_PLAID:
       return action.payload;
     case GET_TRANSACTIONS:
