@@ -1,28 +1,13 @@
 /* global describe beforeEach afterEach it */
 
 import { expect } from "chai";
-import { GET_PLAID, getPlaid } from "./plaidContainer";
+import { GET_PLAID, getPlaid } from "../src/Store/plaidContainer";
 import axios from "axios";
-// import MockAdapter from "axios-mock-adapter";
-// import configureMockStore from "redux-mock-store";
-// import thunkMiddleware from "redux-thunk";
-// import history from "../history";
+import MockAdapter from "axios-mock-adapter";
+import configureMockStore from "redux-mock-store";
+import thunkMiddleware from "redux-thunk";
+import history from "../history";
 import { createStore } from "redux";
-// import * as firebase from "firebase";
-// import firebase from "firebase";
-// import admin from "firebase-admin";
-// var app = admin.initializeApp();
-// var firebasemock = require("firebase-mock");
-// var proxyquire = require("proxyquire");
-// let mockfirebase = require("mockfirebase").MockFirebase;
-// var plaidContainer = proxyquire("./plaidContainer", {
-//   firestore: function(url) {
-//     return (mock = new MockFirebase(url));
-//   }
-// });
-
-// var mockfirestore = new firebasemock.MockFirestore();
-// var foo = proxyquire("./plaidContainer", { firestore: mockfirestore });
 
 const plaidData = { test: "spect" };
 
