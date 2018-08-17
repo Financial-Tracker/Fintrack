@@ -5,6 +5,9 @@ const GET_PLAID = "GET_PLAID";
 const GET_TRANSACTIONS = "GET_TRANSACTIONS";
 const REMOVE_PLAID = "REMOVE_PLAID";
 const UPDATE_BUDGET = "UPDATE_BUDGET"
+const LOADING ='LOADING'
+
+const startLoading = () => ({type : LOADING})
 
 export const getPlaid = data => {
   return {
