@@ -38,44 +38,42 @@ class App extends Component {
       <Provider store={store}>
       <HashRouter>
 
-      <div className='contanier'>
-        <div className='nav'>
-          <Nav/>
+        <div>
+        <div>
+          <Nav />
         </div>
-        <div className='contant '>
+
+        <div className='contant'>
         {
-            this.props._user ? 
-            <Switch>
-              <Route exact path="/!" component={Overview} />
-              <Route exact path="/" component={Overview} />
-              <Route exact path="/homepage" component={Overview} />
-              <Route exact path='/overview' component={Overview} />
-              <Route exact path="/plaid" component={Plaid} />
-              <Route exact path="/balance" component={Balance} />
-              <Route exact path='/income' component={Income} />
-              <Route exact path='/account' component={AddAccount} />
-              <Route exact path='/budgets' component={Budgets} />
-              <Route exact path='/goals' component={Goals} />
-              <Route exact path='/profile' component={Profile} />   
-              <Route exact path='/settings' component={Settings} />   
-              <Route exact path='/transaction' component={Transactions} />  
-              <Route exact path='/saves' component={WaysToSave} />
-              <Route exact path='/bills' component={Bills} />
-              <Route exact path='/budgetbeta' component={BudgetBeta} />
-
-            </Switch>
-            
-            : 
-            <Switch>
-            <Route exact path="/!" component={LogIn} />
-            <Route exact path="/login" component={LogIn} />
-            <Route exact path="/signup" component={SignUp} />
-            <Route component={LogIn} />
-          </Switch>
-          } 
-
+  this.props._user ? 
+  <Switch>
+    <Route exact path="/!" component={Overview} />
+    <Route exact path="/" component={Overview} />
+    <Route exact path="/homepage" component={Overview} />
+    <Route exact path='/overview' component={Overview} />
+    <Route exact path="/plaid" component={Plaid} />
+    <Route exact path="/balance" component={Balance} />
+    <Route exact path='/income' component={Income} />
+    <Route exact path='/account' component={AddAccount} />
+    <Route exact path='/budgets' component={Budgets} />
+    <Route exact path='/goals' component={Goals} />
+    <Route exact path='/profile' component={Profile} />   
+    <Route exact path='/settings' component={Settings} />   
+    <Route exact path='/transaction' component={Transactions} />  
+    <Route exact path='/saves' component={WaysToSave} />
+    <Route exact path='/bills' component={Bills} />
+  </Switch>
+  
+  : 
+  <Switch>
+  <Route exact path="/!" component={LogIn} />
+  <Route exact path="/login" component={LogIn} />
+  <Route exact path="/signup" component={SignUp} />
+  <Route component={LogIn} />
+</Switch>
+}
         </div>
-      </div>
+        </div>
       </HashRouter>
       </Provider>
     );
@@ -83,3 +81,5 @@ class App extends Component {
 }
 
 export default withAuth(App);
+
+
