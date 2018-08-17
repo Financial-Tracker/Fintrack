@@ -70,7 +70,8 @@ const mapState =(state)=>{
 }
 const mapDispatch=(dispatch)=>{
     return{
-        getPlaidData : ()=> dispatch(getDataFromFireStore())
+        getPlaidData : ()=> dispatch(getDataFromFireStore()),
+        deleteFireStore: ()=>dispatch(removeDataFromFireStore())
     }
 }
 
