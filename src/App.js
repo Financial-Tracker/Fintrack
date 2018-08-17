@@ -28,6 +28,7 @@ import Transactions from './allComponents/Transactions'
 import WaysToSave from './allComponents/WaysToSave'
 import Bills from './allComponents/Bills'
 import TransactionTable from "./Component/BankInfo/TransactionTable";
+import EditProfile from './allComponents/EditProfile'
 
 
 // import Budgets from "./Component/BankInfo/Budgets";
@@ -61,6 +62,7 @@ class App extends Component {
               <Route exact path='/transaction' component={Transactions} />  
               <Route exact path='/saves' component={WaysToSave} />
               <Route exact path='/bills' component={Bills} />
+              <Route exact path='/editprofile' component={EditProfile} />
             </Switch>
             
             : 

@@ -4,7 +4,7 @@ const firestore = firebase.firestore();
 const GET_PLAID = "GET_PLAID";
 const GET_TRANSACTIONS = "GET_TRANSACTIONS";
 const REMOVE_PLAID = "REMOVE_PLAID";
-const UPDATE_BUDGET = "UPDATE_BUDGET"
+const UPDATE_BUDGET = "UPDATE_BUDGET";
 
 export const getPlaid = data => {
   return {
@@ -35,6 +35,7 @@ export const updatePlaidBudget = newPlaidData => {
 
 export const getDataFromFireStore = () => async dispatch => {
   try {
+    
     firebase.auth().onAuthStateChanged(async user => {
       if (user) {
         // User is signed in.
@@ -153,7 +154,7 @@ const reducer = (state = initialState, action) => {
     case UPDATE_BUDGET:
       return action.payload
     default:
-      return state;
+      return state
   }
 };
 
