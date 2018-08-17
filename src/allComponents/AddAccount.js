@@ -3,7 +3,7 @@ import HomepageLayout from '../Component/Pages/HomepageHeading'
 import {connect} from 'react-redux'
 import {withAuth} from 'fireview'
 
-import CardBalance from '../Component/BankInfo/CardBalance'
+import Balance from '../Component/BankInfo/BalanceInfo'
 
 //Css imports
 require('./Styling/addAccount.css')
@@ -29,10 +29,14 @@ class AddAccount extends Component {
         : 
         <div className='addAccount'>
         <div className={`addAccount-header ${anmination}`}>
-          <h1 className='addAccount-header-text '>Over view</h1>
+          <h1 className='addAccount-header-text '>OVER VIEW </h1>
         </div>
         <div className={`addAccountAccounts ${anmination}`}>
-          <CardBalance />
+        <h3>
+          Accounts
+        </h3>
+        <h1 />
+          <Balance />
         </div>
         <div className={`addAccount-linegraph-pie  ${anmination}`}>
         <div className={`addAccount-linegraph ${anmination}`}>
