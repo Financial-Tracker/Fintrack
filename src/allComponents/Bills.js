@@ -71,8 +71,48 @@ class Bills extends Component {
 
   render() {
     return (
+        <div>
+          Bill
+        </div>
+    )
+  }
+}
+
+const mapState =(state)=>{
+  return{
+      plaidObj: state.plaidContainer
+  }
+}
+const mapDispatch=(dispatch)=>{
+  return{
+  getAllBill : () => dispatch(getAllBill()) 
+  }
+}
+
+
+{/* <div>
+
+<div class="container">
+  <h2>Dynamic Tabs</h2>
+  <p>To make the tabs toggleable, add the data-toggle="tab" attribute to each link. Then add a .tab-pane class with a unique ID for every tab and wrap them inside a div element with class .tab-content.</p>
+      <Button>Test</Button>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Bills</a></li>
+    <li><a data-toggle="tab" href="#menu1">Paid List</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h3>Bills </h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h3>Payments</h3>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+  </div>
+</div>
       <div>
-        
     <Modal 
     trigger={<Button onClick={this.handleOpen}>Add an offline bill</Button>} 
     centered={false}
@@ -97,23 +137,9 @@ class Bills extends Component {
       </Modal.Description>
     </Modal.Content>
   </Modal>
+      </div>
       
 
-      </div>
-    )
-  }
-}
-
-const mapState =(state)=>{
-  return{
-      plaidObj: state.plaidContainer
-  }
-}
-const mapDispatch=(dispatch)=>{
-  return{
-  getAllBill : () => dispatch(getAllBill()) 
-  }
-}
-
+      </div> */}
 
 export default connect(mapState,mapDispatch)(Bills)
