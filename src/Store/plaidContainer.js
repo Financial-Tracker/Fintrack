@@ -34,7 +34,6 @@ export const updatePlaidBudget = newPlaidData => {
 }
 
 export const getDataFromFireStore = () => async dispatch => {
-  dispatch(startLoading())
   try {
     firebase.auth().onAuthStateChanged(async user => {
       if (user) {
@@ -88,7 +87,6 @@ export const updateBudget = (newBudget) => async dispatch => {
 export const removeDataFromFireStore = () => {
   
   return async dispatch => {
-    dispatch(startLoading())
     const userEmail = firebase.auth().currentUser.email;
     const userRef = await firestore
       .collection("user")
@@ -152,11 +150,6 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case  LOADING:
-    return {
-      ...state, 
-      isLoading : true
-    }
     case GET_PLAID:
       return action.payload;
     case GET_TRANSACTIONS:
