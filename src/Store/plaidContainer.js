@@ -4,9 +4,7 @@ const firestore = firebase.firestore();
 const GET_PLAID = "GET_PLAID";
 const GET_TRANSACTIONS = "GET_TRANSACTIONS";
 const REMOVE_PLAID = "REMOVE_PLAID";
-const LOADING = 'LOADING'
-
-const startLoading = () => ({type : LOADING})
+const UPDATE_BUDGET = "UPDATE_BUDGET"
 
 export const getPlaid = data => {
   return {
@@ -27,6 +25,13 @@ export const getTransactions = plaidData => {
     payload: plaidData
   };
 };
+
+export const updatePlaidBudget = newPlaidData => {
+  return {
+    type: UPDATE_BUDGET,
+    payload: newPlaidData
+  }
+}
 
 export const getDataFromFireStore = () => async dispatch => {
   dispatch(startLoading())
@@ -55,6 +60,31 @@ export const getDataFromFireStore = () => async dispatch => {
     console.error(error);
   }
 };
+
+export const updateBudget = (newBudget) => async dispatch => {
+  try {
+    const userEmail = firebase.auth().currentUser.email
+      const userRef = await firestore.collection('user').where('email',"==",userEmail.toString()).get()
+      const docRefId = userRef.docs[0].id; 
+      await firestore.collection('user').doc(""+docRefId+"").update({budget: newBudget})
+      .then(() => {
+        console.log("updated!")
+      }).catch(error => {
+        console.log(error)
+      })
+    
+      const dataAPI = await firestore
+      .collection("user")
+      .doc("" + docRefId + "")
+      .get()
+      .then(user => user.data());
+      console.log("data",dataAPI)
+      dispatch(updatePlaidBudget(dataAPI))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export const removeDataFromFireStore = () => {
   
   return async dispatch => {
@@ -133,6 +163,8 @@ const reducer = (state = initialState, action) => {
       return action.payload;
     case REMOVE_PLAID:
       return action.payload;
+    case UPDATE_BUDGET:
+      return action.payload
     default:
       return state;
   }
