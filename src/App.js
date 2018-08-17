@@ -28,7 +28,7 @@ import Transactions from './allComponents/Transactions'
 import WaysToSave from './allComponents/WaysToSave'
 import Bills from './allComponents/Bills'
 import TransactionTable from "./Component/BankInfo/TransactionTable";
-
+import BudgetBeta from './Component/BankInfo/Budgets'
 
 // import Budgets from "./Component/BankInfo/Budgets";
 

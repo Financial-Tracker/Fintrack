@@ -20,6 +20,7 @@ import Payment from "../../pictures/Payment.jpg";
 import Travel from "../../pictures/Travel.jpeg";
 import Shop from "../../pictures/Shop.jpg";
 import { Collapsible, CollapsibleItem } from "react-materialize";
+import BudgetChart from './BudgetChart'
 
 class Budgets extends Component {
   constructor() {
@@ -142,6 +143,7 @@ class Budgets extends Component {
                 Monthly budget for this month is ${this.props.plaidInfo.budget}
               </p>
               <button onClick={this.handleClick}>Modify budget</button>
+              <BudgetChart budget = {this.props.plaidInfo.budget} categories = {categories}/>
             </div>
           ) : (
             <form onSubmit={this.handleSubmit}>
