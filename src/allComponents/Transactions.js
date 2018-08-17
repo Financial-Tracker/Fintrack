@@ -6,7 +6,8 @@ export default class Transactions extends Component {
   render() {
     return (
       <div>
-        <TransactionTable />
+        This is transaction
+        {/* <TransactionTable /> */}
       </div>
     )
   }

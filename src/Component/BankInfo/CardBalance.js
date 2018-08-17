@@ -6,9 +6,10 @@ import {Link} from 'react-router-dom'
 
 class CardBalance extends React.Component{
     async componentDidMount(){
-        await this.props.getFireStore();
+        // await this.props.getFireStore();
     }
     render(props){
+        console.log(this.props.plaidObj)
         return(
             <Link to={`/balance/${this.props.id}`}>
                 <Card 
