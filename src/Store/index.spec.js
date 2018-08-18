@@ -1,7 +1,12 @@
 /* global describe beforeEach afterEach it */
 
 import { expect } from "chai";
-import { GET_PLAID, getPlaid } from "./plaidContainer";
+import {
+  getPlaid,
+  removePlaid,
+  getTransactions,
+  updatePlaidBudget
+} from "./plaidContainer";
 import axios from "axios";
 // import MockAdapter from "axios-mock-adapter";
 // import configureMockStore from "redux-mock-store";
@@ -33,6 +38,25 @@ describe("Action creators", () => {
       expect(plaid).to.be.deep.equal({
         type: "GET_PLAID",
         payload: plaidData
+      });
+    });
+  });
+  describe("removePlaid", () => {
+    it("removes the information", () => {
+      const plaid = removePlaid();
+      expect(plaid).to.be.deep.equal({
+        type: "REMOVE_PLAID",
+        payload: {}
+      });
+    });
+  });
+  describe("updatePlaidBudget", () => {
+    it("update Plaid", () => {
+      const payload = { spec: "is Updated" };
+      const plaid = updatePlaidBudget(payload);
+      expect(plaid).to.be.deep.equal({
+        type: "UPDATE_BUDGET",
+        payload: payload
       });
     });
   });

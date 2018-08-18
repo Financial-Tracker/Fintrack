@@ -14,7 +14,7 @@ export const getPlaid = data => {
     payload: data
   };
 };
-const removePlaid = () => {
+export const removePlaid = () => {
   return {
     type: REMOVE_PLAID,
     payload: {}
@@ -94,7 +94,6 @@ export const updateBudget = newBudget => async dispatch => {
 };
 
 export const removeDataFromFireStore = () => {
-  
   return async dispatch => {
     const userEmail = firebase.auth().currentUser.email;
     const userRef = await firestore
@@ -116,7 +115,6 @@ export const removeDataFromFireStore = () => {
 };
 
 export const getTransactionsByCurrentMonth = () => async dispatch => {
- 
   firebase.auth().onAuthStateChanged(async user => {
     if (user) {
       // User is signed in.
@@ -153,8 +151,7 @@ export const getTransactionsByCurrentMonth = () => async dispatch => {
 };
 const initialState = {
   isLoading: false,
-  plaidInfo : {}
-
+  plaidInfo: {}
 };
 
 const reducer = (state = initialState, action) => {
