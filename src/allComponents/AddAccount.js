@@ -4,6 +4,8 @@ import {connect} from 'react-redux'
 import {withAuth} from 'fireview'
 
 import Balance from '../Component/BankInfo/BalanceInfo'
+// import TransactionTable from '../Component/BankInfo/TransactionTable'
+import { Grid, Image } from 'semantic-ui-react'
 
 //Css imports
 require('./Styling/addAccount.css')
@@ -49,8 +51,11 @@ class AddAccount extends Component {
         <div className={`addAccount-Bills-Goals ${anmination}`}>
         Upcoming Bills and Goals
         </div>
-        <div className={`addAccount-transaction-tb ${anmination}`}>
-          Transactions table
+        <div className={`addAccount-transaction-tb center ${anmination}`}>
+        <h3 >
+          Transaction
+        </h3>
+          {/* <TransactionTable /> */}
         </div>
       </div>
         
@@ -58,9 +63,6 @@ class AddAccount extends Component {
         }</div>
       }
       
-
-
-
 
       </div>
     )
