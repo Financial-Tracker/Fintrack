@@ -1,32 +1,34 @@
 import React, { Component } from "react";
 // import BudgetPage from "../Component/BankInfo/Budgets";
 
-import NavBar from './smallComponents/Navbar'
-import SideNav from './smallComponents/SideNav';
-import Transactions from './smallComponents/Transactions'
-import ModalsForm from './smallComponents/ModalsForm';
-import AccountOverViewSection from './smallComponents/AccountOverViewSection';
-import Footer from './smallComponents/Footer'
+import NavBar from "./smallComponents/Navbar";
+import SideNav from "./smallComponents/SideNav";
+import Transactions from "./smallComponents/Transactions";
+import ModalsForm from "./smallComponents/ModalsForm";
+import AccountOverViewSection from "./smallComponents/AccountOverViewSection";
+import Footer from "./smallComponents/Footer";
+import Budget from "../Component/BankInfo/Budgets";
 export default class BudgetPage extends Component {
   render() {
     return (
       <div>
-      <NavBar link={'Budget'}/>
-    <section id="main">
-      <div className="container">
-        <div className="row">
-      <SideNav link={'Budget'}/>
-          <div className="col-md-9">
-          This is budget page
-            {/* <AccountOverViewSection />
+        <NavBar link={"Budget"} />
+        <section id="main">
+          <div className="container">
+            <div className="row">
+              <SideNav link={"Budget"} />
+              <div className="col-md-9">
+                This is budget page
+                <Budget />
+                {/* <AccountOverViewSection />
             <Transactions /> */}
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
+        <Footer />
+        <ModalsForm />
       </div>
-    </section>
-    <Footer />    
-    <ModalsForm />
-</div>
     );
   }
 }

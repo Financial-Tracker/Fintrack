@@ -20,7 +20,7 @@ import Payment from "../../pictures/Payment.jpg";
 import Travel from "../../pictures/Travel.jpeg";
 import Shop from "../../pictures/Shop.jpg";
 import { Collapsible, CollapsibleItem } from "react-materialize";
-import BudgetChart from './BudgetChart'
+import BudgetChart from "./BudgetChart";
 
 class Budgets extends Component {
   constructor() {
@@ -143,7 +143,10 @@ class Budgets extends Component {
                 Monthly budget for this month is ${this.props.plaidInfo.budget}
               </p>
               <button onClick={this.handleClick}>Modify budget</button>
-              <BudgetChart budget = {this.props.plaidInfo.budget} categories = {categories}/>
+              <BudgetChart
+                budget={this.props.plaidInfo.budget}
+                categories={categories}
+              />
             </div>
           ) : (
             <form onSubmit={this.handleSubmit}>
@@ -211,8 +214,8 @@ const MapDispatchToProps = dispatch => ({
   updateBudget: newBudget => dispatch(updateBudget(newBudget))
 });
 
-const BudgetsPage = connect(
+const Budget = connect(
   MapStateToProps,
   MapDispatchToProps
 );
-export default BudgetsPage(Budgets);
+export default Budget(Budgets);
