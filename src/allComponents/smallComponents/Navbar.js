@@ -1,6 +1,20 @@
 import React, { Component } from 'react'
-
+import { Link } from "react-router-dom";
 class Navbar extends Component {
+    constructor(){
+        super()
+        this.state ={ 
+            currentLink : ''
+        }
+        
+    }
+    linkHandler = (evt) =>{
+        console.log('clicked', evt, this.state)
+    }
+
+    logOutHandler = () => {
+        console.log('logout button clicked')
+    }
 render() {
     return (
         <div>
@@ -17,14 +31,15 @@ render() {
         </div>
         <div id="navbar" className="collapse navbar-collapse">
             <ul className="nav navbar-nav">
-            <li className="active"><a href="#">Dashboard</a></li>
-            <li><a href="#">Transactions</a></li>
-            <li><a href="#">Budgets</a></li>
-            <li><a href="#">Ways to save</a></li>
+            {this.props.link ? <li><a href='#/'>Dashboard</a></li>: <li className='active'><a href='#/'>Dashboard</a></li> }
+            {this.props.link === 'Transactions' ? <li className='active'><a href='#/transactions'>Transactions</a></li> : <li><a href='#/transactions'>Transactions</a></li>}
+            {this.props.link === 'Budget'? <li className='active'><a href='#/budget'>Budgets</a></li> :  <li><a href='#/budget'>Budgets</a></li>}
+            {this.props.link === 'Goals' ? <li className='active'><a href='#/goal'>Goals</a></li> : <li><a href='#/goal'>Goals</a></li>}
+            {this.props.link === 'Ways to save' ? <li className='active'><a href='#/waystosave'>Ways to save</a></li> : <li><a href='#/waystosave'>Ways to save</a></li>}
             </ul>
             <ul className="nav navbar-nav navbar-right">
-            <li><a href="#">Welcome, User Name</a></li>
-            <li><a href="#">Logout</a></li>
+            {this.props.link === 'Settings' ? <li className='active'><a href="#/settings">Welcome, User Name</a></li> : <li><a href="#/settings">Welcome, User Name</a></li>}
+            <li onClick={this.logOutHandler}><a href="#">Logout</a></li>
             </ul>
         </div>
         </div>
@@ -57,7 +72,11 @@ render() {
     <section id="breadcrumb">
         <div className="container">
         <ol className="breadcrumb">
-            <li className="active">Dashboard</li>
+        {!this.props.link == '' ?
+<li className="active">Dashboard > {this.props.link}</li>
+        :
+        <li className="active">Dashboard </li>
+        }
         </ol>
         </div>
     </section>

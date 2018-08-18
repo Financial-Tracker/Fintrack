@@ -15,27 +15,55 @@ import store from "./Store";
 // import TransactionTable from "./Component/BankInfo/TransactionTable";
 // import BankPage from "./Component/Pages/BankPage";
 // New Components imports 
-import Nav from "./allComponents/smallComponents/Navbar";
-import AddAccount from './allComponents/AddAccount'
-import Balance from './allComponents/Balance'
-import Budgets from './allComponents/Budgets'
-import Goals from './allComponents/Goals'
-import Income from './allComponents/Income'
-import Overview from './allComponents/Overview'
-import Profile from './allComponents/Profile'
-import Settings from './allComponents/Settings'
-import Transactions from './allComponents/smallComponents/Transactions'
-import WaysToSave from './allComponents/WaysToSave'
-import Bills from './allComponents/Bills'
-import TransactionTable from "./Component/BankInfo/TransactionTable";
-import BudgetBeta from './Component/BankInfo/Budgets'
-
+// import Nav from "./allComponents/smallComponents/Navbar";
+// import AddAccount from './allComponents/AddAccount'
+// import Balance from './allComponents/Balance'
+// import Budgets from './allComponents/BudgetPage'
+// import Goals from './allComponents/GoalPage'
+// import Income from './allComponents/Income'
+// import Profile from './allComponents/Profile'
+// import Settings from './allComponents/Settings'
+// import WaysToSave from './allComponents/WaysToSavePage'
+// import Bills from './allComponents/Bills'
+// import TransactionTable from "./Component/BankInfo/TransactionTable";
+// import BudgetBeta from './Component/BankInfo/Budgets'
 // import Budgets from "./Component/BankInfo/Budgets";
+
+//----------------------------------------------------------------------------------------------------------
+//new imports 
+import BudgetPage from './allComponents/BudgetPage'
+import OverviewPage from './allComponents/OverviewPage'
+import TransactionPage from './allComponents/TransactionPage'
+import GoalPage from './allComponents/GoalPage'
+import WaysToSavePage from './allComponents/WaysToSavePage'
+import UserSettingPage from './allComponents/UserSettingPage'
+//----------------------------------------------------------------------------------------------------------
 
 class App extends Component {
   render() {
     return (
-      <Overview />
+      <Provider store={store}>
+      <HashRouter >
+        <Switch >
+          <Route exact path='/' component ={OverviewPage} />
+          <Route exact path='/transactions' component={TransactionPage} />
+          <Route exact path='/budget' component={BudgetPage} />
+          <Route exact path='/goal'component={GoalPage} />
+          <Route exact path='/waystosave' component={WaysToSavePage} />
+          <Route exact path='/settings' component={UserSettingPage} />
+          <Route path component={OverviewPage}/>
+        </Switch>
+      </HashRouter>
+      </Provider>
+
+    );
+  }
+}
+
+export default withAuth(App);
+
+
+
 //       <Provider store={store}>
 //       <HashRouter>
 
@@ -77,10 +105,3 @@ class App extends Component {
 //         </div>
 //       </HashRouter>
 //       </Provider>
-    );
-  }
-}
-
-export default withAuth(App);
-
-

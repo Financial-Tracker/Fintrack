@@ -8,7 +8,7 @@ import Balance from '../Component/BankInfo/BalanceInfo'
 import { Grid, Image } from 'semantic-ui-react'
 
 //Css imports
-require('./Styling/addAccount.css')
+// require('./Styling/addAccount.css')
 const anmination = 'animated zoomIn delay-2s'
 class AddAccount extends Component {
   componentDidMount() {

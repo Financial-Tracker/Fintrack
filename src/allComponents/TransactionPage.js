@@ -1,38 +1,33 @@
 import React, { Component } from 'react'
+
 import NavBar from './smallComponents/Navbar'
 import SideNav from './smallComponents/SideNav';
 import Transactions from './smallComponents/Transactions'
 import ModalsForm from './smallComponents/ModalsForm';
 import AccountOverViewSection from './smallComponents/AccountOverViewSection';
-
-// import {connect} from 'react-redux'
-// import {getPlaid,getDataFromFireStore} from '../Store/plaidContainer'
-// import AddAccount from './AddAccount'
+import Footer from './smallComponents/Footer'
 
 
-export default class Overview extends Component {
+export default class TransactionPage extends Component {
   render() {
     return (
-      <div>
-        <NavBar/>
+        <div>
+        <NavBar link={'Transactions'}/>
       <section id="main">
         <div className="container">
           <div className="row">
-        <SideNav />
+        <SideNav link={'Transactions'}/>
             <div className="col-md-9">
-              <AccountOverViewSection />
-              <Transactions />
+            This is transaction table
+              {/* <AccountOverViewSection />
+              <Transactions /> */}
             </div>
           </div>
         </div>
       </section>
-  
-      <footer id="footer">
-        <p>Copyright FinTrack, &copy; 2018</p>
-      </footer>
+      <Footer />    
       <ModalsForm />
   </div>
-    
     )
   }
 }

@@ -137,3 +137,10 @@ body{
     background-color: #315b38;
   }
 }
+a {
+  color: white;
+}
+
+a:hover {
+  color: white;
+}
