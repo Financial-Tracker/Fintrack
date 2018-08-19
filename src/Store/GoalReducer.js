@@ -8,6 +8,7 @@ const GET_ALL_GOALS = 'GET_ALL_GOALS'
 const addingAGoalToReducer = (payload) => ({ type: ADD_A_GOAL, payload })
 const gotAllGoal = (payload) => ({ type: GET_ALL_GOALS, payload })
 
+
 //Thunks
 export const addAGoal = (goal) => async dispatch => {
     try {
