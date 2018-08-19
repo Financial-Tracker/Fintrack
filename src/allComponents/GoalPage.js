@@ -7,6 +7,7 @@ import GoalForm from './smallComponents/GoalForm';
 import AccountOverViewSection from './smallComponents/AccountOverViewSection';
 import Footer from './smallComponents/Footer'
 import GoalsList from './smallComponents/GoalsList'
+
 export default class GoalPage extends Component {
   render() {
     return (

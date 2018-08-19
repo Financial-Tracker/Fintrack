@@ -5,8 +5,10 @@ const ADD_A_GOAL = 'ADD_A_GOAL'
 const GET_ALL_GOALS = 'GET_ALL_GOALS'
 
 //Action Creaters
+
 const addingAGoalToReducer = (payload) => ({ type: ADD_A_GOAL, payload })
 const gotAllGoal = (payload) => ({ type: GET_ALL_GOALS, payload })
+
 
 //Thunks
 export const addAGoal = (goal) => async dispatch => {
@@ -32,6 +34,7 @@ export const getAllGoal = () => async dispatch => {
             }
 
         })
+
     } catch (error) {
         console.log(error)
     }
@@ -58,6 +61,7 @@ const GoalReducer = (state = initialState, action) => {
             }
         default:
             return state;
+
     }
 
 }
