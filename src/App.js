@@ -37,6 +37,7 @@ import TransactionPage from './allComponents/TransactionPage'
 import GoalPage from './allComponents/GoalPage'
 import WaysToSavePage from './allComponents/WaysToSavePage'
 import UserSettingPage from './allComponents/UserSettingPage'
+import EditGoal from './allComponents/EditGoal'
 //----------------------------------------------------------------------------------------------------------
 
 class App extends Component {
@@ -51,7 +52,8 @@ class App extends Component {
           <Route exact path='/goal'component={GoalPage} />
           <Route exact path='/waystosave' component={WaysToSavePage} />
           <Route exact path='/settings' component={UserSettingPage} />
-          <Route path component={OverviewPage}/>
+          <Route exact path={`/editgoal/:Id`} component={EditGoal} />
+          <Route component={OverviewPage}/>
         </Switch>
       </HashRouter>
       </Provider>
