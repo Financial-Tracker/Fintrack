@@ -30,11 +30,8 @@
     "fireview": "0.0.8",
     "fusioncharts": "^3.13.1",
     "lodash": "^4.17.10",
-<<<<<<< HEAD
     "mockfirebase": "^0.12.0",
-=======
     "mdbreact": "^4.7.0",
->>>>>>> master
     "moment": "^2.22.2",
     "nodemon": "^1.18.3",
     "plaid": "^2.7.0",

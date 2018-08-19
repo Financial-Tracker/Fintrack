@@ -1,25 +1,6 @@
 import React, { Component } from "react";
-import {
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  Button,
-  Table,
-  ModalHeader,
-  ModalBody,
-  ModalFooter
-} from "reactstrap";
-import {
-  Dimmer,
-  Loader,
-  Segment,
-  Header,
-  Image,
-  Modal
-} from "semantic-ui-react";
+import { Table } from "reactstrap";
+
 import ReactModal from "react-modal";
 
 export default class BudgetsCard extends Component {
