@@ -38,12 +38,17 @@ import GoalPage from './allComponents/GoalPage'
 import WaysToSavePage from './allComponents/WaysToSavePage'
 import UserSettingPage from './allComponents/UserSettingPage'
 import EditGoal from './allComponents/EditGoal'
+import BillForm from './allComponents/smallComponents/BillForm'
+import GoalForm from './/allComponents/smallComponents/GoalForm'
 //----------------------------------------------------------------------------------------------------------
 
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
+      <div>
+
+     
       <HashRouter >
         <Switch >
           <Route exact path='/' component ={OverviewPage} />
@@ -56,6 +61,9 @@ class App extends Component {
           <Route component={OverviewPage}/>
         </Switch>
       </HashRouter>
+        <BillForm />
+        <GoalForm />
+      </div>
       </Provider>
 
     );

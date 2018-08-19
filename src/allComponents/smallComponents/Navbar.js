@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+
 import { Link } from "react-router-dom";
 class Navbar extends Component {
     constructor(){
@@ -14,6 +15,10 @@ class Navbar extends Component {
 
     logOutHandler = () => {
         console.log('logout button clicked')
+    }
+
+    changeAccountHandler = () =>{
+        console.log('change account')
     }
 render() {
     return (
@@ -58,9 +63,9 @@ render() {
                 <span className="caret"></span>
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a href="#">Change Bank Account</a></li>
-                <li><a type="button" data-toggle="modal" data-target="#addPage">Add Goal</a></li>
-                <li><a href="#">Add Bill</a></li>
+                <li><a onClick={this.changeAccountHandler}>Change Bank Account</a></li>
+                <li><a type="button" data-toggle="modal" data-target="#addGoalForm">Add Goal</a></li>
+                <li><a type="button" data-toggle="modal" data-target="#addBillForm">Add Bill</a></li>
                 </ul>
             </div>
             </div>

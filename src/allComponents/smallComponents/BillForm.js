@@ -3,8 +3,7 @@ import DayPicker from 'react-day-picker';
 import moment from 'moment'
 import 'react-day-picker/lib/style.css';
 
-
-class ModalsForm extends Component {
+export default class BillForm extends Component {
     constructor(){
         super()
         this.state = {
@@ -32,17 +31,17 @@ class ModalsForm extends Component {
 render() {
     return (
     <div>
-    <div className="modal fade" id="addPage" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div className="modal fade" id="addBillForm" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div className="modal-dialog" role="document">
     <div className="modal-content">
         <form onSubmit={this.onSubmitHandler}> 
         <div className="modal-header">
         <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 className="modal-title" id="myModalLabel">Add A Goal</h4>
+        <h4 className="modal-title" id="myModalLabel">Add A Bill</h4>
         </div>
         <div className="modal-body">
         <div className="form-group">
-            <label>Goal Title</label>
+            <label>Bill Title</label>
             <input onChange={this.onChangeHandler} type="text" name='goalTitle' className="form-control" placeholder="Goal Title" />
         </div>
         <div className="form-group">
@@ -78,5 +77,3 @@ render() {
     )
 }
 }
-
-export default ModalsForm
