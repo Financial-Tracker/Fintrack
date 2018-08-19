@@ -26,6 +26,16 @@ export default class BudgetsCard extends Component {
     console.log(this);
     const section = this.props.section;
     const categories = this.props.categories;
+    const customStyles = {
+      content: {
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        bottom: "auto",
+        marginRight: "-50%",
+        transform: "translate(-50%, -50%)"
+      }
+    };
     return (
       <React.Fragment>
         <tr>
@@ -37,6 +47,7 @@ export default class BudgetsCard extends Component {
               isOpen={this.state.showModal}
               contentLabel="Minimal Modal Example"
               onRequestClose={this.handleCloseModal}
+              style={customStyles}
             >
               <Table bordered>
                 <thead>
@@ -56,7 +67,7 @@ export default class BudgetsCard extends Component {
                   ))}
                 </tbody>
               </Table>
-              <button onClick={this.handleCloseModal}>Close Modal</button>
+              <button onClick={this.handleCloseModal}>Exit</button>
             </ReactModal>
           </td>
         </tr>
