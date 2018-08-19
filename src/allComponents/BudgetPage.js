@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 // import BudgetPage from "../Component/BankInfo/Budgets";
 
-import NavBar from './smallComponents/Navbar'
-import SideNav from './smallComponents/SideNav';
-import Transactions from './smallComponents/Transactions'
-import GoalForm from './smallComponents/GoalForm';
-import AccountOverViewSection from './smallComponents/AccountOverViewSection';
-import Footer from './smallComponents/Footer'
+import NavBar from "./smallComponents/Navbar";
+import SideNav from "./smallComponents/SideNav";
+import Transactions from "./smallComponents/Transactions";
+import GoalForm from "./smallComponents/GoalForm";
+import AccountOverViewSection from "./smallComponents/AccountOverViewSection";
+import Footer from "./smallComponents/Footer";
+import Budget from "../Component/BankInfo/Budgets";
 export default class BudgetPage extends Component {
   render() {
     return (
@@ -26,7 +27,6 @@ export default class BudgetPage extends Component {
           </div>
         </section>
         <Footer />
-        <ModalsForm />
       </div>
     );
   }
