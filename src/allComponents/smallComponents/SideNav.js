@@ -10,11 +10,11 @@ export default class SideNav extends Component {
         {
             this.props.link ? 
             <a href="#" className="list-group-item">
-            <span className="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard
+            <span className="	glyphicon glyphicon-piggy-bank" aria-hidden="true"></span> Dashboard
             </a>
             : 
             <a href="#" className="list-group-item active main-color-bg">
-            <span className="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard
+            <span className="	glyphicon glyphicon-piggy-bank" aria-hidden="true"></span> Dashboard
             </a>
         }
 
@@ -37,26 +37,26 @@ export default class SideNav extends Component {
         
         {/* Budgets */}
         {this.props.link === 'Budget' ? 
-        <a href="#/budget" className="list-group-item active main-color-bg"><span className="glyphicon glyphicon-pencil" aria-hidden="true"></span> Budgets <span className="badge">33</span></a>
+        <a href="#/budget" className="list-group-item active main-color-bg"><span className="	glyphicon glyphicon-usd" aria-hidden="true"></span> Budgets <span className="badge">33</span></a>
         : 
-        <a href="#/budget" className="list-group-item"><span className="glyphicon glyphicon-pencil" aria-hidden="true"></span> Budgets <span className="badge">33</span></a>
+        <a href="#/budget" className="list-group-item"><span className="	glyphicon glyphicon-usd" aria-hidden="true"></span> Budgets <span className="badge">33</span></a>
         }
     
 
         {/* Goal */}
         {this.props.link === 'Goals' ? 
-        <a href="#/goal" className="list-group-item active main-color-bg"><span className="glyphicon glyphicon-pencil" aria-hidden="true"></span> Goals <span className="badge">33</span></a>
+        <a href="#/goal" className="list-group-item active main-color-bg"><span className="	glyphicon glyphicon-gift" aria-hidden="true"></span> Goals <span className="badge">33</span></a>
         : 
-        <a href="#/goal" className="list-group-item"><span className="glyphicon glyphicon-pencil" aria-hidden="true"></span> Goals <span className="badge">33</span></a>
+        <a href="#/goal" className="list-group-item"><span className="	glyphicon glyphicon-gift" aria-hidden="true"></span> Goals <span className="badge">33</span></a>
         }
         
 
         {/* waystosave */}
         {this.props.link === 'Ways to save' ? 
-        <a href="#/waystosave" className="list-group-item active main-color-bg"><span className="glyphicon glyphicon-user" aria-hidden="true"></span> Ways to save <span className="badge">203</span></a>
+        <a href="#/waystosave" className="list-group-item active main-color-bg"><span className="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Ways to save <span className="badge">203</span></a>
 
         : 
-        <a href="#/waystosave" className="list-group-item"><span className="glyphicon glyphicon-user" aria-hidden="true"></span> Ways to save <span className="badge">203</span></a>
+        <a href="#/waystosave" className="list-group-item"><span className="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Ways to save <span className="badge">203</span></a>
 
         }
         

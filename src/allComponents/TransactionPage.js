@@ -3,9 +3,10 @@ import React, { Component } from 'react'
 import NavBar from './smallComponents/Navbar'
 import SideNav from './smallComponents/SideNav';
 import Transactions from './smallComponents/Transactions'
-import ModalsForm from './smallComponents/ModalsForm';
+import GoalForm from './smallComponents/GoalForm';
 import AccountOverViewSection from './smallComponents/AccountOverViewSection';
 import Footer from './smallComponents/Footer'
+import BillForm from './smallComponents/BillForm'
 // import PieChart from './smallComponents/PieChart'
 
 
@@ -28,7 +29,8 @@ export default class TransactionPage extends Component {
         </div>
       </section>
       <Footer />    
-      <ModalsForm />
+      
+
   </div>
     )
   }
