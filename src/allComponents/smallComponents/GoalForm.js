@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import DayPicker from 'react-day-picker';
 import moment from 'moment'
 import 'react-day-picker/lib/style.css';
+//Thunks import 
+import {addAGoal }from '../../Store/GoalReducer'
+
 import {connect} from 'react-redux'
 
 
@@ -28,15 +31,17 @@ class GoalForm extends Component {
     onSubmitHandler = (evt) =>{
         evt.preventDefault()
         console.log(this.state)
+        this.props.addAGoal(this.state)
     }
     
 render() {
+    // console.log(this.props.goals)
     return (
     <div>
     <div className="modal fade" id="addGoalForm" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div className="modal-dialog" role="document">
     <div className="modal-content">
-        <form onSubmit={this.onSubmitHandler}> 
+        <form > 
         <div className="modal-header">
         <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 className="modal-title" id="myModalLabel">Add A Goal</h4>
@@ -69,7 +74,7 @@ render() {
         </div>
         <div className="modal-footer">
         <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" className="btn btn-primary main-color-bg">Save changes</button>
+        <button onSubmit={this.onSubmitHandler} type="submit" className="btn btn-primary main-color-bg" data-dismiss='modal' >Save changes</button>
         </div>
     </form>
     </div>
@@ -82,13 +87,13 @@ render() {
 
 const MapStateToProps = state => {
     return {
-
+        goals : state.goals
     }
 }
 
 const MapDispatchToProps = dispatch => {
     return {
-
+        addAGoal : (data) => dispatch(addAGoal(data))
     }
 }
 export default connect(MapStateToProps,MapDispatchToProps)(GoalForm)

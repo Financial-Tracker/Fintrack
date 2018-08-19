@@ -10,7 +10,7 @@ export default class AccountOverViewSection extends Component {
             <div className="panel-body">
             <div className="col-md-3">
                 <div className="well dash-box">
-                <h2><span className="glyphicon glyphicon-user" aria-hidden="true"></span> 203</h2>
+                <h2><span className="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> 203</h2>
                 <h4>Ways to save</h4>
                 </div>
             </div>
@@ -22,13 +22,13 @@ export default class AccountOverViewSection extends Component {
             </div>
             <div className="col-md-3">
                 <div className="well dash-box">
-                <h2><span className="glyphicon glyphicon-pencil" aria-hidden="true"></span> 33</h2>
+                <h2><span className="glyphicon glyphicon-usd" aria-hidden="true"></span> 33</h2>
                 <h4>Budgets</h4>
                 </div>
             </div>
             <div className="col-md-3">
                 <div className="well dash-box">
-                <h2><span className="glyphicon glyphicon-stats" aria-hidden="true"></span> 12,334</h2>
+                <h2><span className="glyphicon glyphicon-gift" aria-hidden="true"></span> 334</h2>
                 <h4>Goals</h4>
                 </div>
             </div>

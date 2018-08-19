@@ -54,7 +54,7 @@ render() {
         <div className="container">
         <div className="row">
             <div className="col-md-10">
-            <h1><span className="glyphicon glyphicon-cog" aria-hidden="true"></span> FinTrack <small>All About The Green</small></h1>
+            <h1><span className="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span> FinTrack <small>All About The Green</small></h1>
             </div>
             <div className="col-md-2">
             <div className="dropdown create">
