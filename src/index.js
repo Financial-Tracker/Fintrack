@@ -8,6 +8,7 @@ import registerServiceWorker from './registerServiceWorker';
 import {AuthProvider} from 'fireview'
 import * as firebase from 'firebase'
 
+
 const options = {
   position: 'bottom center',
   timeout: 5000,

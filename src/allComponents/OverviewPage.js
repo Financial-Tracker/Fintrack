@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import NavBar from './smallComponents/Navbar'
 import SideNav from './smallComponents/SideNav';
 import Transactions from './smallComponents/Transactions'
-import ModalsForm from './smallComponents/ModalsForm';
+import GoalForm from './smallComponents/GoalForm';
 import AccountOverViewSection from './smallComponents/AccountOverViewSection';
 import Footer from './smallComponents/Footer'
 
@@ -28,7 +28,6 @@ export default class OverviewPage extends Component {
         </div>
       </section>
       <Footer />    
-      <ModalsForm />
   </div>
     
     )
