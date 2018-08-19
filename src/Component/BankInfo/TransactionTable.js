@@ -5,6 +5,9 @@ import { Header, Table } from 'semantic-ui-react'
 import {Switch} from 'react-router-dom'
 import TransactionHeader from './TransactionHeader'
 import TransactionFooter from './TransactionFilter'
+// import { PieChart } from 'react-easy-chart';
+import TransactionPie  from './TransactionPie'
+import{ProgressBar, Col} from 'react-materialize'
 
 class TransactionTable extends React.Component{
     constructor(){
@@ -14,14 +17,12 @@ class TransactionTable extends React.Component{
             sizeFilter: 5,
             priceFilter: "AllPrice",
             accountFilter: "All",
-            categoryFilter: 'AllCategories',
+            categoryFilter: 'AllCategories'
         }
         this.handleChange = this.handleChange.bind(this)
         this.sizeOption= this.sizeOption.bind(this)
         this.accountOption= this.accountOption.bind(this)
         this.categoryOption= this.categoryOption.bind(this)
-
-
     }
     componentDidMount(){
         this.props.getFireStore()
@@ -80,7 +81,6 @@ class TransactionTable extends React.Component{
             {key: 4, text:"less than 100", value: 100, name:"price"},
             {key: 5, text:"less than 500", value: 500, name:"price"},
             {key: 6, text:"less tham 1,000,000", value: 1000000, name:"price"}
-
         ]
         return arr
     }
@@ -105,11 +105,29 @@ class TransactionTable extends React.Component{
         }
         return finalArr
     }
+    add(){
+        const filtered = this.props.plaidObj.transaction.filter((elem, idx)=>
+        idx<this.state.sizeFilter
+        && (this.state.accountFilter=== "All" || this.state.accountFilter === this.getSingleBalance(elem.account_id))
+        && (this.state.priceFilter==="AllPrice" || this.state.priceFilter > elem.amount)
+        &&(this.state.categoryFilter === "AllCategories" || this.state.categoryFilter === elem.category[0])
+        )
+        return filtered
+    }
     render(){
+        {Object.keys(this.props.plaidObj).length !==0?this.add():console.log('')}
         return(
             <div>
                 {Object.keys(this.props.plaidObj).length !==0?
                 <div>
+                    <TransactionFooter 
+                        state = {this.state}
+                        size = {this.sizeOption} 
+                        handleChange= {this.handleChange} 
+                        account={this.accountOption}
+                        price = {this.priceOption}
+                        category = {this.categoryOption}/>
+                    <TransactionPie plaidData={this.props.plaidObj} filter = {this.add()}/>
                     <Table basic='very' celled collapsing>
                         <TransactionHeader />
                         <Table.Body>
@@ -119,35 +137,28 @@ class TransactionTable extends React.Component{
                                         {idx<this.state.sizeFilter 
                                         && (this.state.accountFilter=== "All" || this.state.accountFilter === this.getSingleBalance(elem.account_id))
                                         && (this.state.priceFilter==="AllPrice" || this.state.priceFilter > elem.amount)
-                                        &&(this.state.categoryFilter === "AllCategories" || this.state.categoryFilter == elem.category[0])? 
-                                        <Table.Row key = {idx}>
-                                            <Table.Cell>
-                                            <Header as='h4' image>
-                                                <Header.Content>
-                                                {elem.name}
-                                                <Header.Subheader>Date: {elem.date}</Header.Subheader>
-                                                </Header.Content>
-                                            </Header>
-                                            </Table.Cell>
-                                            <Table.Cell> USD: {elem.amount}</Table.Cell>
-                                            <Table.Cell> {elem.category.map(item=>item)}</Table.Cell>
-                                            <Table.Cell> {this.getSingleBalance(elem.account_id)}</Table.Cell>
-                                        </Table.Row>
+                                        &&(this.state.categoryFilter === "AllCategories" || this.state.categoryFilter === elem.category[0])?
+                                            <Table.Row key = {idx}>
+                                                <Table.Cell>
+                                                <Header as='h4' image>
+                                                    <Header.Content>
+                                                    {elem.name}
+                                                    <Header.Subheader>Date: {elem.date}</Header.Subheader>
+                                                    </Header.Content>
+                                                </Header>
+                                                </Table.Cell>
+                                                <Table.Cell> USD: {elem.amount}</Table.Cell>
+                                                <Table.Cell> {elem.category.map(item=>item)}</Table.Cell>
+                                                <Table.Cell> {this.getSingleBalance(elem.account_id)}</Table.Cell>
+                                            </Table.Row>
                                         : <Switch> </Switch>}
                                     </Switch>
                                 )
                             })}
                         </Table.Body>
-                        <TransactionFooter 
-                        state = {this.state}
-                        size = {this.sizeOption} 
-                        handleChange= {this.handleChange} 
-                        account={this.accountOption}
-                        price = {this.priceOption}
-                        category = {this.categoryOption}/>
                     </Table>
                 </div>
-            : <h3>Loading....</h3>}
+            : <Col s={12}><ProgressBar /></Col>}
             </div>
         )
     }

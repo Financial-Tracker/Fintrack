@@ -1,25 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { firestore } from '../../Firebase/firebase'
-import firebase from 'firebase'
 import { LineChart } from 'react-easy-chart';
 import account from '../dummyData/account'
 import transaction from '../dummyData/transactions'
 import { getPlaid, getDataFromFireStore } from '../../Store/plaidContainer'
 import {
-  Button,
-  Icon,
-  Row,
-  Col,
   Table,
-  thead,
-  tr,
-  tbody,
-  td,
-  Collapsible,
-  CollapsibleItem,
-  Tabs,
-  Tab
 } from 'react-materialize'
 require('./account.css')
 

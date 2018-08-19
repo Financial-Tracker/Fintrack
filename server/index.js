@@ -1,11 +1,12 @@
-const { clientId, publicKey, secretKey } = require("../secret");
-
+const path = require('path')
 const bodyParser = require("body-parser");
 const express = require("express");
 const plaid = require("plaid");
 const volleyball = require("volleyball");
 const cors = require("cors");
+const PORT = process.env.PORT || 8000
 const app = express();
+require('../secret')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -13,18 +14,17 @@ let ACCESS_TOKEN = null;
 let PUBLIC_TOKEN = null;
 
 const client = new plaid.Client(
-  clientId,
-  secretKey,
-  publicKey,
+  process.env.CLIENT_ID,
+  process.env.SECRET_KEY,
+  process.env.PUBLIC_KEY,
   plaid.environments.sandbox
-  // { version: "2018-05-22" }
 );
 
 app.use(volleyball);
 app.use(cors());
-// app.get("/get_access_token", (req, res) => {
-//   res.json("hello ef");
-// });
+let file = process.env.NODE_ENV==="production"? "build": "public"
+app.use(express.static(path.join(__dirname, '..', file)))
+
 app.post("/get_access_token", async function(request, response, next) {
   console.log(request.body);
   PUBLIC_TOKEN = await request.body.public_token;
@@ -69,8 +69,8 @@ app.post("/auth/get", (req, res, next) => {
 app.post("/transaction/get", (req, res, next) => {
   client.getTransactions(
     ACCESS_TOKEN,
-    "2017-01-01",
-    "2017-02-15",
+    "2018-01-01",
+    "2018-09-15",
     {
       count: 250,
       offset: 0
@@ -111,6 +111,6 @@ app.post("/income/get", (req, res, next) => {
   });
 });
 
-app.listen(8000, () => {
-  console.log("listening to server 8000");
+app.listen(PORT, () => {
+  console.log("listening to server "+PORT);
 });

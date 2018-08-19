@@ -4,7 +4,8 @@ import axios from "axios";
 import firebase from 'firebase'
 import {getPlaid} from '../../Store/plaidContainer'
 import{connect} from 'react-redux'
-const path = "http://localhost:8000";
+import { Loader } from 'semantic-ui-react'
+const path = process.env.NODE_ENV==="production"?"": "http://localhost:8000";
 const firestore = firebase.firestore();
 const settings = {/* your settings... */ timestampsInSnapshots: true};
 firestore.settings(settings);
@@ -26,9 +27,17 @@ class Plaid extends Component {
       case "LOGIN_BUTTON":
       case "EXIT":
         return this.renderButton();
+      case "LOADING":
+        return this.loading()
       default:
         return this.renderLogin();
     }
+  }
+
+  loading=()=>{
+    return(
+            <Loader active>Preparing Files</Loader>
+    )
   }
 
   renderButton = () => {
@@ -73,8 +82,7 @@ class Plaid extends Component {
 
 
     const userEmail = firebase.auth().currentUser.email
-
-
+    
     const newPlaid = {...plaidObj, email: userEmail}
 
     const userRef = await firestore.collection('user').where('email',"==",userEmail.toString()).get()
@@ -84,21 +92,19 @@ class Plaid extends Component {
     
 
 
-    firestore.collection('user').doc(""+docRefId+"").set(newPlaid).then(() => {
-      console.log("Connected")
+    firestore.collection('user').doc(""+docRefId+"").update(newPlaid).then(() => {
+      console.log("Connected")``
     }).catch(() => {
       console.log("error")
     })
     const dataAPI = await firestore.collection('user').doc(""+docRefId+"").get().then(user=>user.data())
     console.log("Now persistent")
-
+    
     this.props.getPlaid(dataAPI);
-    this.props.history.push('/bankInfo')
+    this.props.history.push('/overview')
   };
   onMessage = data => {
     console.log(data);
-
-
     this.setState({
       data,
       status: data.action.substr(data.action.lastIndexOf(":") + 1).toUpperCase()
@@ -118,6 +124,7 @@ class Plaid extends Component {
         onLoadStart={this.onLoadStart}
         onLoadEnd={this.onLoadEnd}
         onSuccess={this.onSuccess}
+        onClick={() => this.setState({ status: "LOADING" })}
       >
         Open and connect to plaid
       </PlaidLink>
