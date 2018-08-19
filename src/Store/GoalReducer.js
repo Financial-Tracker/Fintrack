@@ -11,9 +11,24 @@ const gotAllGoal = (payload) => ({ type: GET_ALL_GOALS, payload })
 //Thunks
 export const addAGoal = (goal) => async dispatch => {
     try {
-        console.log(goal)
-        // go to fire base
-        dispatch(addingAGoalToReducer(goal))
+        firebase.auth().onAuthStateChanged(async user => {
+            if (user) {
+                const userEmail = user.email
+                const userRef = await db
+                    .collection("user")
+                    .where("email", "==", userEmail.toString())
+                    .get();
+                const docRefId = await userRef.docs[0].id;
+                const addingGoals = await db.collection('user').doc(docRefId.toString()).update({
+                    Goals: firebase.firestore.FieldValue.arrayUnion(goal)
+                })
+                // console.log('HERE', addingGoals)
+                dispatch(addingAGoalToReducer(goal))
+
+            }
+        })
+
+
     } catch (error) {
         console.log(error)
     }
