@@ -16,7 +16,8 @@ class GoalForm extends Component {
             selectedDay: undefined,
             goalTitle : '',
             howMuch : '',
-            additialInformation : ''
+            additialInformation : '',
+            error : null
         }
 
     }
@@ -31,7 +32,9 @@ class GoalForm extends Component {
     onSubmitHandler = (evt) =>{
         evt.preventDefault()
         console.log(this.state)
+
         this.props.addAGoal(this.state)
+        
         this.setState({
             Created : new Date().toLocaleDateString() ,
             selectedDay: undefined,
