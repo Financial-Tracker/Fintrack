@@ -47,12 +47,14 @@ class LogIn extends Component {
 
   async handleSubmit(event) {
     event.preventDefault();
+    console.log('hey',this.state)
     if(valid(this.state.email,'email') && valid(this.state.password,'password')){
       await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => auth.logIn(this.state.email, this.state.password));
       const user = firebase.auth().currentUser;
+      console.log(user)
       if (user) {
         this.props.alert.success('Log in success!')
-        this.props.history.push("/homepage");
+        this.props.history.push("/");
       } else {
         this.props.alert.error('Invalid login credentials!')
         this.props.history.push("/login");

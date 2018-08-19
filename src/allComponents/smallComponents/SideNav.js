@@ -66,20 +66,20 @@ export default class SideNav extends Component {
     <div className="well">
         <h4>Goal 1</h4>
         <div className="progress">
-            <div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{width: '60%'}}>
+            <div className="progress-bar main-color-bg" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{width: '60%'}}>
                 60%
         </div>
         </div>
         <h4>Goal 2 </h4>
         <div className="progress">
-            <div className="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style={{width: '40%'}}>
+            <div className="progress-bar main-color-bg" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style={{width: '40%'}}>
                 40%
         </div>
     </div>
 
         <h4>Goal 3 </h4>
         <div className="progress">
-            <div className="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style={{width: '45%'}}>
+            <div className="progress-bar main-color-bg" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style={{width: '45%'}}>
                 45%
         </div>
     </div>

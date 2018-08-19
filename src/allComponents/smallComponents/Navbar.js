@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import {auth} from '../../Firebase'
 import { Link } from "react-router-dom";
 class Navbar extends Component {
     constructor(){
@@ -15,6 +15,7 @@ class Navbar extends Component {
 
     logOutHandler = () => {
         console.log('logout button clicked')
+        auth.signOut()
     }
 
     changeAccountHandler = () =>{
