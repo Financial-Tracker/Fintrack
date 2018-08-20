@@ -69,12 +69,15 @@ export const destroyingGoal = (dataId) => async dispatch => {
         .get()
         .then(user => user.data());
         var goals = dataAPI.Goals
-        var newGoals = []
-        for(var i = 0; i < goals.length; i++) {
-            if(i != dataId){
-                newGoals.push(goals[i])
-            }
-        }
+        // var newGoals = []
+        // for(var i = 0; i < goals.length; i++) {
+        //     if(i != dataId){
+        //         newGoals.push(goals[i])
+        //     }
+        // }
+        var newGoals = goals.filter((goal, index) => {
+            return (index != dataId)
+        })
         await db.collection("user").doc("" + docRefId + "").update({Goals: newGoals}).then(() => {
             "array updated"
         }).catch(error => console.error(error))
