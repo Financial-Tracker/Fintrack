@@ -48,21 +48,28 @@ export const getUserProfileInfo = () => async dispatch => {
   }
 }
 
-export const changeUserInfo = newInfo => async dispatch => {
+export const changeUserInfo = newInfo => dispatch => {
   try {
-    const userEmail = firebase.auth().currentUser.email
-    const userRef = await firestore.collection('user').where('email',"==",userEmail.toString()).get()
-    const docRefId = userRef.docs[0].id; 
-    await firestore.collection('user').doc(""+docRefId+"").update({
-      email: newInfo.email,
-      name: newInfo.name
+    firebase.auth().onAuthStateChanged(async user => {
+      if (user) {
+        console.log(user)
+        const userEmail = user.email
+        const userRef = await firestore.collection('user').where('email',"==",userEmail.toString()).get()
+        const docRefId = userRef.docs[0].id; 
+        await firestore.collection('user').doc(""+docRefId+"").update({
+          email: newInfo.email,
+          name: newInfo.name
+        })
+        await user.updateEmail(newInfo.email.toString())
+        const dataAPI = await firestore
+          .collection("user")
+          .doc("" + docRefId + "")
+          .get()
+          .then(user => user.data());
+        console.log(dataAPI)
+        // dispatch(changeUserInfo(dataAPI))
+      }
     })
-    const dataAPI = await firestore
-      .collection("user")
-      .doc("" + docRefId + "")
-      .get()
-      .then(user => user.data());
-    dispatch(changeUserInfo(dataAPI))
   } catch (error) {
     console.error(error)
   }

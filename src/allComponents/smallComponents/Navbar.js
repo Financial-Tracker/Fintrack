@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import {auth} from '../../Firebase'
 import { Link } from "react-router-dom";
+import {connect} from 'react-redux'
+import {removeDataFromFireStore} from '../../Store/plaidContainer'
 class Navbar extends Component {
     constructor(){
         super()
@@ -16,6 +18,7 @@ class Navbar extends Component {
     logOutHandler = () => {
         console.log('logout button clicked')
         auth.signOut()
+        this.props.removeDataFromFireStore()   
     }
 
     changeAccountHandler = () =>{
@@ -91,4 +94,19 @@ render() {
 }
 }
 
-export default  Navbar
+const mapStateToProps = state => {
+    return {
+        user: state
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        removeDataFromFireStore: () => {
+           dispatch(removeDataFromFireStore())
+        }
+    }
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)

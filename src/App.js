@@ -41,6 +41,7 @@ import UserSettingPage from "./allComponents/UserSettingPage";
 import EditGoal from "./allComponents/EditGoal";
 import BillForm from "./allComponents/smallComponents/BillForm";
 import GoalForm from ".//allComponents/smallComponents/GoalForm";
+
 //----------------------------------------------------------------------------------------------------------
 
 class App extends Component {
@@ -113,7 +114,11 @@ export default withAuth(App);
 //     <Route exact path='/bills' component={Bills} />
 //   </Switch>
 
+
+//   : 
+
 //   :
+
 //   <Switch>
 //   <Route exact path="/!" component={LogIn} />
 //   <Route exact path="/login" component={LogIn} />

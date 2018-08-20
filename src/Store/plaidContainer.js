@@ -121,7 +121,9 @@ export const removeDataFromFireStore = () => {
       balance: firebase.firestore.FieldValue.delete(),
       income: firebase.firestore.FieldValue.delete(),
       transaction: firebase.firestore.FieldValue.delete()
-    });
+    }).then(() => {
+      console.log('deleted')
+    }).catch(error => console.error(error));
     console.log("REMOVE PLAID: ", deletePLaid);
     const action = removePlaid(deletePLaid);
     dispatch(action);

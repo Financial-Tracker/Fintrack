@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PlaidLink from "react-plaid-link";
+
 import axios from "axios";
 import firebase from 'firebase'
 import {getPlaid} from '../../Store/plaidContainer'
@@ -10,56 +11,14 @@ const firestore = firebase.firestore();
 const settings = {/* your settings... */ timestampsInSnapshots: true};
 firestore.settings(settings);
 
+class BankLogInButton extends Component {
 
-class Plaid extends Component {
-  state = {
-    data: {},
-    status: "LOGIN_BUTTON"
-  };
-
-  render() {
-    // console.log(this.state.status);
-  
-    switch (this.state.status) {
-      // case "CONNECTED":
-      //   console.log("connected");
-      //   return this.renderDetails();
-      // case "LOGIN_BUTTON":
-      // case "EXIT":
-      //   return this.Login();
-      // case "LOADING":
-      //   return this.loading()
-      default:
-        return this.renderLogin();
+    state = {
+      data: {},
+      status: "LOGIN_BUTTON"
     }
-  }
+  
 
-  loading=()=>{
-    return(
-            <Loader active>Preparing Files</Loader>
-    )
-  }
-
-  renderButton = () => {
-    return (
-      <div>
-        <button onClick={() => this.setState({ status: "" })} >Link Account</button>
-        <p>Login with Plaid</p>
-      </div>
-    );
-  };
-
-  // onLoadStart = props => {
-  //   console.log("onLoadStart", props);
-  // };
-
-  // onLoad = props => {
-  //   console.log("onLoad", props);
-  // };
-
-  // onLoadEnd = props => {
-  //   console.log("onLoadEnd", props);
-  // };
   onSuccess = async (token, metadata) => {
 
     await axios.post(`${path}/get_access_token`, {
@@ -93,7 +52,7 @@ class Plaid extends Component {
 
 
     firestore.collection('user').doc(""+docRefId+"").update(newPlaid).then(() => {
-      console.log("Connected")``
+      console.log("Connected")
     }).catch(() => {
       console.log("error")
     })
@@ -101,18 +60,16 @@ class Plaid extends Component {
     console.log("Now persistent")
     
     this.props.getPlaid(dataAPI);
-    this.props.history.push('/overview')
+    // this.props.history.push('/overview')
   };
-  // onMessage = data => {
-  //   console.log(data);
-  //   this.setState({
-  //     data,
-  //     status: data.action.substr(data.action.lastIndexOf(":") + 1).toUpperCase()
-  //   });
-  // };
+
+  render() {
+    if(this.state.status){
+      return this.renderLogin()
+    }
+  }
 
   renderLogin() {
-    console.log("Plaid.renderLogin", this);
     return (
       <PlaidLink
         clientName="Fintrack"
@@ -130,27 +87,12 @@ class Plaid extends Component {
       </PlaidLink>
     );
   }
-
-  // renderDetails() {
-  //   return (
-  //     <div>
-  //       <div>Institution</div>
-  //       <div>{this.state.data.metadata.institution.name}</div>
-  //       <div>Institution ID</div>
-  //       <div>{this.state.data.metadata.institution.institution_id}</div>
-  //       <div>Token</div>
-  //       <div>{this.state.data.metadata.public_token}</div>
-  //     </div>
-  //   );
-  // }
-
-  
 }
 
-const mapDispatch = (dispatch)=>{
-  return{
-    getPlaid: (data)=>dispatch(getPlaid(data))
+const mapDispatchToProps = dispatch => {
+  return {
+    getPlaid: data => dispatch(getPlaid(data))
   }
 }
 
-export default connect(null, mapDispatch)(Plaid)
+export default connect(null,mapDispatchToProps)(BankLogInButton)
