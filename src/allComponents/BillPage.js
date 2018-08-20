@@ -4,28 +4,35 @@ import { Header, Image, Modal, Dropdown } from 'semantic-ui-react'
 import {getAllBill} from '../Store/BillReducer'
 import {connect} from 'react-redux'
 
-const typeOfBill = [
-  { key: 'none', text: 'none', value: 'none' },
-  { key: 'bills & utilities ', text: 'bills & utilities', value: 'bills & utilities' },
-  { key: 'Rent', text: 'Rent', value: 'Rent' },
-  { key: 'Medical', text: 'Medical', value: 'Medical' },
-  { key: 'Education', text: 'Education', value: 'Education' },
-  { key: 'Loan', text: 'Loan', value: 'Loan' },
-  { key: 'Day Care', text: 'DayCare', value: 'DayCare' },
-  { key: 'Other', text: 'Other', value: 'Other' },
-]
+import NavBar from './smallComponents/Navbar'
+import SideNav from './smallComponents/SideNav';
+import Transactions from './smallComponents/Transactions'
+import GoalForm from './smallComponents/GoalForm';
+import AccountOverViewSection from './smallComponents/AccountOverViewSection';
+import Footer from './smallComponents/Footer'
 
-const howOften = [
-  { key: 'none', text: 'none', value: 'none' },
-  { key: 'One time only', text: 'One time only', value: 'One time only' },
-  { key: 'Weekly', text: 'Weekly', value: 'Weekly' },
-  { key: 'Monthly', text: 'Monthly', value: 'Monthly' },
-  { key: 'Quarterly', text: 'Quarterly', value: 'Quarterly' },
-  { key: 'Yearly', text: 'Yearly', value: 'Yearly' },
-  { key: 'Other', text: 'Other', value: 'Other' },
-]
+// const typeOfBill = [
+//   { key: 'none', text: 'none', value: 'none' },
+//   { key: 'bills & utilities ', text: 'bills & utilities', value: 'bills & utilities' },
+//   { key: 'Rent', text: 'Rent', value: 'Rent' },
+//   { key: 'Medical', text: 'Medical', value: 'Medical' },
+//   { key: 'Education', text: 'Education', value: 'Education' },
+//   { key: 'Loan', text: 'Loan', value: 'Loan' },
+//   { key: 'Day Care', text: 'DayCare', value: 'DayCare' },
+//   { key: 'Other', text: 'Other', value: 'Other' },
+// ]
 
-class Bills extends Component {
+// const howOften = [
+//   { key: 'none', text: 'none', value: 'none' },
+//   { key: 'One time only', text: 'One time only', value: 'One time only' },
+//   { key: 'Weekly', text: 'Weekly', value: 'Weekly' },
+//   { key: 'Monthly', text: 'Monthly', value: 'Monthly' },
+//   { key: 'Quarterly', text: 'Quarterly', value: 'Quarterly' },
+//   { key: 'Yearly', text: 'Yearly', value: 'Yearly' },
+//   { key: 'Other', text: 'Other', value: 'Other' },
+// ]
+
+class BillPage extends Component {
   constructor(){
     super()
     this.state = {
@@ -71,12 +78,27 @@ class Bills extends Component {
 
   render() {
     return (
-        <div>
-          Bill
+      <div>
+      <NavBar link={'Bills'}/>
+    <section id="main">
+      <div className="container">
+        <div className="row">
+      <SideNav link={"Bills"}/>
+          <div className="col-md-9">
+          This Bills
+            {/* <AccountOverViewSection />
+            <Transactions /> */}
+          </div>
         </div>
+      </div>
+    </section>
+    <Footer />    
+    
+    </div>
     )
   }
 }
+
 
 const mapState =(state)=>{
   return{
@@ -142,4 +164,4 @@ const mapDispatch=(dispatch)=>{
 
       </div> */}
 
-export default connect(mapState,mapDispatch)(Bills)
+export default connect(mapState,mapDispatch)(BillPage)
