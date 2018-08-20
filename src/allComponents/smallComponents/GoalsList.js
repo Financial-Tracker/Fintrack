@@ -16,6 +16,7 @@ class GoalsList extends Component {
     deleteGoalHandler = (goalId) => {
         console.log('delete goal with id:', goalId)
         this.props.deleteGoals(goalId)
+        this.forceUpdate()
     }
     paidHandler = () => {
         console.log('paid button is clicked')
