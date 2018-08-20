@@ -9,6 +9,7 @@ const addingAGoalToReducer = (payload) => ({ type: ADD_A_GOAL, payload })
 const gotAllGoal = (payload) => ({ type: GET_ALL_GOALS, payload })
 const removeGoal = payload => ({ type: REMOVE_GOAL, payload })
 
+
 //Thunks
 export const addAGoal = (goal) => async dispatch => {
     try {
@@ -23,7 +24,6 @@ export const addAGoal = (goal) => async dispatch => {
                 const addingGoals = await db.collection('user').doc(docRefId.toString()).update({
                     Goals: firebase.firestore.FieldValue.arrayUnion(goal)
                 })
-
                 dispatch(addingAGoalToReducer(goal))
 
             }

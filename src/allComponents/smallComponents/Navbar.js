@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import {auth} from '../../Firebase'
 import { Link } from "react-router-dom";
 class Navbar extends Component {
     constructor(){
@@ -15,6 +15,7 @@ class Navbar extends Component {
 
     logOutHandler = () => {
         console.log('logout button clicked')
+        auth.signOut()
     }
 
     changeAccountHandler = () =>{
@@ -63,7 +64,7 @@ render() {
                 <span className="caret"></span>
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a onClick={this.changeAccountHandler}>Change Bank Account</a></li>
+                <li><a href='#/plaid'>Change Bank Account</a></li>
                 <li><a type="button" data-toggle="modal" data-target="#addGoalForm">Add Goal</a></li>
                 <li><a type="button" data-toggle="modal" data-target="#addBillForm">Add Bill</a></li>
                 </ul>
