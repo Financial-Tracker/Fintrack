@@ -23,7 +23,6 @@ export default class BudgetsCard extends Component {
     this.setState({ showModal: false });
   }
   render() {
-    console.log(this);
     const section = this.props.section;
     const categories = this.props.categories;
     const customStyles = {
@@ -58,8 +57,8 @@ export default class BudgetsCard extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {categories[section].list.map(item => (
-                    <tr>
+                  {categories[section].list.map((item, index) => (
+                    <tr key={index}>
                       <td> {item.name}</td>
                       <td>{item.amount}</td>
                       <td>{item.date}</td>

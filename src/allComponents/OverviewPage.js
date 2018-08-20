@@ -1,52 +1,50 @@
-import React, { Component } from 'react'
-import NavBar from './smallComponents/Navbar'
-import SideNav from './smallComponents/SideNav';
-import Transactions from './smallComponents/Transactions'
-import GoalForm from './smallComponents/GoalForm';
-import AccountOverViewSection from './smallComponents/AccountOverViewSection';
-import Footer from './smallComponents/Footer'
+import React, { Component } from "react";
+import NavBar from "./smallComponents/Navbar";
+import SideNav from "./smallComponents/SideNav";
+import Transactions from "./smallComponents/Transactions";
+import GoalForm from "./smallComponents/GoalForm";
+import AccountOverViewSection from "./smallComponents/AccountOverViewSection";
+import Footer from "./smallComponents/Footer";
 
-import {connect} from 'react-redux'
-import {getPlaid,getDataFromFireStore} from '../Store/plaidContainer'
+import { connect } from "react-redux";
+import { getPlaid, getDataFromFireStore } from "../Store/plaidContainer";
 // import AddAccount from './AddAccount'
 
-
-
-
- class OverviewPage extends Component {
-   componentDidMount(){
-    this.props.getDataFromFireStore()
-   }
-   render() {
-    console.log(this.props.plaidInfo)
+class OverviewPage extends Component {
+  componentDidMount() {
+    // this.props.getDataFromFireStore()
+  }
+  render() {
+    console.log(this.props.plaidInfo);
     return (
       <div>
-        <NavBar/>
-      <section id="main">
-        <div className="container">
-          <div className="row">
-        <SideNav />
-            <div className="col-md-9">
-
-              <AccountOverViewSection />
-              <Transactions />
+        <NavBar />
+        <section id="main">
+          <div className="container">
+            <div className="row">
+              <SideNav />
+              <div className="col-md-9">
+                <AccountOverViewSection />
+                <Transactions />
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-      <Footer />    
-  </div>
-    
-    )
+        </section>
+        <Footer />
+      </div>
+    );
   }
 }
 
 const MapStateToProps = state => ({
-  plaidInfo : state.plaidContainer
-})
+  plaidInfo: state.plaidContainer
+});
 
 const MapDispatchToProps = dispatch => ({
-  getDataFromFireStore : () => dispatch(getDataFromFireStore())
-})
+  getDataFromFireStore: () => dispatch(getDataFromFireStore())
+});
 
-export default connect(MapStateToProps,MapDispatchToProps)(OverviewPage)
+export default connect(
+  MapStateToProps,
+  MapDispatchToProps
+)(OverviewPage);

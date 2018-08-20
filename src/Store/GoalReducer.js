@@ -1,6 +1,8 @@
-//Actions
+
 import firebase from 'firebase'
 const db = firebase.firestore()
+
+//Actions
 const ADD_A_GOAL = 'ADD_A_GOAL'
 const GET_ALL_GOALS = 'GET_ALL_GOALS'
 const REMOVE_GOAL = 'REMOVE_GOAL'
@@ -52,27 +54,34 @@ export const getAllGoal = () => async dispatch => {
         console.log(error)
     }
 }
-export const destroyingGoal = goalId => async dispatch => {
-    // console.log(goalId)
-    // dispatch(removeGoal(goalId))
+export const destroyingGoal = (dataId) => async dispatch => {
     try {
-        firebase.auth().onAuthStateChanged(async user => {
-            if (user) {
-                const userEmail = user.email
-                const userRef = await db
-                    .collection("user")
-                    .where("email", "==", userEmail.toString())
-                    .get();
-                const docRefId = await userRef.docs[0].id;
-                const destroyGoals = await db.collection('user').doc(docRefId.toString()).update({
-                    Goals: firebase.firestore.FieldValue.arrayRemove(goalId)
-                })
-                // console.log('DESTRA', destroyGoals)
-                dispatch(removeGoal(goalId))
-
-            }
+        const user = firebase.auth().currentUser
+        const userEmail = user.email;
+        const userRef = await db
+        .collection("user")
+        .where("email", "==", userEmail.toString())
+        .get();
+        const docRefId = await userRef.docs[0].id;
+        const dataAPI = await db
+        .collection("user")
+        .doc("" + docRefId + "")
+        .get()
+        .then(user => user.data());
+        var goals = dataAPI.Goals
+        // var newGoals = []
+        // for(var i = 0; i < goals.length; i++) {
+        //     if(i != dataId){
+        //         newGoals.push(goals[i])
+        //     }
+        // }
+        var newGoals = goals.filter((goal, index) => {
+            return (index != dataId)
         })
-
+        await db.collection("user").doc("" + docRefId + "").update({Goals: newGoals}).then(() => {
+            "array updated"
+        }).catch(error => console.error(error))
+        dispatch(removeGoal(newGoals))
     } catch (error) {
         console.error(error)
     }
@@ -102,7 +111,7 @@ const GoalReducer = (state = initialState, action) => {
             // return state
             return {
                 ...state,
-                allGoals: state.allGoals.filter((goal, index) => index !== action.payload)
+                allGoals: action.payload
             }
         default:
             return state;
