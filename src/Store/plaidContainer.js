@@ -8,6 +8,7 @@ const GET_TRANSACTIONS = "GET_TRANSACTIONS";
 const REMOVE_PLAID = "REMOVE_PLAID";
 const UPDATE_BUDGET = "UPDATE_BUDGET";
 const LOADING = "LOADING";
+const GET_MONTH = "GET_MONTH";
 
 const startLoading = () => ({ type: LOADING });
 
@@ -21,6 +22,13 @@ export const removePlaid = () => {
   return {
     type: REMOVE_PLAID,
     payload: {}
+  };
+};
+
+export const getMonth = month => {
+  return {
+    type: GET_MONTH,
+    payload: month
   };
 };
 
@@ -148,7 +156,7 @@ export const getTransactionsByCurrentMonth = () => async dispatch => {
       const budget = dataAPI.budget;
       const income = dataAPI.income.income_streams[0].monthly_income;
       const action = { transMonth, monthlyIncome: income, budget: budget };
-      dispatch(getPlaid(action));
+      dispatch(getMonth(action));
     }
   });
 };
@@ -161,6 +169,8 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_PLAID:
       return action.payload;
+    case GET_MONTH:
+      return { ...state, month: action.payload };
     case GET_TRANSACTIONS:
       return action.payload;
     case REMOVE_PLAID:

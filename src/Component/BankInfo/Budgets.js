@@ -129,67 +129,74 @@ class Budgets extends Component {
 
     return (
       <React.Fragment>
-        {this.props.plaidInfo.monthlyIncome ? (
-          <div>
-            <h3>
-              Your monthly income is ${this.props.plaidInfo.monthlyIncome}
-            </h3>
-            <h4>You spent ${total} this month</h4>
-          </div>
-        ) : (
-          <div>
-            <Segment>
-              <Dimmer active>
-                <Loader size="medium">Preparing Files</Loader>
-              </Dimmer>
-              <Image src="/images/wireframe/short-paragraph.png" />
-            </Segment>
-          </div>
-        )}
-        <div>
-          {this.props.plaidInfo.budget ? (
+        {this.props.plaidInfo.month ? (
+          <React.Fragment>
+            {this.props.plaidInfo.month.monthlyIncome ? (
+              <div>
+                <h3>
+                  Your monthly income is $
+                  {this.props.plaidInfo.month.monthlyIncome}
+                </h3>
+                <h4>You spent ${total} this month</h4>
+              </div>
+            ) : (
+              <div>
+                <Segment>
+                  <Dimmer active>
+                    <Loader size="medium">Preparing Files</Loader>
+                  </Dimmer>
+                  <Image src="/images/wireframe/short-paragraph.png" />
+                </Segment>
+              </div>
+            )}
             <div>
-              <p>
-                Monthly budget for this month is ${this.props.plaidInfo.budget}
-              </p>
-              <button onClick={this.handleClick}>Modify budget</button>
-              <BudgetChart
-                budget={this.props.plaidInfo.budget}
-                categories={categories}
-              />
-            </div>
-          ) : (
-            <form onSubmit={this.handleSubmit}>
-              <label>Set up a monthly budget!</label>
-              <input
-                type="number"
-                onChange={this.handleChange}
-                name="budget"
-                value={this.state.budget}
-                placeholder="Please enter an amount to budget"
-              />
-              <button type="submit">Save</button>
-            </form>
-          )}
-          <div>
-            {/* <Collapsible> */}
-            <Table bordered>
-              <thead>
-                <tr>
-                  <th>Category</th>
-                  <th>Amount Spent</th>
-                  <th>Transactions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.props.plaidInfo.monthlyIncome ? (
-                  Object.keys(categories).map(section => (
-                    // <CollapsibleItem
-                    //   header={section + ": $" + categories[section].amount}
-                    // >
-                    <React.Fragment>
-                      <BudgetsCard section={section} categories={categories} />
-                      {/* <Modal trigger={<Button>See Transactions</Button>}>
+              {this.props.plaidInfo.budget ? (
+                <div>
+                  <p>
+                    Monthly budget for this month is $
+                    {this.props.plaidInfo.budget}
+                  </p>
+                  <button onClick={this.handleClick}>Modify budget</button>
+                  <BudgetChart
+                    budget={this.props.plaidInfo.budget}
+                    categories={categories}
+                  />
+                </div>
+              ) : (
+                <form onSubmit={this.handleSubmit}>
+                  <label>Set up a monthly budget!</label>
+                  <input
+                    type="number"
+                    onChange={this.handleChange}
+                    name="budget"
+                    value={this.state.budget}
+                    placeholder="Please enter an amount to budget"
+                  />
+                  <button type="submit">Save</button>
+                </form>
+              )}
+              <div>
+                {/* <Collapsible> */}
+                <Table bordered>
+                  <thead>
+                    <tr>
+                      <th>Category</th>
+                      <th>Amount Spent</th>
+                      <th>Transactions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {this.props.plaidInfo.monthlyIncome ? (
+                      Object.keys(categories).map(section => (
+                        // <CollapsibleItem
+                        //   header={section + ": $" + categories[section].amount}
+                        // >
+                        <React.Fragment>
+                          <BudgetsCard
+                            section={section}
+                            categories={categories}
+                          />
+                          {/* <Modal trigger={<Button>See Transactions</Button>}>
                     <Modal.Header>{section}</Modal.Header>
                     <Modal.Content image>
                     <Image
@@ -213,16 +220,20 @@ class Budgets extends Component {
                     </Modal.Content>
                     <Modal.Actions />
                   </Modal> */}
-                    </React.Fragment>
-                  ))
-                ) : (
-                  <Loader active inline="centered" />
-                )}
-              </tbody>
-            </Table>
-            {/* </Collapsible> */}
-          </div>
-        </div>
+                        </React.Fragment>
+                      ))
+                    ) : (
+                      <Loader active inline="centered" />
+                    )}
+                  </tbody>
+                </Table>
+                {/* </Collapsible> */}
+              </div>
+            </div>
+          </React.Fragment>
+        ) : (
+          <h1>hi</h1>
+        )}
       </React.Fragment>
     );
   }
