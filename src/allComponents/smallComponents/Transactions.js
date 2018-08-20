@@ -1,11 +1,39 @@
 import React, { Component } from 'react'
 import { MDBDataTable } from 'mdbreact';
-
+import {connect} from 'react-redux'
 // import TransactionTable from '../Component/BankInfo/TransactionTable'
+import {getPlaid,getDataFromFireStore} from '../../Store/plaidContainer'
 
-export default class Transactions extends Component {
+class Transactions extends Component {
+  componentDidMount(){
+    this.props.getDataFromFireStore()
+  }
+  getSingleBalance(accountId){
+    for(let i =0;i<this.props.plaidInfo.balance.length; i++){
+        if(this.props.plaidInfo.balance[i].account_id=== accountId){
+            return this.props.plaidInfo.balance[i].name
+        }
+    }
+} 
+  tableRows(){
+    let finalArr = []
+    console.log("at rows:",this.props.plaidInfo.transaction)
+    for(let i = 0; i<this.props.plaidInfo.transaction.length; i++){
+      let obj = {}
+      obj.name = this.props.plaidInfo.transaction[i].name
+      obj.category = this.props.plaidInfo.transaction[i].category[0]
+      obj.amount = this.props.plaidInfo.transaction[i].amount.toString()
+      obj.account = this.getSingleBalance(this.props.plaidInfo.transaction[i].account_id)
+      finalArr.push(obj)
+    }
+    console.log('FINALARR: ', finalArr)
+    return finalArr
+  }
   render() {
-    const data = {
+    console.log(this.props.plaidInfo)
+    let Datarows = []
+    {this.props.plaidInfo.isLoading === false?console.log('loading'): Datarows =this.tableRows()}
+    let data = {
       columns: [
         {
           label: 'Name',
@@ -14,82 +42,54 @@ export default class Transactions extends Component {
           width: 150
         },
         {
-          label: 'Position',
-          field: 'position',
+          label: 'Category',
+          field: 'category',
           sort: 'asc',
           width: 270
         },
         {
-          label: 'Office',
-          field: 'office',
+          label: 'Amount',
+          field: 'amount',
           sort: 'asc',
           width: 200
         },
         {
-          label: 'Age',
-          field: 'age',
+          label: 'Account',
+          field: 'account',
           sort: 'asc',
           width: 100
-        },
-        {
-          label: 'Start date',
-          field: 'date',
-          sort: 'asc',
-          width: 150
-        },
-        {
-          label: 'Salary',
-          field: 'salary',
-          sort: 'asc',
-          width: 100
-        }
-      ],
-      rows: [
-        {
-          name: 'Tiger Nixon',
-          position: 'System Architect',
-          office: 'Edinburgh',
-          age: '61',
-          date: '2011/04/25',
-          salary: '$320'
-        },
-        {
-          name: 'Garrett Winters',
-          position: 'Accountant',
-          office: 'Tokyo',
-          age: '63',
-          date: '2011/07/25',
-          salary: '$170'
-        },
-        {
-          name: 'Ashton Cox',
-          position: 'Junior Technical Author',
-          office: 'San Francisco',
-          age: '66',
-          date: '2009/01/12',
-          salary: '$86'
-        },
-        {
-          name: 'Cedric Kelly',
-          position: 'Senior Javascript Developer',
-          office: 'Edinburgh',
-          age: '22',
-          date: '2012/03/29',
-          salary: '$433'
         }
       ]
     };
+
+
+    data = {...data, rows: Datarows}
+
+    console.log('FINALE TABLE: ', data)
   
     return (
-
-      <MDBDataTable
-      maxHeight="200px"
-      responsive
-      striped
-      bordered
-      hover
-      data={data}
-    />
+      <div>
+        {data.rows.length >=1
+        ?<MDBDataTable
+        maxHeight="200px"
+        responsive
+        striped
+        bordered
+        hover
+        data={data}
+      />: console.log('loading...') }
+      </div>
+      
     )
   }
 }
+
+const MapStateToProps = state => ({
+  plaidInfo : state.plaidContainer
+})
+
+const MapDispatchToProps = dispatch => ({
+  getDataFromFireStore : () => dispatch(getDataFromFireStore())
+})
+
+export default connect(MapStateToProps, MapDispatchToProps)(Transactions)

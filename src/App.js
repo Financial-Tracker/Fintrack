@@ -14,7 +14,8 @@ import store from "./Store";
 // import Income from "./Component/BankInfo/Income";
 // import TransactionTable from "./Component/BankInfo/TransactionTable";
 // import BankPage from "./Component/Pages/BankPage";
-// New Components imports
+
+
 // import Nav from "./allComponents/smallComponents/Navbar";
 // import AddAccount from './allComponents/AddAccount'
 // import Balance from './allComponents/Balance'
@@ -46,6 +47,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
+
         <div>
           <HashRouter>
             {!this.props._user ? (
@@ -74,6 +76,7 @@ class App extends Component {
           <BillForm />
           <GoalForm />
         </div>
+
       </Provider>
     );
   }

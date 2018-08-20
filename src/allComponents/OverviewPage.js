@@ -18,7 +18,7 @@ import {getPlaid,getDataFromFireStore} from '../Store/plaidContainer'
     this.props.getDataFromFireStore()
    }
    render() {
-    console.log(this.props.plaidInfo.auth)
+    console.log(this.props.plaidInfo)
     return (
       <div>
         <NavBar/>
