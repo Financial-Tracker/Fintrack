@@ -64,7 +64,6 @@ class App extends Component {
               <Route exact path='/bills' component={Bills} />
               <Route exact path='/editprofile' component={EditProfile} />
             </Switch>
-            
             : 
             <Switch>
             <Route exact path="/!" component={LogIn} />

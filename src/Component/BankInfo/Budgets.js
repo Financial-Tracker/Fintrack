@@ -113,7 +113,6 @@ class Budgets extends Component {
         categories[oneCharge.category[0]].amount += oneCharge.amount;
         categories[oneCharge.category[0]].list.push(oneCharge);
       }
-      console.log(categories);
     }
 
     return (

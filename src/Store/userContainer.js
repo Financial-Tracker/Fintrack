@@ -5,8 +5,14 @@ const firestore = firebase.firestore()
 const intialState = {}
 
 const GET_USER_PROFILE = "GET_USER_PROFILE"
+const CHANGE_USER_INFO = "CHANGE_USER_INFO"
 
-
+const changeUser = (changedUser) => {
+  return {
+    type: CHANGE_USER_INFO,
+    paylaod: changedUser
+  }
+}
 
 const getUser = (userData) => {
   return {
@@ -37,6 +43,26 @@ export const getUserProfileInfo = () => async dispatch => {
       email: dataAPI.email
     }
     dispatch(getUser(output))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const changeUserInfo = newInfo => async dispatch => {
+  try {
+    const userEmail = firebase.auth().currentUser.email
+    const userRef = await firestore.collection('user').where('email',"==",userEmail.toString()).get()
+    const docRefId = userRef.docs[0].id; 
+    await firestore.collection('user').doc(""+docRefId+"").update({
+      email: newInfo.email,
+      name: newInfo.name
+    })
+    const dataAPI = await firestore
+      .collection("user")
+      .doc("" + docRefId + "")
+      .get()
+      .then(user => user.data());
+    dispatch(changeUserInfo(dataAPI))
   } catch (error) {
     console.error(error)
   }
