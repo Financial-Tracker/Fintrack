@@ -52,6 +52,7 @@ class App extends Component {
       {
         !this.props._user ? 
         (  <Switch>
+          {/* {!this.props._user ? (null) : (null) } */}
           {/* Login and sign up  */}
         <Route exact path='/login' component={LogIn} />
         <Route exact path='/signup' component={SignUp} />
