@@ -64,26 +64,65 @@ export default class SideNav extends Component {
         </div>
 
     <div className="well">
-        <h4>Goal 1</h4>
+        <h3>Goals</h3>
+    
+        <h5>Goal 1</h5>
         <div className="progress">
-            <div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{width: '60%'}}>
+            <div className="progress-bar main-color-bg" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{width: '60%'}}>
                 60%
         </div>
         </div>
-        <h4>Goal 2 </h4>
+        <h5>Goal 2 </h5>
         <div className="progress">
-            <div className="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style={{width: '40%'}}>
+            <div className="progress-bar main-color-bg" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style={{width: '40%'}}>
                 40%
         </div>
     </div>
 
-        <h4>Goal 3 </h4>
+        <h6>Goal 3 </h6>
         <div className="progress">
-            <div className="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style={{width: '45%'}}>
+            <div className="progress-bar main-color-bg" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style={{width: '45%'}}>
                 45%
         </div>
     </div>
         </div>
+
+
+<div className="well">
+        <h4>Bills</h4>
+        <table className="table table-hover">
+    <thead>
+        <tr>
+        <th scope="col">Type</th>
+        <th scope="col">Date</th>
+        <th scope="col">Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td>Rental</td>
+        <td>2011/04/25</td>
+        <td>$300</td>
+        </tr>
+        <tr>
+        <td>Rental</td>
+        <td>2011/04/25</td>
+        <td>$300</td>
+        </tr>
+        <tr>
+        <td>Rental</td>
+        <td>2011/04/25</td>
+        <td>$300</td>
+        </tr>
+    </tbody>
+</table>
+
+
+        
+
+    
+        </div>
+
     </div>
     )
   }

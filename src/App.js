@@ -47,11 +47,22 @@ class App extends Component {
     return (
       <Provider store={store}>
       <div>
-
-     
       <HashRouter >
-        <Switch >
+
+      {
+        !this.props._user ? 
+        (  <Switch>
+          {/* {!this.props._user ? (null) : (null) } */}
+          {/* Login and sign up  */}
+        <Route exact path='/login' component={LogIn} />
+        <Route exact path='/signup' component={SignUp} />
+        <Route component={LogIn} />
+      </Switch>)
+        : 
+        ( <Switch >
+          {/* once the user is logged in */}
           <Route exact path='/' component ={OverviewPage} />
+          <Route exact path="/plaid" component={Plaid} />
           <Route exact path='/transactions' component={TransactionPage} />
           <Route exact path='/budget' component={BudgetPage} />
           <Route exact path='/goal'component={GoalPage} />
@@ -59,7 +70,12 @@ class App extends Component {
           <Route exact path='/settings' component={UserSettingPage} />
           <Route exact path={`/editgoal/:Id`} component={EditGoal} />
           <Route component={OverviewPage}/>
-        </Switch>
+        </Switch>)
+      }
+
+
+
+
       </HashRouter>
         <BillForm />
         <GoalForm />

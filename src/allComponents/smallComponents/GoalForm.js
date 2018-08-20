@@ -34,7 +34,7 @@ class GoalForm extends Component {
         console.log(this.state)
 
         this.props.addAGoal(this.state)
-
+        this.props.alert.success('success!')
         this.setState({
             Created: new Date().toLocaleDateString(),
             selectedDay: undefined,
