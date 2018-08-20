@@ -11,7 +11,6 @@ const reducer = combineReducers({
   userContainer,
   bills : BillReducer,
   goals : GoalReducer
-  
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
