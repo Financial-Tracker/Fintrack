@@ -57,6 +57,7 @@ export const changeUserInfo = newInfo => async dispatch => {
       email: newInfo.email,
       name: newInfo.name
     })
+    await firebase.auth().updateEmail(newInfo.email)
     const dataAPI = await firestore
       .collection("user")
       .doc("" + docRefId + "")
