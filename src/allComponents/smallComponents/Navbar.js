@@ -45,7 +45,7 @@ render() {
             {this.props.link === 'Transactions' ? <li className='active'><a href='#/transactions'>Transactions</a></li> : <li><a href='#/transactions'>Transactions</a></li>}
             {this.props.link === 'Budget'? <li className='active'><a href='#/budget'>Budgets</a></li> :  <li><a href='#/budget'>Budgets</a></li>}
             {this.props.link === 'Goals' ? <li className='active'><a href='#/goal'>Goals</a></li> : <li><a href='#/goal'>Goals</a></li>}
-            {this.props.link === 'Ways to save' ? <li className='active'><a href='#/waystosave'>Ways to save</a></li> : <li><a href='#/waystosave'>Ways to save</a></li>}
+            {this.props.link === 'Bills' ? <li className='active'><a href='#/bills'>Bills</a></li> : <li><a href='#/bills'>Bills</a></li>}
             </ul>
             <ul className="nav navbar-nav navbar-right">
             {this.props.link === 'Settings' ? <li className='active'><a href="#/settings">Welcome, {this.props.user.plaidContainer.name}</a></li> : <li><a href="#/settings">Welcome, {this.props.user.plaidContainer.name}</a></li>}
