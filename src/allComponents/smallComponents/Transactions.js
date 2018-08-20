@@ -3,6 +3,7 @@ import { MDBDataTable } from 'mdbreact';
 import {connect} from 'react-redux'
 // import TransactionTable from '../Component/BankInfo/TransactionTable'
 import {getPlaid,getDataFromFireStore} from '../../Store/plaidContainer'
+import BankLogInButton from './BankLogInButton'
 
 class Transactions extends Component {
   componentDidMount(){
@@ -16,18 +17,20 @@ class Transactions extends Component {
     }
 } 
   tableRows(){
-    let finalArr = []
-    console.log("at rows:",this.props.plaidInfo.transaction)
-    for(let i = 0; i<this.props.plaidInfo.transaction.length; i++){
-      let obj = {}
-      obj.name = this.props.plaidInfo.transaction[i].name
-      obj.category = this.props.plaidInfo.transaction[i].category[0]
-      obj.amount = this.props.plaidInfo.transaction[i].amount.toString()
-      obj.account = this.getSingleBalance(this.props.plaidInfo.transaction[i].account_id)
-      finalArr.push(obj)
-    }
+    if(this.props.plaidInfo.auth) {
+      let finalArr = []
+      console.log("at rows:",this.props.plaidInfo.transaction)
+      for(let i = 0; i<this.props.plaidInfo.transaction.length; i++){
+        let obj = {}
+        obj.name = this.props.plaidInfo.transaction[i].name
+        obj.category = this.props.plaidInfo.transaction[i].category[0]
+        obj.amount = this.props.plaidInfo.transaction[i].amount.toString()
+        obj.account = this.getSingleBalance(this.props.plaidInfo.transaction[i].account_id)
+        finalArr.push(obj)
+      } 
     console.log('FINALARR: ', finalArr)
     return finalArr
+    }
   }
   render() {
     console.log(this.props.plaidInfo)
@@ -68,16 +71,17 @@ class Transactions extends Component {
     console.log('FINALE TABLE: ', data)
   
     return (
+      
       <div>
-        {data.rows.length >=1
-        ?<MDBDataTable
+        { this.props.plaidInfo.transaction
+        ?(<MDBDataTable
         maxHeight="200px"
         responsive
         striped
         bordered
         hover
         data={data}
-      />: console.log('loading...') }
+        />) : <div><BankLogInButton/></div>}
       </div>
       
     )
