@@ -24,7 +24,6 @@ export default class BudgetsCard extends Component {
   }
   render() {
     const section = this.props.section;
-    console.log(section);
     const categories = this.props.categories;
     const customStyles = {
       content: {
