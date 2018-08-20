@@ -3,44 +3,44 @@ import DayPicker from 'react-day-picker';
 import moment from 'moment'
 import 'react-day-picker/lib/style.css';
 //Thunks import 
-import {addAGoal }from '../../Store/GoalReducer'
+import { addAGoal } from '../../Store/GoalReducer'
 
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 
 class GoalForm extends Component {
-    constructor(){
+    constructor() {
         super()
         this.state = {
-            Created : new Date().toLocaleDateString() ,
+            Created: new Date().toLocaleDateString(),
             selectedDay: undefined,
-            goalTitle : '',
-            howMuch : '',
-            additialInformation : '',
-            error : null
+            goalTitle: '',
+            howMuch: '',
+            additialInformation: '',
+            error: null
         }
 
     }
-    onChangeHandler = (evt)=>{
+    onChangeHandler = (evt) => {
         this.setState({
-            [evt.target.name] : evt.target.value
+            [evt.target.name]: evt.target.value
         })
     }
     DateHandler = (day) => {
         this.setState({ selectedDay: day.toLocaleDateString() });
     }
-    onSubmitHandler = (evt) =>{
+    onSubmitHandler = (evt) => {
         evt.preventDefault()
         console.log(this.state)
 
         this.props.addAGoal(this.state)
         this.props.alert.success('success!')
         this.setState({
-            Created : new Date().toLocaleDateString() ,
+            Created: new Date().toLocaleDateString(),
             selectedDay: undefined,
-            goalTitle : '',
-            howMuch : '',
-            additialInformation : ''
+            goalTitle: '',
+            howMuch: '',
+            additialInformation: ''
         })
         console.log(this.state)
     }
@@ -99,13 +99,13 @@ render() {
 
 const MapStateToProps = state => {
     return {
-        goals : state.goals
+        goals: state.goals
     }
 }
 
 const MapDispatchToProps = dispatch => {
     return {
-        addAGoal : (data) => dispatch(addAGoal(data))
+        addAGoal: (data) => dispatch(addAGoal(data))
     }
 }
-export default connect(MapStateToProps,MapDispatchToProps)(GoalForm)
+export default connect(MapStateToProps, MapDispatchToProps)(GoalForm)
