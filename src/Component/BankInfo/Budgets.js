@@ -105,7 +105,7 @@ class Budgets extends Component {
     let transMonthArray;
     let spending;
     let categories;
-    if (this.props.plaidInfo.transMonth) {
+    if (this.props.plaidInfo.month.transMonth) {
       transMonthArray = this.props.plaidInfo.transMonth;
       console.log(this.props);
       spending = transMonthArray.map(transaction => {
