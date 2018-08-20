@@ -25,6 +25,7 @@ class Navbar extends Component {
         console.log('change account')
     }
 render() {
+    console.log(this.props.user.plaidContainer.name)
     return (
         <div>
     <nav className="navbar navbar-default">
@@ -47,7 +48,7 @@ render() {
             {this.props.link === 'Ways to save' ? <li className='active'><a href='#/waystosave'>Ways to save</a></li> : <li><a href='#/waystosave'>Ways to save</a></li>}
             </ul>
             <ul className="nav navbar-nav navbar-right">
-            {this.props.link === 'Settings' ? <li className='active'><a href="#/settings">Welcome, User Name</a></li> : <li><a href="#/settings">Welcome, User Name</a></li>}
+            {this.props.link === 'Settings' ? <li className='active'><a href="#/settings">Welcome, {this.props.user.plaidContainer.name}</a></li> : <li><a href="#/settings">Welcome, {this.props.user.plaidContainer.name}</a></li>}
             <li onClick={this.logOutHandler}><a href="#">Logout</a></li>
             </ul>
         </div>

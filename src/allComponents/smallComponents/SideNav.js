@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
+import {getDataFromFireStore} from '../../Store/plaidContainer'
 
-export default class SideNav extends Component {
+ class SideNav extends Component {
   render() {
+    console.log('this is side nav',this.props.stateData.plaidContainer.Goals ? this.props.stateData.plaidContainer.Goals.length : 0 )
     return (
         <div className="col-md-3">
         <div className="list-group">
@@ -24,12 +27,12 @@ export default class SideNav extends Component {
         {this.props.link === 'Transactions' ? 
         <a href="#/transactions" className={`list-group-item active main-color-bg`}>
         <span className="glyphicon glyphicon-list-alt" aria-hidden="true">
-        </span> Transactions <span className="badge">12</span>
+        </span> Transactions <span className="badge">{this.props.stateData.plaidContainer.transaction ? this.props.stateData.plaidContainer.transaction.length : 0 }</span>
         </a>
         : 
         <a href="#/transactions" className={`list-group-item`}>
         <span className="glyphicon glyphicon-list-alt" aria-hidden="true">
-        </span> Transactions <span className="badge">12</span>
+        </span> Transactions <span className="badge">{this.props.stateData.plaidContainer.transaction ? this.props.stateData.plaidContainer.transaction.length : 0 }</span>
         </a>
         }
 
@@ -45,18 +48,18 @@ export default class SideNav extends Component {
 
         {/* Goal */}
         {this.props.link === 'Goals' ? 
-        <a href="#/goal" className="list-group-item active main-color-bg"><span className="	glyphicon glyphicon-gift" aria-hidden="true"></span> Goals <span className="badge">33</span></a>
+        <a href="#/goal" className="list-group-item active main-color-bg"><span className="	glyphicon glyphicon-gift" aria-hidden="true"></span> Goals <span className="badge">{this.props.stateData.plaidContainer.Goals ? this.props.stateData.plaidContainer.Goals.length : 0 }</span></a>
         : 
-        <a href="#/goal" className="list-group-item"><span className="	glyphicon glyphicon-gift" aria-hidden="true"></span> Goals <span className="badge">33</span></a>
+        <a href="#/goal" className="list-group-item"><span className="	glyphicon glyphicon-gift" aria-hidden="true"></span> Goals <span className="badge">{this.props.stateData.plaidContainer.Goals ? this.props.stateData.plaidContainer.Goals.length : 0 }</span></a>
         }
         
 
         {/* waystosave */}
         {this.props.link === 'Ways to save' ? 
-        <a href="#/waystosave" className="list-group-item active main-color-bg"><span className="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Ways to save <span className="badge">203</span></a>
+        <a href="#/waystosave" className="list-group-item active main-color-bg"><span className="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Ways to save <span className="badge"></span></a>
 
         : 
-        <a href="#/waystosave" className="list-group-item"><span className="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Ways to save <span className="badge">203</span></a>
+        <a href="#/waystosave" className="list-group-item"><span className="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Ways to save <span className="badge"></span></a>
 
         }
         
@@ -127,3 +130,19 @@ export default class SideNav extends Component {
     )
   }
 }
+
+const mapStateToProps = state => {
+    return {
+        stateData: state
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        getDataFromFireStore : () => dispatch(getDataFromFireStore())
+        
+        }
+    }
+
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(SideNav)

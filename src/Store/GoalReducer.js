@@ -90,7 +90,7 @@ const GoalReducer = (state = initialState, action) => {
         case ADD_A_GOAL:
             return {
                 ...state,
-                allGoals: [...state.allGoals, action.payload]
+                allGoals: state.allGoals ? [...state.allGoals, action.payload] : action.payload
             }
         case GET_ALL_GOALS:
             return {

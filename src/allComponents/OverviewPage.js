@@ -7,7 +7,7 @@ import AccountOverViewSection from './smallComponents/AccountOverViewSection';
 import Footer from './smallComponents/Footer'
 
 import {connect} from 'react-redux'
-import {getPlaid,getDataFromFireStore} from '../Store/plaidContainer'
+import {getDataFromFireStore} from '../Store/plaidContainer'
 // import AddAccount from './AddAccount'
 
 
