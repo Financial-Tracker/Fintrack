@@ -44,29 +44,35 @@ class Settings extends Component {
     return (
       <div>
       <NavBar link={'Settings'}/>
-    <section id="main">
+      <section id="main">
       <div className="container">
         <div className="row">
       <SideNav link={'Settings'}/>
           <div className="col-md-9">
           <div>
-            <div class="panel panel-default">
-            <div class="panel-heading main-color-bg">
-              <h3 class="panel-title">Edit Profile Info</h3>
+            <div className="panel panel-default">
+            <div className="panel-heading main-color-bg">
+              <h3 className="panel-title center">Edit Profile Info</h3>
             </div>
           <form onSubmit={this.handleSubmit}>
-            <div class="form-group">
+            <div className="form-group">
               <label>Email</label>
-              <input type="text" class="form-control" name="email "placeholder={this.props.user.email} value={this.state.email} />
+              <input type="text" className="form-control" name="email" placeholder={this.props.user.email} value={this.state.email} onChange={this.handleChange}/>
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <label>Name</label>
-              <input name="name" type="text" class="form-control" value={this.state.name} onChange={this.handleChange} placeholder={this.props.user.name}/>
+              <input name="name" type="text" className="form-control" value={this.state.name} onChange={this.handleChange} placeholder={this.props.user.name}/>
             </div>
-              <input type="submit" class="btn btn-default" value="Submit" />
+              <input type="submit" className="btn btn-default" value="Submit" />
             </form>
             </div>
           </div>
+          <div>
+              <h5>Member since: {this.props.user.created}</h5>
+            </div>
+            <div>
+              <h5>Last logged in: {this.props.user.access}</h5>
+            </div>
             {/* <AccountOverViewSection />
             <Transactions /> */}
           </div>
