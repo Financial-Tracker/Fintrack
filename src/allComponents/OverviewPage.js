@@ -6,13 +6,19 @@ import GoalForm from './smallComponents/GoalForm';
 import AccountOverViewSection from './smallComponents/AccountOverViewSection';
 import Footer from './smallComponents/Footer'
 
-// import {connect} from 'react-redux'
-// import {getPlaid,getDataFromFireStore} from '../Store/plaidContainer'
+import {connect} from 'react-redux'
+import {getPlaid,getDataFromFireStore} from '../Store/plaidContainer'
 // import AddAccount from './AddAccount'
 
 
-export default class OverviewPage extends Component {
-  render() {
+
+
+ class OverviewPage extends Component {
+   componentDidMount(){
+    this.props.getDataFromFireStore()
+   }
+   render() {
+    console.log(this.props.plaidInfo.auth)
     return (
       <div>
         <NavBar/>
@@ -21,6 +27,7 @@ export default class OverviewPage extends Component {
           <div className="row">
         <SideNav />
             <div className="col-md-9">
+
               <AccountOverViewSection />
               <Transactions />
             </div>
@@ -33,3 +40,13 @@ export default class OverviewPage extends Component {
     )
   }
 }
+
+const MapStateToProps = state => ({
+  plaidInfo : state.plaidContainer
+})
+
+const MapDispatchToProps = dispatch => ({
+  getDataFromFireStore : () => dispatch(getDataFromFireStore())
+})
+
+export default connect(MapStateToProps,MapDispatchToProps)(OverviewPage)

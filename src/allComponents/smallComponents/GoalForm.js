@@ -86,7 +86,7 @@ render() {
         <div className="modal-footer">
         <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
     
-        {/* <button onClick={this.onSubmitHandler} type="submit" className="btn btn-primary main-color-bg" >Save changes</button> */}
+        <button onClick={this.onSubmitHandler} type="submit" className="btn btn-primary main-color-bg" >Save changes</button>
         </div>
     </form>
     </div>

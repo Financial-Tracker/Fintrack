@@ -64,7 +64,7 @@ render() {
                 <span className="caret"></span>
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a onClick={this.changeAccountHandler}>Change Bank Account</a></li>
+                <li><a href='#/plaid'>Change Bank Account</a></li>
                 <li><a type="button" data-toggle="modal" data-target="#addGoalForm">Add Goal</a></li>
                 <li><a type="button" data-toggle="modal" data-target="#addBillForm">Add Bill</a></li>
                 </ul>
