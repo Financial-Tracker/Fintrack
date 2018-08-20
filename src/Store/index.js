@@ -5,10 +5,12 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import plaidContainer from './plaidContainer'
 import userContainer from './userContainer'
 import BillReducer from './BillReducer'
+import GoalReducer from './GoalReducer'
 const reducer = combineReducers({
   plaidContainer,
   userContainer,
-  bills : BillReducer
+  bills : BillReducer,
+  goals : GoalReducer
   
 })
 const middleware = composeWithDevTools(

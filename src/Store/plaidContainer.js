@@ -1,10 +1,17 @@
 import firebase from "firebase";
-const firestore = firebase.firestore();
+console.log(process.env.NODE_ENV);
+export const firestore =
+  process.env.NODE_ENV === "test" ? null : firebase.firestore();
 
 const GET_PLAID = "GET_PLAID";
 const GET_TRANSACTIONS = "GET_TRANSACTIONS";
 const REMOVE_PLAID = "REMOVE_PLAID";
 const UPDATE_BUDGET = "UPDATE_BUDGET";
+
+const LOADING = "LOADING";
+
+const startLoading = () => ({ type: LOADING });
+
 
 export const getPlaid = data => {
   return {
@@ -12,7 +19,7 @@ export const getPlaid = data => {
     payload: data
   };
 };
-const removePlaid = () => {
+export const removePlaid = () => {
   return {
     type: REMOVE_PLAID,
     payload: {}
@@ -30,8 +37,8 @@ export const updatePlaidBudget = newPlaidData => {
   return {
     type: UPDATE_BUDGET,
     payload: newPlaidData
-  }
-}
+  };
+};
 
 export const getDataFromFireStore = () => async dispatch => {
   try {
@@ -61,29 +68,36 @@ export const getDataFromFireStore = () => async dispatch => {
   }
 };
 
-export const updateBudget = (newBudget) => async dispatch => {
+export const updateBudget = newBudget => async dispatch => {
   try {
-    const userEmail = firebase.auth().currentUser.email
-      const userRef = await firestore.collection('user').where('email',"==",userEmail.toString()).get()
-      const docRefId = userRef.docs[0].id; 
-      await firestore.collection('user').doc(""+docRefId+"").update({budget: newBudget})
+    const userEmail = firebase.auth().currentUser.email;
+    const userRef = await firestore
+      .collection("user")
+      .where("email", "==", userEmail.toString())
+      .get();
+    const docRefId = userRef.docs[0].id;
+    await firestore
+      .collection("user")
+      .doc("" + docRefId + "")
+      .update({ budget: newBudget })
       .then(() => {
-        console.log("updated!")
-      }).catch(error => {
-        console.log(error)
+        console.log("updated!");
       })
-    
-      const dataAPI = await firestore
+      .catch(error => {
+        console.log(error);
+      });
+
+    const dataAPI = await firestore
       .collection("user")
       .doc("" + docRefId + "")
       .get()
       .then(user => user.data());
-      console.log("data",dataAPI)
-      dispatch(updatePlaidBudget(dataAPI))
+    console.log("data", dataAPI);
+    dispatch(updatePlaidBudget(dataAPI));
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-}
+};
 
 export const removeDataFromFireStore = () => {
   return async dispatch => {
@@ -134,14 +148,17 @@ export const getTransactionsByCurrentMonth = () => async dispatch => {
           return false;
         }
       });
-      const budget = dataAPI.budget
-      const income = dataAPI.income.income_streams[0].monthly_income
-      const action = {transMonth, monthlyIncome: income, budget: budget}
+      const budget = dataAPI.budget;
+      const income = dataAPI.income.income_streams[0].monthly_income;
+      const action = { transMonth, monthlyIncome: income, budget: budget };
       dispatch(getPlaid(action));
     }
   });
 };
-const initialState = {};
+const initialState = {
+  isLoading: false,
+  plaidInfo: {}
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -152,7 +169,7 @@ const reducer = (state = initialState, action) => {
     case REMOVE_PLAID:
       return action.payload;
     case UPDATE_BUDGET:
-      return action.payload
+      return action.payload;
     default:
       return state
   }

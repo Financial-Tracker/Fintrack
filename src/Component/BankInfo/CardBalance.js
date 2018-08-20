@@ -6,18 +6,27 @@ import {Link} from 'react-router-dom'
 
 class CardBalance extends React.Component{
     async componentDidMount(){
-        await this.props.getFireStore();
+        // await this.props.getFireStore();
     }
     render(props){
+        console.log(this.props.account)
+        let id = this.props.account.account_id
+        let currency = this.props.account.name
+        let available = this.props.account.balances.available
+        let subtype = this.props.account.subtype
+        let officialName = this.props.officialName
+
         return(
-            <Link to={`/balance/${this.props.id}`}>
+            // <div>
+            //     hello
+            // </div>
+            <Link to={`/balance/${id}`}>
                 <Card 
-                header = {this.props.officialName}
-                meta = {this.props.currency}
+                header = {officialName}
+                meta = {currency}
                 description = {[
-                    `Available: ${this.props.available} `,
-                    `type: ${this.props.type} `,
-                    `subtype: ${this.props.subtype} `,
+                    `Available: ${available} `,
+                    `subtype: ${subtype} `,
                 ].join('')}
                 />
             </Link>
@@ -27,12 +36,12 @@ class CardBalance extends React.Component{
 
 const mapState =(state)=>{
     return{
-        plaidObj: state.plaidContainer
+        // plaidObj: state.plaidContainer
     }
 }
 const mapDispatch=(dispatch)=>{
     return{
-        getFireStore: ()=>dispatch(getDataFromFireStore())
+        // getFireStore: ()=>dispatch(getDataFromFireStore())
     }
 }
 

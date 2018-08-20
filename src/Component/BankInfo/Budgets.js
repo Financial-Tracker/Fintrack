@@ -10,7 +10,6 @@ import {
   Dimmer,
   Loader,
   Segment,
-  Button,
   Header,
   Image,
   Modal
@@ -19,7 +18,19 @@ import Food from "../../pictures/Food.jpg";
 import Payment from "../../pictures/Payment.jpg";
 import Travel from "../../pictures/Travel.jpeg";
 import Shop from "../../pictures/Shop.jpg";
-import { Collapsible, CollapsibleItem } from "react-materialize";
+// import { Collapsible, CollapsibleItem } from "react-materialize";
+import BudgetChart from "./BudgetChart";
+import {
+  Card,
+  CardImg,
+  CardText,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  Button,
+  Table
+} from "reactstrap";
+import BudgetsCard from "./BudgetsCard";
 
 class Budgets extends Component {
   constructor() {
@@ -141,6 +152,10 @@ class Budgets extends Component {
                 Monthly budget for this month is ${this.props.plaidInfo.budget}
               </p>
               <button onClick={this.handleClick}>Modify budget</button>
+              <BudgetChart
+                budget={this.props.plaidInfo.budget}
+                categories={categories}
+              />
             </div>
           ) : (
             <form onSubmit={this.handleSubmit}>
@@ -156,42 +171,55 @@ class Budgets extends Component {
             </form>
           )}
           <div>
-            <Collapsible>
-              {this.props.plaidInfo.monthlyIncome ? (
-                Object.keys(categories).map(section => (
-                  <CollapsibleItem
-                    header={section + ": $" + categories[section].amount}
-                  >
-                    <Modal trigger={<Button>See Transactions</Button>}>
-                      <Modal.Header>{section}</Modal.Header>
-                      <Modal.Content image>
-                        <Image
-                          wrapped
-                          size="medium"
-                          src={categories[section].picture}
-                        />
-                        <Modal.Description>
-                          <Header>{section} Transactions</Header>
-                          <p>
-                            <ul>
-                              {categories[section].list.map(item => (
-                                <li>
-                                  You spent {item.amount} to {item.name} on{" "}
-                                  {item.date}{" "}
-                                </li>
-                              ))}
-                            </ul>
-                          </p>
-                        </Modal.Description>
-                      </Modal.Content>
-                      <Modal.Actions />
-                    </Modal>
-                  </CollapsibleItem>
-                ))
-              ) : (
-                <Loader active inline="centered" />
-              )}
-            </Collapsible>
+            {/* <Collapsible> */}
+            <Table bordered>
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Amount Spent</th>
+                  <th>Transactions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.props.plaidInfo.monthlyIncome ? (
+                  Object.keys(categories).map(section => (
+                    // <CollapsibleItem
+                    //   header={section + ": $" + categories[section].amount}
+                    // >
+                    <React.Fragment>
+                      <BudgetsCard section={section} categories={categories} />
+                      {/* <Modal trigger={<Button>See Transactions</Button>}>
+                    <Modal.Header>{section}</Modal.Header>
+                    <Modal.Content image>
+                    <Image
+                    wrapped
+                    size="medium"
+                    src={categories[section].picture}
+                    />
+                    <Modal.Description>
+                    <Header>{section} Transactions</Header>
+                    <p>
+                    <ul>
+                    {categories[section].list.map(item => (
+                      <li>
+                      You spent {item.amount} to {item.name} on{" "}
+                      {item.date}{" "}
+                      </li>
+                    ))}
+                    </ul>
+                    </p>
+                    </Modal.Description>
+                    </Modal.Content>
+                    <Modal.Actions />
+                  </Modal> */}
+                    </React.Fragment>
+                  ))
+                ) : (
+                  <Loader active inline="centered" />
+                )}
+              </tbody>
+            </Table>
+            {/* </Collapsible> */}
           </div>
         </div>
       </React.Fragment>
@@ -208,8 +236,8 @@ const MapDispatchToProps = dispatch => ({
   updateBudget: newBudget => dispatch(updateBudget(newBudget))
 });
 
-const BudgetsPage = connect(
+const Budget = connect(
   MapStateToProps,
   MapDispatchToProps
 );
-export default BudgetsPage(Budgets);
+export default Budget(Budgets);
