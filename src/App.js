@@ -39,47 +39,48 @@ import WaysToSavePage from './allComponents/WaysToSavePage'
 import UserSettingPage from './allComponents/UserSettingPage'
 import EditGoal from './allComponents/EditGoal'
 import BillForm from './allComponents/smallComponents/BillForm'
-import GoalForm from './/allComponents/smallComponents/GoalForm'
+import GoalForm from './allComponents/smallComponents/GoalForm'
 //----------------------------------------------------------------------------------------------------------
 
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
-      <div>
-      <HashRouter >
+        <div>
+          <HashRouter >
 
-      {
-        !this.props._user ? 
-        (  <Switch>
-          {/* {!this.props._user ? (null) : (null) } */}
-          {/* Login and sign up  */}
-        <Route exact path='/login' component={LogIn} />
-        <Route exact path='/signup' component={SignUp} />
-        <Route component={LogIn} />
-      </Switch>)
-        : 
-        ( <Switch >
-          {/* once the user is logged in */}
-          <Route exact path='/' component ={OverviewPage} />
-          <Route exact path="/plaid" component={Plaid} />
-          <Route exact path='/transactions' component={TransactionPage} />
-          <Route exact path='/budget' component={BudgetPage} />
-          <Route exact path='/goal'component={GoalPage} />
-          <Route exact path='/waystosave' component={WaysToSavePage} />
-          <Route exact path='/settings' component={UserSettingPage} />
-          <Route exact path={`/editgoal/:Id`} component={EditGoal} />
-          <Route component={OverviewPage}/>
-        </Switch>)
-      }
+            {
+              !this.props._user ?
+                (<Switch>
+                  {/* {!this.props._user ? (null) : (null) } */}
+                  {/* Login and sign up  */}
+                  <Route exact path='/login' component={LogIn} />
+                  <Route exact path='/signup' component={SignUp} />
+                  <Route component={LogIn} />
+                </Switch>)
+                :
+                (<Switch >
+                  {/* once the user is logged in */}
+                  <Route exact path='/' component={OverviewPage} />
+                  <Route exact path="/plaid" component={Plaid} />
+                  <Route exact path='/transactions' component={TransactionPage} />
+                  <Route exact path='/budget' component={BudgetPage} />
+                  <Route exact path='/goal' component={GoalPage} />
+                  <Route exact path='/waystosave' component={WaysToSavePage} />
+                  <Route exact path='/settings' component={UserSettingPage} />
+                  <Route exact path={`/editgoal/:Id`} component={EditGoal} />
+                  {/* <Route exact path='/bills' component={BillForm} /> */}
+                  <Route component={OverviewPage} />
+                </Switch>)
+            }
 
 
 
 
-      </HashRouter>
-        <BillForm />
-        <GoalForm />
-      </div>
+          </HashRouter>
+          <BillForm />
+          <GoalForm />
+        </div>
       </Provider>
 
     );
@@ -118,7 +119,7 @@ export default withAuth(App);
 //     <Route exact path='/saves' component={WaysToSave} />
 //     <Route exact path='/bills' component={Bills} />
 //   </Switch>
-  
+
 //   : 
 //   <Switch>
 //   <Route exact path="/!" component={LogIn} />
