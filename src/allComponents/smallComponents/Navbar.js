@@ -16,6 +16,7 @@ class Navbar extends Component {
     logOutHandler = () => {
         console.log('logout button clicked')
         auth.signOut()
+        
     }
 
     changeAccountHandler = () =>{

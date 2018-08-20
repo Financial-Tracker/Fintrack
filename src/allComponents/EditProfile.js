@@ -32,7 +32,7 @@ class EditProfile extends Component {
   handleSubmit(event) {
     event.preventDefault()
     this.props.updateUser(this.state)
-    this.props.history.push('/profile')
+    this.props.history.push('/settings')
   }
   render() {
     return (

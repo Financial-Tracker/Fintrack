@@ -14,7 +14,7 @@
 
     handleClick(event) {
       event.preventDefault()
-      this.props.history.push('/editprofile')
+      this.props.history.push('/settings')
     }
     render() {
       return (
