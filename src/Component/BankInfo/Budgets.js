@@ -1,35 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
-  getPlaid,
   getDataFromFireStore,
   getTransactionsByCurrentMonth,
   updateBudget
 } from "../../Store/plaidContainer";
-import {
-  Dimmer,
-  Loader,
-  Segment,
-  Header,
-  Image,
-  Modal
-} from "semantic-ui-react";
+import { Dimmer, Loader, Segment, Image } from "semantic-ui-react";
 import Food from "../../pictures/Food.jpg";
 import Payment from "../../pictures/Payment.jpg";
 import Travel from "../../pictures/Travel.jpeg";
 import Shop from "../../pictures/Shop.jpg";
 // import { Collapsible, CollapsibleItem } from "react-materialize";
 import BudgetChart from "./BudgetChart";
-import {
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  Button,
-  Table
-} from "reactstrap";
+import { Table } from "reactstrap";
 import BudgetsCard from "./BudgetsCard";
 
 class Budgets extends Component {
@@ -61,7 +44,7 @@ class Budgets extends Component {
         console.log(this.state);
       }
     );
-    if (event.target.value > this.props.plaidInfo.monthlyIncome) {
+    if (event.target.value > this.props.plaidInfo.actionlyIncome) {
       event.target.setCustomValidity(
         "Budget cannot be greater than your income!"
       );
@@ -84,7 +67,6 @@ class Budgets extends Component {
       this.setState({
         set: true
       });
-      window.location.reload();
     } else {
       alert("Error: Please check your budget!");
     }
@@ -97,7 +79,6 @@ class Budgets extends Component {
       set: false,
       budget: ""
     });
-    window.location.reload();
   }
 
   render() {
@@ -105,36 +86,38 @@ class Budgets extends Component {
     let transMonthArray;
     let spending;
     let categories;
-    if (this.props.plaidInfo.month.transMonth) {
-      transMonthArray = this.props.plaidInfo.transMonth;
-      console.log(this.props);
-      spending = transMonthArray.map(transaction => {
-        return transaction.amount;
-      });
-      const reducer = (accumulator, currentVal) => accumulator + currentVal;
-      total = spending.reduce(reducer);
-      categories = {
-        "Food and Drink": { amount: 0, list: [], picture: Food },
-        Shops: { amount: 0, list: [], picture: Shop },
-        Travel: { amount: 0, list: [], picture: Travel },
-        Payment: { amount: 0, list: [], picture: Payment }
-      };
-      for (let i = 0; i < transMonthArray.length; i++) {
-        let oneCharge = transMonthArray[i];
-        categories[oneCharge.category[0]].amount += oneCharge.amount;
-        categories[oneCharge.category[0]].list.push(oneCharge);
+    if (this.props.plaidInfo.action) {
+      if (this.props.plaidInfo.action.transMonth) {
+        transMonthArray = this.props.plaidInfo.action.transMonth;
+
+        spending = transMonthArray.map(transaction => {
+          return transaction.amount;
+        });
+        const reducer = (accumulator, currentVal) => accumulator + currentVal;
+        total = spending.reduce(reducer);
+        categories = {
+          "Food and Drink": { id: 0, amount: 0, list: [], picture: Food },
+          Shops: { id: 1, amount: 0, list: [], picture: Shop },
+          Travel: { id: 2, amount: 0, list: [], picture: Travel },
+          Payment: { id: 3, amount: 0, list: [], picture: Payment }
+        };
+        for (let i = 0; i < transMonthArray.length; i++) {
+          let oneCharge = transMonthArray[i];
+          categories[oneCharge.category[0]].amount += oneCharge.amount;
+          categories[oneCharge.category[0]].list.push(oneCharge);
+        }
       }
     }
 
     return (
       <React.Fragment>
-        {this.props.plaidInfo.month ? (
+        {this.props.plaidInfo.action ? (
           <React.Fragment>
-            {this.props.plaidInfo.month.monthlyIncome ? (
+            {this.props.plaidInfo.action.monthlyIncome ? (
               <div>
                 <h3>
                   Your monthly income is $
-                  {this.props.plaidInfo.month.monthlyIncome}
+                  {this.props.plaidInfo.action.monthlyIncome}
                 </h3>
                 <h4>You spent ${total} this month</h4>
               </div>
@@ -153,7 +136,7 @@ class Budgets extends Component {
                 <div>
                   <p>
                     Monthly budget for this month is $
-                    {this.props.plaidInfo.budget}
+                    {this.props.plaidInfo.action.budget}
                   </p>
                   <button onClick={this.handleClick}>Modify budget</button>
                   <BudgetChart
@@ -175,7 +158,6 @@ class Budgets extends Component {
                 </form>
               )}
               <div>
-                {/* <Collapsible> */}
                 <Table bordered>
                   <thead>
                     <tr>
@@ -185,40 +167,13 @@ class Budgets extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {this.props.plaidInfo.monthlyIncome ? (
-                      Object.keys(categories).map(section => (
-                        // <CollapsibleItem
-                        //   header={section + ": $" + categories[section].amount}
-                        // >
-                        <React.Fragment>
+                    {this.props.plaidInfo.action.monthlyIncome ? (
+                      Object.keys(categories).map((section, index) => (
+                        <React.Fragment key={index}>
                           <BudgetsCard
                             section={section}
                             categories={categories}
                           />
-                          {/* <Modal trigger={<Button>See Transactions</Button>}>
-                    <Modal.Header>{section}</Modal.Header>
-                    <Modal.Content image>
-                    <Image
-                    wrapped
-                    size="medium"
-                    src={categories[section].picture}
-                    />
-                    <Modal.Description>
-                    <Header>{section} Transactions</Header>
-                    <p>
-                    <ul>
-                    {categories[section].list.map(item => (
-                      <li>
-                      You spent {item.amount} to {item.name} on{" "}
-                      {item.date}{" "}
-                      </li>
-                    ))}
-                    </ul>
-                    </p>
-                    </Modal.Description>
-                    </Modal.Content>
-                    <Modal.Actions />
-                  </Modal> */}
                         </React.Fragment>
                       ))
                     ) : (
@@ -226,12 +181,11 @@ class Budgets extends Component {
                     )}
                   </tbody>
                 </Table>
-                {/* </Collapsible> */}
               </div>
             </div>
           </React.Fragment>
         ) : (
-          <h1>hi</h1>
+          <h1>Loading</h1>
         )}
       </React.Fragment>
     );
@@ -241,7 +195,6 @@ const MapStateToProps = state => ({
   plaidInfo: state.plaidContainer
 });
 const MapDispatchToProps = dispatch => ({
-  getPlaid: data => dispatch(getPlaid(data)),
   getDataFromFireStore: () => dispatch(getDataFromFireStore()),
   getTransactions: () => dispatch(getTransactionsByCurrentMonth()),
   updateBudget: newBudget => dispatch(updateBudget(newBudget))

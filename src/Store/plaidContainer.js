@@ -13,7 +13,6 @@ const GET_MONTH = "GET_MONTH";
 
 const startLoading = () => ({ type: LOADING });
 
-
 export const getPlaid = data => {
   return {
     type: GET_PLAID,
@@ -50,7 +49,6 @@ export const updatePlaidBudget = newPlaidData => {
 
 export const getDataFromFireStore = () => async dispatch => {
   try {
-    
     firebase.auth().onAuthStateChanged(async user => {
       if (user) {
         // User is signed in.
@@ -65,6 +63,22 @@ export const getDataFromFireStore = () => async dispatch => {
           .doc("" + docRefId + "")
           .get()
           .then(user => user.data());
+        const currentDate = new Date();
+        const month = currentDate.getMonth() + 1;
+        const year = currentDate.getFullYear();
+        const transMonth = await dataAPI.transaction.filter(transaction => {
+          if (
+            transaction.date.substring(0, 4) == year &&
+            transaction.date.substring(5, 7) == month
+          ) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+        const budget = dataAPI.budget;
+        const income = dataAPI.income.income_streams[0].monthly_income;
+        dataAPI.action = { transMonth, monthlyIncome: income, budget: budget };
         const action = getPlaid(dataAPI);
         dispatch(action);
       } else {
@@ -101,6 +115,22 @@ export const updateBudget = newBudget => async dispatch => {
       .get()
       .then(user => user.data());
     console.log("data", dataAPI);
+    const currentDate = new Date();
+    const month = currentDate.getMonth() + 1;
+    const year = currentDate.getFullYear();
+    const transMonth = await dataAPI.transaction.filter(transaction => {
+      if (
+        transaction.date.substring(0, 4) == year &&
+        transaction.date.substring(5, 7) == month
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    const budget = dataAPI.budget;
+    const income = dataAPI.income.income_streams[0].monthly_income;
+    dataAPI.action = { transMonth, monthlyIncome: income, budget: budget };
     dispatch(updatePlaidBudget(dataAPI));
   } catch (error) {
     console.error(error);
@@ -116,14 +146,17 @@ export const removeDataFromFireStore = () => {
       .get();
     const docRefId = await userRef.docs[0].id;
     const dataAPI = await firestore.collection("user").doc("" + docRefId + "");
-    const deletePLaid = await dataAPI.update({
-      auth: firebase.firestore.FieldValue.delete(),
-      balance: firebase.firestore.FieldValue.delete(),
-      income: firebase.firestore.FieldValue.delete(),
-      transaction: firebase.firestore.FieldValue.delete()
-    }).then(() => {
-      console.log('deleted')
-    }).catch(error => console.error(error));
+    const deletePLaid = await dataAPI
+      .update({
+        auth: firebase.firestore.FieldValue.delete(),
+        balance: firebase.firestore.FieldValue.delete(),
+        income: firebase.firestore.FieldValue.delete(),
+        transaction: firebase.firestore.FieldValue.delete()
+      })
+      .then(() => {
+        console.log("deleted");
+      })
+      .catch(error => console.error(error));
     console.log("REMOVE PLAID: ", deletePLaid);
     const action = removePlaid(deletePLaid);
     dispatch(action);
@@ -183,7 +216,7 @@ const reducer = (state = initialState, action) => {
     case UPDATE_BUDGET:
       return action.payload;
     default:
-      return state
+      return state;
   }
 };
 
