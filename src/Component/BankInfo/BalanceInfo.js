@@ -12,7 +12,7 @@ import { Card } from 'semantic-ui-react'
 
 class Balance extends React.Component {
     async componentDidMount() {
-        // await this.props.getFireStore();
+        await this.props.getFireStore();
     }
 
     render() {
@@ -38,20 +38,28 @@ class Balance extends React.Component {
             //     }
 
             // </div>
-
-            <div className='centerItems'>
-                <Card.Group centered>
-                    {
-                        accounts.map((account, index) => {
-                            return (
-                                <CardBalance account={account} key={index} />
-                            )
-                        })
-                    }
-                </Card.Group>
-
+            <div>
+                {
+                    this.props.plaidObj.transaction ? 
+                (<div className='centerItems'>
+                    <Card.Group centered>
+                        {
+                            accounts.map((account, index) => {
+                                return (
+                                    <CardBalance account={account} key={index} />
+                                )
+                            })
+                        }
+                    </Card.Group>
+    
+                </div>) : (
+                <div>
+                    <button>Log In to your Bank Account</button>
+                </div>
+                )
+                }
             </div>
-        )
+            )
     }
 }
 
@@ -68,5 +76,4 @@ const mapDispatch = (dispatch) => {
 
 
 export default connect(mapState, mapDispatch)(Balance)
-
 
