@@ -38,7 +38,7 @@ class GoalsList extends Component {
                     </div>
                     <br />
                     <table className="table table-striped table-hover">
-                        {goals.length ?
+                        {goals ?
                             (<tbody >
                                 <tr>
                                     <th>Goal</th>

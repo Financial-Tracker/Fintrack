@@ -19,7 +19,6 @@ class Transactions extends Component {
   tableRows(){
     if(this.props.plaidInfo.auth) {
       let finalArr = []
-      console.log("at rows:",this.props.plaidInfo.transaction)
       for(let i = 0; i<this.props.plaidInfo.transaction.length; i++){
         let obj = {}
         obj.name = this.props.plaidInfo.transaction[i].name
@@ -28,12 +27,10 @@ class Transactions extends Component {
         obj.account = this.getSingleBalance(this.props.plaidInfo.transaction[i].account_id)
         finalArr.push(obj)
       } 
-    console.log('FINALARR: ', finalArr)
     return finalArr
     }
   }
   render() {
-    console.log(this.props.plaidInfo)
     let Datarows = []
     {this.props.plaidInfo.isLoading === false?console.log('loading'): Datarows =this.tableRows()}
     let data = {
@@ -67,8 +64,6 @@ class Transactions extends Component {
 
 
     data = {...data, rows: Datarows}
-
-    console.log('FINALE TABLE: ', data)
   
     return (
       
