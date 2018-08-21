@@ -54,7 +54,7 @@ class OverviewPage extends Component {
       </div>
     );
   }
-}
+} 
 
 const MapStateToProps = state => ({
   plaidInfo: state.plaidContainer
