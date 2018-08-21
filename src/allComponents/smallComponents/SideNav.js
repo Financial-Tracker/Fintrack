@@ -4,7 +4,6 @@ import {getDataFromFireStore} from '../../Store/plaidContainer'
 
 class SideNav extends Component {
 render() {
-    console.log('this is side nav',this.props.stateData.plaidContainer.Goals ? this.props.stateData.plaidContainer.Goals.length : 0 )
     return (
     <div className="col-md-3">
         <div className="list-group">
