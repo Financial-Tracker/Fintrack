@@ -23,7 +23,7 @@ render() {
         <div className="row">
     <SideNav link={'Goals'}/>
         <div className="col-md-9">
-            <EditGoalForm />
+            <EditGoalForm ID={this.props.match.params.Id} history={this.props.history}/>
         </div>
         </div>
     </div>

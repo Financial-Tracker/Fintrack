@@ -43,6 +43,7 @@ import BillForm from "./allComponents/smallComponents/BillForm";
 import GoalForm from "./allComponents/smallComponents/GoalForm";
 import BillPage from './allComponents/BillPage'
 
+
 //----------------------------------------------------------------------------------------------------------
 
 class App extends Component {
@@ -51,7 +52,7 @@ class App extends Component {
       <Provider store={store}>
 
         <div>
-          <HashRouter>
+          <HashRouter >
             {!this.props._user ? (
               <Switch>
                 {/* {!this.props._user ? (null) : (null) } */}
