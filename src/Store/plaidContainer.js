@@ -49,10 +49,10 @@ export const updatePlaidBudget = newPlaidData => {
 
 export const getDataFromFireStore = () => async dispatch => {
   try {
-    firebase.auth().onAuthStateChanged(async user => {
+    const user = firebase.auth().currentUser
       if (user) {
         // User is signed in.
-        const userEmail = firebase.auth().currentUser.email;
+        const userEmail = user.email;
         const userRef = await firestore
           .collection("user")
           .where("email", "==", userEmail.toString())
@@ -84,7 +84,7 @@ export const getDataFromFireStore = () => async dispatch => {
       } else {
         // No user is signed in.
       }
-    });
+
   } catch (error) {
     console.error(error);
   }
