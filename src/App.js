@@ -40,7 +40,8 @@ import WaysToSavePage from "./allComponents/WaysToSavePage";
 import UserSettingPage from "./allComponents/UserSettingPage";
 import EditGoal from "./allComponents/EditGoal";
 import BillForm from "./allComponents/smallComponents/BillForm";
-import GoalForm from ".//allComponents/smallComponents/GoalForm";
+import GoalForm from "./allComponents/smallComponents/GoalForm";
+import BillPage from './allComponents/BillPage'
 
 //----------------------------------------------------------------------------------------------------------
 
@@ -70,6 +71,7 @@ class App extends Component {
                 <Route exact path="/waystosave" component={WaysToSavePage} />
                 <Route exact path="/settings" component={UserSettingPage} />
                 <Route exact path={`/editgoal/:Id`} component={EditGoal} />
+                <Route exact path={'/bills'} component={BillPage} />
                 <Route component={OverviewPage} />
               </Switch>
             )}

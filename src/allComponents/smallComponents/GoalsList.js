@@ -34,6 +34,7 @@ class GoalsList extends Component {
             {/* <div className="col-md-12">
                 <input className="form-control" type="text" placeholder="Filter Posts..." />
             </div> */}
+<<<<<<< HEAD
           </div>
           <br />
           <table className="table table-striped table-hover">
@@ -94,6 +95,57 @@ class GoalsList extends Component {
       </div>
     );
   }
+=======
+                    </div>
+                    <br />
+                    <table className="table table-striped table-hover">
+                        {goals ?
+                            (<tbody >
+                                <tr>
+                                    <th>Goal</th>
+                                    <th>How Much?</th>
+                                    <th>Monthly Savings</th>
+                                    <th>Created</th>
+                                    <th>End Date</th>
+                                    <th></th>
+                                </tr>
+                                {
+                                    goals.map((goal, index) => {
+                                        console.log('GOAl', index)
+                                        return (
+                                            <tr key={index}>
+                                                <td>{goal.goalTitle}</td>
+                                                <td>{goal.howMuch}</td>
+                                                <td>$30</td>
+                                                <td>{goal.Created}</td>
+                                                <td>{goal.selectedDay}</td>
+                                                <td><a className="btn main-color-bg" onClick={this.paidHandler}>Paid</a><a className="btn btn-default" href="#/editgoal/1">Edit</a> <a className="btn btn-danger" onClick={() => this.deleteGoalHandler(index)}>Delete</a></td>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </tbody>)
+                            :
+
+                            (<tbody >
+                                <tr>
+                                    <th>Goal</th>
+                                    <th>How Much?</th>
+                                    <th>Monthly Savings</th>
+                                    <th>Created</th>
+                                    <th>End Date</th>
+                                    <th></th>
+                                </tr>
+                            </tbody>)}
+
+
+                    </table>
+                </div>
+            </div>
+
+        )
+    }
+>>>>>>> master
 }
 
 const MapStateToProps = state => {
