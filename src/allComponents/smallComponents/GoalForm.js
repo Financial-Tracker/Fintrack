@@ -17,9 +17,9 @@ class GoalForm extends Component {
             goalTitle: '',
             howMuch: '',
             additialInformation: '',
-            error: null
+            error: null,
+            isActive: true
         }
-
     }
     onChangeHandler = (evt) => {
         this.setState({
@@ -31,17 +31,16 @@ class GoalForm extends Component {
     }
     onSubmitHandler = (evt) => {
         evt.preventDefault()
-        console.log(this.state)
-
         this.props.addAGoal(this.state)
         this.setState({
             Created: new Date().toLocaleDateString(),
             selectedDay: undefined,
             goalTitle: '',
             howMuch: '',
-            additialInformation: ''
+            additialInformation: '',
+            isActive: false
         })
-        console.log(this.state)
+    
     }
 
     render() {
@@ -75,7 +74,6 @@ class GoalForm extends Component {
                                         ) : (
                                                 <p>Please select a day.</p>
                                             )}
-
                                     </div>
                                     <div className="form-group">
                                         <label>Additional Information realated to this goal (optional)</label>
@@ -84,8 +82,7 @@ class GoalForm extends Component {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-
-                                    <button onClick={this.onSubmitHandler} type="submit" className="btn btn-primary main-color-bg" >Save changes</button>
+                                    <button onClick={this.onSubmitHandler} type="submit" className="btn btn-primary main-color-bg" data-dismiss="modal">Save changes</button>
                                 </div>
                             </form>
                         </div>
