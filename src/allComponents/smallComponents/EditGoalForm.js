@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import DayPicker from 'react-day-picker';
-import {Redirect, Link} from 'react-router-dom'
+
 import {getSingleGoal, editSingleGoal} from '../../Store/GoalReducer'
 class EditGoalForm extends Component {
   constructor(props) {
@@ -18,29 +18,29 @@ class EditGoalForm extends Component {
     this.onChangeHandler = this.onChangeHandler.bind(this)
     this.onSubmitHandler = this.onSubmitHandler.bind(this)
     this.DateHandler = this.DateHandler.bind(this)
+    this.closeHandler = this.closeHandler.bind(this)
   } 
   async componentWillMount() {
     await this.props.fetchGoal(this.props.ID)
-    console.log(this.props)
   }
   async onSubmitHandler(evt) {
     evt.preventDefault()
     await this.props.editGoal(this.state, this.props.ID)
     // window.alert('Goal saved')
-    this.props.history.push('/goal')
+    this.props.history.push('/goal') 
   }
-  // async componentDidUpdate() {
-  //   await this.props.fetchGoal(this.props.ID)
-  // }
+
   onChangeHandler(evt) {
     this.setState({
       [evt.target.name]: evt.target.value,
       Created: this.props.goal.Created
     })
-
   }
   DateHandler(day) {
     this.setState({ selectedDay: day.toLocaleDateString() });
+  }
+  closeHandler() {
+    this.props.history.push('/goal') 
   }
 
 
@@ -75,7 +75,7 @@ class EditGoalForm extends Component {
                   </div>
                 </div>
                 <div className="modal-footer">
-                  <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.closeHandler}>Close</button>
                   <button onClick={this.onSubmitHandler} type="submit" className="btn btn-primary main-color-bg" data-dismiss="modal">Save changes</button>
                 </div>
               </form>  
