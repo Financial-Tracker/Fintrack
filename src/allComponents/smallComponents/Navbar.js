@@ -25,7 +25,6 @@ class Navbar extends Component {
         console.log('change account')
     }
 render() {
-    console.log(this.props.user.plaidContainer.name)
     return (
         <div>
     <nav className="navbar navbar-default">
