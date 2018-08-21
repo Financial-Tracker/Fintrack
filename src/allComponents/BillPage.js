@@ -88,7 +88,7 @@ class BillPage extends Component {
               <div className="col-md-9">
                 <div className="panel panel-default">
                   <div className="panel-heading main-color-bg">
-                    <h3 className="panel-title">Goals</h3>
+                    <h3 className="panel-title">Bills</h3>
                   </div>
                   <div className="panel-body">
                     <div className="row">
@@ -113,11 +113,11 @@ class BillPage extends Component {
                                 return (
                                   <tr key={index}>
                                     <td>{bill.billTitle}</td>
-                                    <td>{bill.howMuch}</td>
+                                    <td>$ {bill.howMuch}</td>
                                     <td>{bill.howMuch? 'True' : 'False'}</td>
                                     <td>{bill.howOften}</td>
                                     <td>{bill.endDate}</td>
-                                    <td><a className="btn main-color-bg" onClick={this.paidHandler}>Paid</a><a className="btn btn-default" href={`#/editgoal/${index}`} onClick={this.editHandler}>Edit</a> <a className="btn btn-danger" >Delete</a></td>
+                                    <td><a className="btn main-color-bg" onClick={this.paidHandler}>Paid</a><a className="btn btn-default" href={`#/editbill/${index}`} onClick={this.editHandler}>Edit</a></td>
                                   </tr>)
                               })
                             }

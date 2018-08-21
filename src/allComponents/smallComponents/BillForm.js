@@ -18,6 +18,7 @@ class BillForm extends Component {
             additialInformation : '',
             howOften: '',
             endDate: '',
+            paid: false
         }
     }
     onChangeHandler = (evt) => {
