@@ -86,9 +86,29 @@ class Budgets extends Component {
     let transMonthArray;
     let spending;
     let categories;
+    let weeks = {
+      "Week One": 0,
+      "Week Two": 0,
+      "Week Three": 0,
+      "Week Four": 0
+    };
+
     if (this.props.plaidInfo.action) {
       if (this.props.plaidInfo.action.transMonth) {
         transMonthArray = this.props.plaidInfo.action.transMonth;
+        for (let i = 0; i < transMonthArray.length; i++) {
+          const day = transMonthArray[i].date.substring(8);
+          const amount = Number(transMonthArray[i].amount);
+          if (day <= 8) {
+            weeks["Week One"] += amount;
+          } else if (day > 7 && day <= 14) {
+            weeks["Week Two"] += amount;
+          } else if (day > 14 && day <= 21) {
+            weeks["Week Three"] += amount;
+          } else {
+            weeks["Week Four"] += amount;
+          }
+        }
 
         spending = transMonthArray.map(transaction => {
           return transaction.amount;
@@ -108,7 +128,6 @@ class Budgets extends Component {
         }
       }
     }
-
     return (
       <React.Fragment>
         {this.props.plaidInfo.action ? (
@@ -139,10 +158,6 @@ class Budgets extends Component {
                     {this.props.plaidInfo.action.budget}
                   </p>
                   <button onClick={this.handleClick}>Modify budget</button>
-                  <BudgetChart
-                    budget={this.props.plaidInfo.budget}
-                    categories={categories}
-                  />
                 </div>
               ) : (
                 <form onSubmit={this.handleSubmit}>
@@ -157,6 +172,11 @@ class Budgets extends Component {
                   <button type="submit">Save</button>
                 </form>
               )}
+              <BudgetChart
+                budget={this.props.plaidInfo.budget}
+                categories={categories}
+                weeks={weeks}
+              />
               <div>
                 <Table bordered>
                   <thead>
