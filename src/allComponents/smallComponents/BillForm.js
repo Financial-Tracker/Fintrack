@@ -9,8 +9,8 @@ export default class BillForm extends Component {
         this.state = {
             Created : new Date().toLocaleDateString() ,
             selectedDay: undefined,
-            goalTitle : '',
-            howMuch : '',
+            BillTitle : '',
+            amountDue : '',
             additialInformation : ''
         }
 
@@ -42,11 +42,11 @@ render() {
         <div className="modal-body">
         <div className="form-group">
             <label>Bill Title</label>
-            <input onChange={this.onChangeHandler} type="text" name='goalTitle' className="form-control" placeholder="Goal Title" />
+            <input onChange={this.onChangeHandler} type="text" name='TypeOfBill' className="form-control" placeholder="Bill Title" />
         </div>
         <div className="form-group">
             <label>How much ?</label>
-            <input onChange={this.onChangeHandler} type="text" name='howMuch' className="form-control" placeholder="How much ?" />
+            <input onChange={this.onChangeHandler} type="text" name='amountDue' className="form-control" placeholder="How much ?" />
         </div>
         <div className="form-group">
             <label>End Date</label>

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import {Row, Icon, Input, Button} from 'react-materialize'
+import { Row, Icon, Input, Button } from 'react-materialize'
 import { Header, Image, Modal, Dropdown } from 'semantic-ui-react'
-import {getAllBill} from '../Store/BillReducer'
-import {connect} from 'react-redux'
+import { getAllBill } from '../Store/BillReducer'
+import { connect } from 'react-redux'
 
 import NavBar from './smallComponents/Navbar'
 import SideNav from './smallComponents/SideNav';
@@ -33,81 +33,137 @@ import Footer from './smallComponents/Footer'
 // ]
 
 class BillPage extends Component {
-  constructor(){
+  constructor() {
     super()
     this.state = {
-      modalOpen : false,
-      bill : '',
-      typeOfBill : '',
-      amountDue  : '',
-      howOften : '',
+      modalOpen: false,
+      bill: '',
+      typeOfBill: '',
+      amountDue: '',
+      howOften: '',
       date: '',
       paid: false
     }
   }
-  componentDidMount(){
+  componentDidMount() {
     this.props.getAllBill()
   }
-  
+
   onSubmitHandler = (evt) => {
     // evt.preventDefault()
     console.log(this.state)
   }
 
   //this is handler dropdown
-  onChangeHandlerDrop =(evt,data) => {
+  onChangeHandlerDrop = (evt, data) => {
     this.setState({
-      [data.name] : data.value
+      [data.name]: data.value
     })
   }
   //handler for text
   onChange = (evt) => {
     this.setState({
-      [evt.target.name] : evt.target.value
+      [evt.target.name]: evt.target.value
     })
   }
-  onChangeDate = (e,value) =>{
-   this.setState({
-     date : value
-   })
+  onChangeDate = (e, value) => {
+    this.setState({
+      date: value
+    })
   }
 
-  handleOpen = () => this.setState({modalOpen : true})
+  handleOpen = () => this.setState({ modalOpen: true })
   handleClose = () => this.setState({ modalOpen: false })
 
 
   render() {
+    const bills = this.props.plaidObj.allBills
     return (
       <div>
-      <NavBar link={'Bills'}/>
-    <section id="main">
-      <div className="container">
-        <div className="row">
-      <SideNav link={"Bills"}/>
-          <div className="col-md-9">
-          This Bills
-            {/* <AccountOverViewSection />
-            <Transactions /> */}
+        <NavBar link={'Bills'} />
+        <section id="main">
+          <div className="container">
+            <div className="row">
+              <SideNav link={"Bills"} />
+              <div className="col-md-9">
+                <div className="panel panel-default">
+                  <div className="panel-heading main-color-bg">
+                    <h3 className="panel-title">Goals</h3>
+                  </div>
+                  <div className="panel-body">
+                    <div className="row">
+                      {/* <div className="col-md-12">
+                    <input className="form-control" type="text" placeholder="Filter Posts..." />
+                </div> */}
+                    </div>
+                    <br />
+                    <table className="table table-striped table-hover">
+                      {
+                        bills ?
+
+                          (<tbody >
+                            <tr>
+                              <th>Bill</th>
+                              <th>How Much?</th>
+                              <th>Monthly Savings</th>
+                              <th>Created</th>
+                              <th>End Date</th>
+                              <th></th>
+                            </tr>
+
+                            {
+                              bills.map((bill, index) => {
+                                return (
+                                  <tr key={index}>
+                                    <td>{bill.typeOfBill}</td>
+                                    <td>{bill.amountDue}</td>
+                                    <td>$30</td>
+                                    <td>{bill.howOften}</td>
+                                    <td>{bill.date}</td>
+                                    <td><a className="btn main-color-bg" onClick={this.paidHandler}>Paid</a><a className="btn btn-default" href={`#/editgoal/${index}`} onClick={this.editHandler}>Edit</a> <a className="btn btn-danger" >Delete</a></td>
+                                  </tr>
+                                )
+                              })
+                            }
+                          </tbody>)
+                          :
+                          (<tbody >
+                            <tr>
+                              <th>Goal</th>
+                              <th>How Much?</th>
+                              <th>Monthly Savings</th>
+                              <th>Created</th>
+                              <th>End Date</th>
+                              <th></th>
+                            </tr>
+                            {/* <h4>You currently have no goals.</h4> */}
+                          </tbody>)}
+
+                    </table>
+                    <button data-toggle="modal" data-target="#addBillForm" className="btn btn-lg btn-primary main-color-bg center">Add A Bill</button>
+
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
+        <Footer />
+
       </div>
-    </section>
-    <Footer />    
-    
-    </div>
     )
   }
 }
 
 
-const mapState =(state)=>{
-  return{
-      plaidObj: state.plaidContainer
+const mapState = (state) => {
+  return {
+    plaidObj: state.plaidContainer
   }
 }
-const mapDispatch=(dispatch)=>{
-  return{
-  getAllBill : () => dispatch(getAllBill()) 
+const mapDispatch = (dispatch) => {
+  return {
+    getAllBill: () => dispatch(getAllBill())
   }
 }
 
@@ -164,4 +220,4 @@ const mapDispatch=(dispatch)=>{
 
       </div> */}
 
-export default connect(mapState,mapDispatch)(BillPage)
+export default connect(mapState, mapDispatch)(BillPage)
