@@ -14,14 +14,15 @@ class GoalsList extends Component {
         this.props.getAllGoal()
     }
     deleteGoalHandler = (goalId) => {
-        console.log('delete goal with id:', goalId)
         this.props.deleteGoals(goalId)
         this.forceUpdate()
     }
     paidHandler = () => {
         console.log('paid button is clicked')
     }
-
+    editHandler = () => {
+        
+    }
     render() {
         console.log(this.props.goals)
         const goals = this.props.goals.allGoals
@@ -58,7 +59,7 @@ class GoalsList extends Component {
                                                 <td>$30</td>
                                                 <td>{goal.Created}</td>
                                                 <td>{goal.selectedDay}</td>
-                                                <td><a className="btn main-color-bg" onClick={this.paidHandler}>Paid</a><a className="btn btn-default" href="#/editgoal/1">Edit</a> <a className="btn btn-danger" onClick={() => this.deleteGoalHandler(index)}>Delete</a></td>
+                                                <td><a className="btn main-color-bg" onClick={this.paidHandler}>Paid</a><a className="btn btn-default" href={`#/editgoal/${index}`}>Edit</a> <a className="btn btn-danger" onClick={() => this.deleteGoalHandler(index)}>Delete</a></td>
                                             </tr>
                                         )
                                     })
