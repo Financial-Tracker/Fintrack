@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import BudgetPage from "../Component/BankInfo/Budgets";
-
+import BankLogInButton from "./smallComponents/BankLogInButton"
 import NavBar from "./smallComponents/Navbar";
 import SideNav from "./smallComponents/SideNav";
 import Transactions from "./smallComponents/Transactions";
@@ -47,7 +47,7 @@ class BudgetPage extends Component {
                   <SideNav link={"Budget"} />
                   <div className="col-md-9">
                     <div>
-                      <button>Log in to your bank account</button>
+                      <BankLogInButton />
                     </div>
                   </div>
                 </div>
