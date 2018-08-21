@@ -4,6 +4,7 @@ import {getDataFromFireStore} from '../../Store/plaidContainer'
 
 class SideNav extends Component {
 render() {
+    console.log(this.props.stateData.plaidContainer.budget ? this.props.stateData.plaidContainer.budget : 0)
     return (
     <div className="col-md-3">
         <div className="list-group">
@@ -43,9 +44,9 @@ render() {
         
         {/* Budgets */}
         {this.props.link === 'Budget' ? 
-        <a href="#/budget" className="list-group-item active main-color-bg"><span className="	glyphicon glyphicon-usd" aria-hidden="true"></span> Budgets <span className="badge">33</span></a>
+        <a href="#/budget" className="list-group-item active main-color-bg"><span className="	glyphicon glyphicon-usd" aria-hidden="true"></span> Budgets <span className="badge">$ {this.props.stateData.plaidContainer.budget ? this.props.stateData.plaidContainer.budget : 0}</span></a>
         : 
-        <a href="#/budget" className="list-group-item"><span className="	glyphicon glyphicon-usd" aria-hidden="true"></span> Budgets <span className="badge">33</span></a>
+        <a href="#/budget" className="list-group-item"><span className="	glyphicon glyphicon-usd" aria-hidden="true"></span> Budgets <span className="badge">$ {this.props.stateData.plaidContainer.budget ? this.props.stateData.plaidContainer.budget : 0}</span></a>
         }
     
 

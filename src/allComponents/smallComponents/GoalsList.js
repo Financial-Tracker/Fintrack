@@ -8,21 +8,22 @@ import { destroyingGoal } from "../../Store/GoalReducer";
 class GoalsList extends Component {
   constructor() {
     super();
+    this.state = {
+      updated: ""
+    };
   }
-  componentDidMount() {
-    this.props.getAllGoal();
+  async componentWillMount() {
+    await this.props.getAllGoal();
   }
   deleteGoalHandler = goalId => {
-    console.log("delete goal with id:", goalId);
     this.props.deleteGoals(goalId);
     this.forceUpdate();
   };
   paidHandler = () => {
     console.log("paid button is clicked");
   };
-
+  editHandler = () => {};
   render() {
-    console.log(this.props.goals);
     const goals = this.props.goals.allGoals;
     return (
       <div className="panel panel-default">
@@ -32,12 +33,12 @@ class GoalsList extends Component {
         <div className="panel-body">
           <div className="row">
             {/* <div className="col-md-12">
-                <input className="form-control" type="text" placeholder="Filter Posts..." />
-            </div> */}
+                    <input className="form-control" type="text" placeholder="Filter Posts..." />
+                </div> */}
           </div>
           <br />
           <table className="table table-striped table-hover">
-            {goals ? (
+            {goals && goals.length ? (
               <tbody>
                 <tr>
                   <th>Goal</th>
@@ -48,7 +49,6 @@ class GoalsList extends Component {
                   <th />
                 </tr>
                 {goals.map((goal, index) => {
-                  console.log("GOAl", index);
                   return (
                     <tr key={index}>
                       <td>{goal.goalTitle}</td>
@@ -63,7 +63,11 @@ class GoalsList extends Component {
                         >
                           Paid
                         </a>
-                        <a className="btn btn-default" href="#/editgoal/1">
+                        <a
+                          className="btn btn-default"
+                          href={`#/editgoal/${index}`}
+                          onClick={this.editHandler}
+                        >
                           Edit
                         </a>{" "}
                         <a
@@ -87,6 +91,7 @@ class GoalsList extends Component {
                   <th>End Date</th>
                   <th />
                 </tr>
+                <h4>You currently have no goals.</h4>
               </tbody>
             )}
           </table>
