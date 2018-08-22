@@ -49,7 +49,7 @@ export const updatePlaidBudget = newPlaidData => {
 
 export const getDataFromFireStore = () => async dispatch => {
   try {
-    dispatch(startLoading())
+    // dispatch(startLoading())
     const user = firebase.auth().currentUser
       if (user) {
         // User is signed in.
@@ -223,7 +223,10 @@ const reducer = (state = initialState, action) => {
       }
 
     case GET_MONTH:
-      return { ...state, month: action.payload };
+      return { ...state, 
+        isLoading: false,
+        month: action.payload 
+      };
     case GET_TRANSACTIONS:
       return action.payload;
     case REMOVE_PLAID:
