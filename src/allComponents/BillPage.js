@@ -164,4 +164,4 @@ const mapDispatch = (dispatch) => {
   }
 }
 
-export default connect(mapState, mapDispatch)(BillPage)
+export default connect(mapState, mapDispatch)(BillPage) 
