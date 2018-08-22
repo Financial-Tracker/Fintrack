@@ -40,7 +40,6 @@ class GoalForm extends Component {
             additialInformation: '',
             isActive: false
         })
-    
     }
 
     render() {

@@ -35,6 +35,7 @@ class BillForm extends Component {
         evt.preventDefault()
         this.props.add(this.state)
     }
+
     dropDownChange = (event) => {
         this.setState({
             howOften: event.value
@@ -48,7 +49,7 @@ render() {
     <div className="modal fade" id="addBillForm" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div className="modal-dialog" role="document">
     <div className="modal-content">
-        <form onSubmit={this.onSubmitHandler}> 
+        <form> 
             <div className="modal-header">
             <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 className="modal-title" id="myModalLabel">Add A Bill</h4>
@@ -84,7 +85,7 @@ render() {
             </div>
             <div className="modal-footer">
             <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" className="btn btn-primary main-color-bg">Save changes</button>
+            <button onClick={this.onSubmitHandler} type="submit" className="btn btn-primary main-color-bg" data-dismiss="modal">Save changes</button>
             </div>
         </form>
     </div>

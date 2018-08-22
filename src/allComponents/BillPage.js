@@ -78,6 +78,7 @@ class BillPage extends Component {
 
   render() {
     const bills = this.props.allBills
+    console.log(this.props)
     return (
       <div>
         <NavBar link={'Bills'} />
@@ -99,7 +100,7 @@ class BillPage extends Component {
                     <br />
                     <table className="table table-striped table-hover">
                       {
-                        bills ?
+                        bills && bills.length ?
                           (<tbody >
                             <tr>
                               <th>Bill</th>
