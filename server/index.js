@@ -26,28 +26,24 @@ let file = process.env.NODE_ENV==="production"? "build": "public"
 app.use(express.static(path.join(__dirname, '..', file)))
 
 app.post("/get_access_token", async function(request, response, next) {
-  console.log(request.body);
+
   PUBLIC_TOKEN = await request.body.public_token;
-  console.log("PUBLIC_TOKEN: ", PUBLIC_TOKEN);
+
 
   await client.exchangePublicToken(PUBLIC_TOKEN, function(
     error,
     tokenResponse
   ) {
-    console.log("TOKEN RESONSE", tokenResponse);
-    console.log("the error", error);
+   
     if (error != null) {
-      console.log("Could not exchange public_token!" + "\n" + error);
-      console.log(Object.keys(error));
       return response.status(500).json(error);
     }
     ACCESS_TOKEN = tokenResponse.access_token;
     ITEM_ID = tokenResponse.item_id;
-    console.log("Access Token: " + ACCESS_TOKEN);
-    console.log("Item ID: " + ITEM_ID);
+
     response.json({ error: false });
   });
-  // response.json("working");
+
 });
 
 app.post("/auth/get", (req, res, next) => {
@@ -61,7 +57,7 @@ app.post("/auth/get", (req, res, next) => {
       // Handle EFT numbers (Canadian accounts)
       var eftNumbers = results.numbers.eft;
     }
-    // console.log("ACCOUNT DATA: ", accountData);
+
     res.json(accountData);
   });
 });
@@ -78,7 +74,7 @@ app.post("/transaction/get", (req, res, next) => {
     (err, result) => {
       // Handle err
       const transactions = result.transactions;
-      console.log("TRANSACTIONS: ", transactions);
+      
       res.json(transactions);
     }
   );
@@ -89,7 +85,7 @@ app.post("/accounts/balance/get", (req, res, next) => {
     // Handle err
     // Each account has up-to-date balance information associated with it
     const item = result.accounts;
-    console.log("ITEM: ", item);
+
     res.json(item);
   });
 });
@@ -114,6 +110,4 @@ app.post("/income/get", (req, res, next) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log("listening to server "+PORT);
-});
+app.listen(PORT)
