@@ -151,8 +151,12 @@ class BillPage extends Component {
                     >
                       Add A Bill
                     </button>
-                    <div></div>
-                    <div>
+
+                    <div className="spaces">           ""                   </div>
+                    <div className="spaces">            ""                  </div>
+                    
+
+                    <div >
                       <div className="panel-heading main-color-bg">
                         <h3 className="panel-title">Paid Bills</h3>
                       </div>
