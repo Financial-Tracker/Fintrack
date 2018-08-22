@@ -47,6 +47,11 @@ export const updatePlaidBudget = newPlaidData => {
   };
 };
 
+export const getLoad = () => dispatch => {
+  dispatch(startLoading())
+}
+
+
 export const getDataFromFireStore = () => async dispatch => {
   try {
     dispatch(startLoading())
@@ -87,6 +92,7 @@ export const getDataFromFireStore = () => async dispatch => {
         dispatch(action);
       } else {
         // No user is signed in.
+        dispatch(getPlaid('no user'))
       }
 
   } catch (error) {

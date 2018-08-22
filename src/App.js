@@ -59,7 +59,8 @@ class App extends Component {
 
   }
   render() {
-    console.log(this.props)
+    console.log(this.props.store.plaidContainer.plaidData ? 'yes data from plaid' : 'no data from plaid' )
+    console.log(this.props.store.plaidContainer.isLoading ? 'Loading' : 'Finish')
     return (
         <div>
           <HashRouter >
@@ -67,6 +68,7 @@ class App extends Component {
               <Switch>
                 {/* {!this.props._user ? (null) : (null) } */}
                 {/* Login and sign up  */}
+                <Route exact path='/' component={LogIn} />
                 <Route exact path="/login" component={LogIn} />
                 <Route exact path="/signup" component={SignUp} />
                 <Route component={LogIn} />
@@ -74,7 +76,7 @@ class App extends Component {
             ) : (
               <Switch>
                 {
-                  this.props.store.plaidContainer.plaidData? 
+                  this.props.store.plaidContainer.plaidData.auth? 
                   (
                   <div>
                 <Route exact path="/" component={OverviewPage} />
@@ -93,7 +95,7 @@ class App extends Component {
                   : 
                   
                   (
-                    <Route component={BankLogInButton} />
+                    <Route exact path='/' component={BankLogInButton} />
                   )
                 }
                 {/* once the user is logged in */}

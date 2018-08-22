@@ -21,14 +21,14 @@ class Plaid extends Component {
     // console.log(this.state.status);
   
     switch (this.state.status) {
-      // case "CONNECTED":
-      //   console.log("connected");
-      //   return this.renderDetails();
-      // case "LOGIN_BUTTON":
-      // case "EXIT":
-      //   return this.Login();
-      // case "LOADING":
-      //   return this.loading()
+      case "CONNECTED":
+        console.log("connected");
+        return this.renderDetails();
+      case "LOGIN_BUTTON":
+      case "EXIT":
+        return this.Login();
+      case "LOADING":
+        return this.loading()
       default:
         return this.renderLogin();
     }
@@ -49,19 +49,19 @@ class Plaid extends Component {
     );
   };
 
-  // onLoadStart = props => {
-  //   console.log("onLoadStart", props);
-  // };
+  onLoadStart = props => {
+    console.log("onLoadStart", props);
+  };
 
-  // onLoad = props => {
-  //   console.log("onLoad", props);
-  // };
+  onLoad = props => {
+    console.log("onLoad", props);
+  };
 
-  // onLoadEnd = props => {
-  //   console.log("onLoadEnd", props);
-  // };
+  onLoadEnd = props => {
+    console.log("onLoadEnd", props);
+  };
   onSuccess = async (token, metadata) => {
-
+    console.log('SUCCESS')
     await axios.post(`${path}/get_access_token`, {
       public_token: metadata.public_token,
       accounts: metadata.accounts,
@@ -101,15 +101,15 @@ class Plaid extends Component {
     console.log("Now persistent")
     
     this.props.getPlaid(dataAPI);
-    this.props.history.push('/overview')
+    this.props.history.push('/')
   };
-  // onMessage = data => {
-  //   console.log(data);
-  //   this.setState({
-  //     data,
-  //     status: data.action.substr(data.action.lastIndexOf(":") + 1).toUpperCase()
-  //   });
-  // };
+  onMessage = data => {
+    console.log(data);
+    this.setState({
+      data,
+      status: data.action.substr(data.action.lastIndexOf(":") + 1).toUpperCase()
+    });
+  };
 
   renderLogin() {
     console.log("Plaid.renderLogin", this);
@@ -124,7 +124,7 @@ class Plaid extends Component {
         onLoadStart={this.onLoadStart}
         onLoadEnd={this.onLoadEnd}
         onSuccess={this.onSuccess}
-        onClick={() => this.setState({ status: "LOADING" })}
+        onClick={() => console.log('start loading plaid now!!!!')}
       >
         Open and connect to plaid
       </PlaidLink>

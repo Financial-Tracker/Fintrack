@@ -3,7 +3,7 @@ import PlaidLink from "react-plaid-link";
 
 import axios from "axios";
 import firebase from 'firebase'
-import {getPlaid} from '../../Store/plaidContainer'
+import {getPlaid, getLoad} from '../../Store/plaidContainer'
 import{connect} from 'react-redux'
 import { Loader } from 'semantic-ui-react'
 const path = process.env.NODE_ENV==="production"?"": "http://localhost:8000";
@@ -26,7 +26,7 @@ class BankLogInButton extends Component {
   
 
   onSuccess = async (token, metadata) => {
-
+    this.props.getLoad()
     await axios.post(`${path}/get_access_token`, {
       public_token: metadata.public_token,
       accounts: metadata.accounts,
@@ -66,7 +66,7 @@ class BankLogInButton extends Component {
     console.log("Now persistent")
     
     this.props.getPlaid(dataAPI);
-    this.props.history.push('/overview')
+    this.props.history.push('/')
   };
 
   render() {
@@ -98,7 +98,8 @@ class BankLogInButton extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getPlaid: data => dispatch(getPlaid(data))
+    getPlaid: data => dispatch(getPlaid(data)),
+    getLoad: () => dispatch(getLoad())
   }
 }
 
