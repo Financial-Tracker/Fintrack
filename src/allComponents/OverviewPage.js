@@ -29,9 +29,9 @@ class OverviewPage extends Component {
 
   componentDidMount() {
     // this.props.getDataFromFireStore()
-    console.log(this.props._user)
   }
   render() {
+    console.log(this.props)
   let AccountTotal = getAccountTotal(this.props.plaidInfo.auth);
   let goals = this.props.plaidInfo.Goals ? this.props.plaidInfo.Goals.length : 0
   let transactions = this.props.plaidInfo.transaction ? this.props.plaidInfo.transaction.length : 'Loading';
@@ -57,7 +57,8 @@ class OverviewPage extends Component {
 } 
 
 const MapStateToProps = state => ({
-  plaidInfo: state.plaidContainer
+  isLoading : state.plaidContainer.isLoading,
+  plaidInfo: state.plaidContainer.plaidData
 });
 
 const MapDispatchToProps = dispatch => ({
