@@ -172,7 +172,8 @@ const mapDispatch=(dispatch)=>{
 }
 const mapState=(state)=>{
     return{
-        plaidObj: state.plaidContainer
+        plaidObj: state.plaidContainer.plaidData,
+        isLoading : state.plaidContainer.isLoading
     }
 }
 

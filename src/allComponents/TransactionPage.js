@@ -22,7 +22,7 @@ class TransactionPage extends Component {
     console.log("Props in transaction", this.props)
     return (
       <div>
-        {this.props.plaidData.transaction ?
+        {this.props.plaidInfo.transaction ?
           (
             <div>
               <NavBar link={'Transactions'} />
@@ -70,7 +70,8 @@ class TransactionPage extends Component {
   }
 }
 const mapState = state => ({
-  plaidData: state.plaidContainer
+  isLoading : state.plaidContainer.isLoading,
+  plaidInfo: state.plaidContainer.plaidData
 })
 const mapDispatch = dispatch => ({
   getPlaidInfo: data => dispatch(getDataFromFireStore(data))

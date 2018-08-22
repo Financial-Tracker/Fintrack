@@ -102,7 +102,8 @@ class BankHomePage extends Component {
 
 const mapState = (state) => {
   return {
-    plaidObj: state.plaidContainer
+    plaidObj: state.plaidContainer.plaidData,
+    isLoading : state.plaidContainer.isLoading
   }
 }
 const mapDispatch = (dispatch) => {

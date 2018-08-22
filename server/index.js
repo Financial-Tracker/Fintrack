@@ -102,7 +102,10 @@ app.post("/identity/get", (req, res, next) => {
 app.post("/income/get", (req, res, next) => {
   client.getIncome(ACCESS_TOKEN, function(err, result) {
     // Handle err
-    var income = result.income;
+    var income = 0
+    if (result){
+      var income = result.income;
+    }
     res.json(income);
   });
 });

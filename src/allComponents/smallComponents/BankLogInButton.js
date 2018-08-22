@@ -17,6 +17,12 @@ class BankLogInButton extends Component {
       data: {},
       status: "LOGIN_BUTTON"
     }
+    onClickHandler = () => {
+    this.setState({ status: "LOADING" })
+    }
+    componentWillMount(){
+      this.setState({states : 'LOGIN_BUTTON'})
+    }
   
 
   onSuccess = async (token, metadata) => {
@@ -47,7 +53,7 @@ class BankLogInButton extends Component {
     const userRef = await firestore.collection('user').where('email',"==",userEmail.toString()).get()
     
 
-    const docRefId = userRef.docs[0].id;
+    const docRefId = await userRef.docs[0].id;
     
 
 
@@ -63,6 +69,7 @@ class BankLogInButton extends Component {
     }
   }
 
+
   renderLogin() {
     return (
       <PlaidLink
@@ -75,7 +82,7 @@ class BankLogInButton extends Component {
         onLoadStart={this.onLoadStart}
         onLoadEnd={this.onLoadEnd}
         onSuccess={this.onSuccess}
-        onClick={() => this.setState({ status: "LOADING" })}
+        onClick={this.onClickHandler}
       >
         Open and connect to plaid
       </PlaidLink>

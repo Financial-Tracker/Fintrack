@@ -48,7 +48,11 @@ import EditBill from './allComponents/EditBill';
 
 
 class App extends Component {
+  constructor(props){
+    super(props)
+  }
   render() {
+    console.log(this.props)
     return (
       <Provider store={store}>
 

@@ -226,6 +226,7 @@ const mapState = state => {
   };
 };
 const mapDispatch = dispatch => {
+
   return {
     getAllBill: () => dispatch(getAllBill()),
     pay: (idx) => dispatch(payBill(idx)),
@@ -233,7 +234,9 @@ const mapDispatch = dispatch => {
   };
 };
 
+
 export default connect(
   mapState,
   mapDispatch
 )(BillPage);
+
