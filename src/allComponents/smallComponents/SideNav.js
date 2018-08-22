@@ -30,12 +30,18 @@ render() {
         {this.props.link === 'Transactions' ? 
         <a href="#/transactions" className={`list-group-item active main-color-bg`}>
         <span className="glyphicon glyphicon-list-alt" aria-hidden="true">
-        </span> Transactions <span className="badge">{this.props.stateData.plaidContainer.transaction ? this.props.stateData.plaidContainer.transaction.length : 0 }</span>
+        </span> Transactions <span className="badge">
+        {/* {this.props.stateData.plaidContainer.transaction ? this.props.stateData.plaidContainer.transaction.length : 0 } */}
+        122
+        </span>
         </a>
         : 
         <a href="#/transactions" className={`list-group-item`}>
         <span className="glyphicon glyphicon-list-alt" aria-hidden="true">
-        </span> Transactions <span className="badge">{this.props.stateData.plaidContainer.transaction ? this.props.stateData.plaidContainer.transaction.length : 0 }</span>
+        </span> Transactions <span className="badge">
+        {/* {this.props.stateData.plaidContainer.transaction ? this.props.stateData.plaidContainer.transaction.length : 0 } */}
+        122
+        </span>
         </a>
         }
 
@@ -43,17 +49,29 @@ render() {
         
         {/* Budgets */}
         {this.props.link === 'Budget' ? 
-        <a href="#/budget" className="list-group-item active main-color-bg"><span className="	glyphicon glyphicon-usd" aria-hidden="true"></span> Budgets <span className="badge">$ {this.props.stateData.plaidContainer.budget ? this.props.stateData.plaidContainer.budget : 0}</span></a>
+        <a href="#/budget" className="list-group-item active main-color-bg"><span className="	glyphicon glyphicon-usd" aria-hidden="true"></span> Budgets <span className="badge">
+        {/* $ {this.props.stateData.plaidContainer.budget ? this.props.stateData.plaidContainer.budget : 0} */}
+        $ 300
+        </span></a>
         : 
-        <a href="#/budget" className="list-group-item"><span className="	glyphicon glyphicon-usd" aria-hidden="true"></span> Budgets <span className="badge">$ {this.props.stateData.plaidContainer.budget ? this.props.stateData.plaidContainer.budget : 0}</span></a>
+        <a href="#/budget" className="list-group-item"><span className="	glyphicon glyphicon-usd" aria-hidden="true"></span> Budgets <span className="badge">
+        {/* $ {this.props.stateData.plaidContainer.budget ? this.props.stateData.plaidContainer.budget : 0} */}
+        $ 300
+        </span></a>
         }
     
 
         {/* Goal */}
         {this.props.link === 'Goals' ? 
-        <a href="#/goal" className="list-group-item active main-color-bg"><span className="	glyphicon glyphicon-gift" aria-hidden="true"></span> Goals <span className="badge">{this.props.stateData.plaidContainer.Goals ? this.props.stateData.plaidContainer.Goals.length : 0 }</span></a>
+        <a href="#/goal" className="list-group-item active main-color-bg"><span className="	glyphicon glyphicon-gift" aria-hidden="true"></span> Goals <span className="badge">
+        {/* {this.props.stateData.plaidContainer.Goals ? this.props.stateData.plaidContainer.Goals.length : 0 } */
+    3}
+        </span></a>
         : 
-        <a href="#/goal" className="list-group-item"><span className="	glyphicon glyphicon-gift" aria-hidden="true"></span> Goals <span className="badge">{this.props.stateData.plaidContainer.Goals ? this.props.stateData.plaidContainer.Goals.length : 0 }</span></a>
+        <a href="#/goal" className="list-group-item"><span className="	glyphicon glyphicon-gift" aria-hidden="true"></span> Goals <span className="badge">
+        {/* {this.props.stateData.plaidContainer.Goals ? this.props.stateData.plaidContainer.Goals.length : 0 } */}
+        3
+        </span></a>
         }
         
 
