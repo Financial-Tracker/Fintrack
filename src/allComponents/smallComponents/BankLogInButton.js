@@ -57,14 +57,8 @@ class BankLogInButton extends Component {
     
 
 
-    firestore.collection('user').doc(""+docRefId+"").update(newPlaid).then(() => {
-      console.log("Connected")
-    }).catch(() => {
-      console.log("error")
-    })
+    firestore.collection('user').doc(""+docRefId+"").update(newPlaid)
     const dataAPI = await firestore.collection('user').doc(""+docRefId+"").get().then(user=>user.data())
-    console.log("Now persistent")
-    
     this.props.getPlaid(dataAPI);
     this.props.history.push('/')
   };

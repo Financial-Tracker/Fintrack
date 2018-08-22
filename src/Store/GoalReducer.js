@@ -168,6 +168,10 @@ const GoalReducer = (state = initialState, action) => {
                 ...state,
                 allGoals: action.payload
             }
+        case EDIT_GOAL:
+            return {
+              ...state, allGoals: action.payload
+            }
         default:
             return state;
     }

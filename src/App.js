@@ -44,7 +44,7 @@ import EditGoal from "./allComponents/EditGoal";
 import BillForm from "./allComponents/smallComponents/BillForm";
 import GoalForm from "./allComponents/smallComponents/GoalForm";
 import BillPage from './allComponents/BillPage'
-
+import EditBill from './allComponents/EditBill';
 import BankLogInButton from './allComponents/smallComponents/BankLogInButton'
 import {getDataFromFireStore} from './Store/plaidContainer'
 //----------------------------------------------------------------------------------------------------------
@@ -88,6 +88,7 @@ class App extends Component {
                 <Route exact path="/settings" component={UserSettingPage} />
                 <Route exact path={`/editgoal/:Id`} component={EditGoal} />
                 <Route exact path={'/bills'} component={BillPage} />
+                <Route exact path={`/editbill/:Id`} component={EditBill} />
                 {/* <Route component={OverviewPage} /> */}
                     </div>
                   )

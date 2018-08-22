@@ -1,15 +1,10 @@
-import React, { Component } from 'react'
-import { Row, Icon, Input, Button } from 'react-materialize'
-import { Header, Image, Modal, Dropdown } from 'semantic-ui-react'
-import { getAllBill } from '../Store/BillReducer'
-import { connect } from 'react-redux'
+import React, { Component } from "react";
+import { getAllBill, payBill, deleteBill } from "../Store/BillReducer";
+import { connect } from "react-redux";
 
-import NavBar from './smallComponents/Navbar'
-import SideNav from './smallComponents/SideNav';
-import Transactions from './smallComponents/Transactions'
-import GoalForm from './smallComponents/GoalForm';
-import AccountOverViewSection from './smallComponents/AccountOverViewSection';
-import Footer from './smallComponents/Footer'
+import NavBar from "./smallComponents/Navbar";
+import SideNav from "./smallComponents/SideNav";
+import Footer from "./smallComponents/Footer";
 
 // const typeOfBill = [
 //   { key: 'none', text: 'none', value: 'none' },
@@ -34,53 +29,55 @@ import Footer from './smallComponents/Footer'
 
 class BillPage extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
       modalOpen: false,
-      bill: '',
-      typeOfBill: '',
-      amountDue: '',
-      howOften: '',
-      date: '',
+      bill: "",
+      typeOfBill: "",
+      amountDue: "",
+      howOften: "",
+      date: "",
       paid: false
-    }
+    };
   }
   async componentDidMount() {
-    await this.props.getAllBill()
-  }
-
-  onSubmitHandler = (evt) => {
-    // evt.preventDefault()
-    console.log(this.state)
+    await this.props.getAllBill();
   }
 
   //this is handler dropdown
   onChangeHandlerDrop = (evt, data) => {
     this.setState({
       [data.name]: data.value
-    })
-  }
+    });
+  };
   //handler for text
-  onChange = (evt) => {
+  onChange = evt => {
     this.setState({
       [evt.target.name]: evt.target.value
-    })
-  }
+    });
+  };
   onChangeDate = (e, value) => {
     this.setState({
       date: value
-    })
+    });
+  };
+  paidHandler = index => {
+    this.props.pay(index);
+  };
+  deletePaidBill = index => {
+    this.props.delete(index)
   }
-
-  handleOpen = () => this.setState({ modalOpen: true })
-  handleClose = () => this.setState({ modalOpen: false })
-
+  handleOpen = () => this.setState({ modalOpen: true });
+  handleClose = () => this.setState({ modalOpen: false });
 
   render() {
-    const bills = this.props.allBills
+    const bills = this.props.allBills;
+    const paid = this.props.paidBills;
+    console.log("allBills: ", this.props.allBills);
+    console.log("paidBills: ", this.props.paidBills);
     return (
       <div>
-        <NavBar link={'Bills'} />
+        <NavBar link={"Bills"} />
         <section id="main">
           <div className="container">
             <div className="row">
@@ -88,56 +85,128 @@ class BillPage extends Component {
               <div className="col-md-9">
                 <div className="panel panel-default">
                   <div className="panel-heading main-color-bg">
-                    <h3 className="panel-title">Bills</h3>
+                    <h3 className="panel-title">Pending Bills</h3>
                   </div>
+
                   <div className="panel-body">
-                    <div className="row">
-                      {/* <div className="col-md-12">
-                    <input className="form-control" type="text" placeholder="Filter Posts..." />
-                </div> */}
-                    </div>
-                    <br />
+                    <div className="row" />
+
                     <table className="table table-striped table-hover">
-                      {
-                        bills ?
-                          (<tbody >
+                      {bills && bills.length ? (
+                        <tbody>
+                          <tr>
+                            <th>Bill</th>
+                            <th>Amount Due</th>
+                            <th>Recurring</th>
+                            <th>How Often</th>
+                            <th>End Date</th>
+                            <th />
+                          </tr>
+                          {bills.map((bill, index) => {
+                            return (
+                              <tr key={index}>
+                                <td>{bill.billTitle}</td>
+                                <td>$ {bill.howMuch}</td>
+                                <td>{bill.howMuch ? "True" : "False"}</td>
+                                <td>{bill.howOften}</td>
+                                <td>{bill.endDate}</td>
+                                <td>
+                                  <a
+                                    className="btn main-color-bg"
+                                    onClick={() => this.paidHandler(index)}
+                                  >
+                                    Paid
+                                  </a>
+                                  <a
+                                    className="btn btn-default"
+                                    href={`#/editbill/${index}`}
+                                    onClick={this.editHandler}
+                                  >
+                                    Edit
+                                  </a>
+                                </td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      ) : (
+                        <tbody>
+                          <tr>
+                            <th>Bill</th>
+                            <th>How Much?</th>
+                            <th>Recurring?</th>
+                            <th>How Often?</th>
+                            <th>End Date</th>
+                            <th />
+                          </tr>
+                          <h3>You currently have no pending bills.</h3>
+                        </tbody>
+                      )}
+                    </table>
+             
+                    <button
+                      data-toggle="modal"
+                      data-target="#addBillForm"
+                      className="btn btn-lg btn-primary main-color-bg center"
+                    >
+                      Add A Bill
+                    </button>
+
+                    <div className="spaces">           ""                   </div>
+                    <div className="spaces">            ""                  </div>
+                    
+
+                    <div >
+                      <div className="panel-heading main-color-bg">
+                        <h3 className="panel-title">Paid Bills</h3>
+                      </div>
+
+                      <table className="table table-striped table-hover">
+                        {paid && paid.length ? (
+                          <tbody>
                             <tr>
                               <th>Bill</th>
-                              <th>Amount Due</th>
+                              <th>Amount Paid</th>
                               <th>Recurring</th>
                               <th>How Often</th>
-                              <th>End Date</th>
-                              <th></th>
+                              <th>Paid On</th>
+                              <th />
                             </tr>
-                            { bills.map((bill, index) => {
-                                return (
-                                  <tr key={index}>
-                                    <td>{bill.billTitle}</td>
-                                    <td>$ {bill.howMuch}</td>
-                                    <td>{bill.howMuch? 'True' : 'False'}</td>
-                                    <td>{bill.howOften}</td>
-                                    <td>{bill.endDate}</td>
-                                    <td><a className="btn main-color-bg" onClick={this.paidHandler}>Paid</a><a className="btn btn-default" href={`#/editbill/${index}`} onClick={this.editHandler}>Edit</a></td>
-                                  </tr>)
-                              })
-                            }
-                          </tbody>)
-                          :
-                          (<tbody >
+                            {paid.map((bill, index) => {
+                              return (
+                                <tr key={index}>
+                                  <td>{bill.billTitle}</td>
+                                  <td>$ {bill.howMuch}</td>
+                                  <td>{bill.howMuch ? "True" : "False"}</td>
+                                  <td>{bill.howOften}</td>
+                                  <td>{bill.endDate}</td>
+                                  <td>
+                                    <a
+                                      className="btn main-color-bg"
+                                      onClick={() => this.deletePaidBill(index)}
+                                    >
+                                      Remove
+                                    </a>
+                                  </td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        ) : (
+                          <tbody>
                             <tr>
-                              <th>Goal</th>
-                              <th>How Much?</th>
-                              <th>Monthly Savings</th>
-                              <th>Created</th>
-                              <th>End Date</th>
-                              <th></th>
+                              <th>Bill</th>
+                              <th>Amount Paid</th>
+                              <th>Recurring</th>
+                              <th>How Often</th>
+                              <th>Paid On</th>
+                              <th />
                             </tr>
-                            {/* <h4>You currently have no goals.</h4> */}
-                          </tbody>)}
-
-                    </table>
-                    <button data-toggle="modal" data-target="#addBillForm" className="btn btn-lg btn-primary main-color-bg center">Add A Bill</button>
-
+                            <h3>You currently have no paid bills.</h3>
+                          </tbody>
+                        )}
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -145,23 +214,29 @@ class BillPage extends Component {
           </div>
         </section>
         <Footer />
-
       </div>
-    )
+    );
   }
 }
 
-
-const mapState =(state)=>{
-  return{
-    isLoading:state.plaidContainer.isLoading,
-      plaidObj: state.plaidContainer.plaidData
-  }
-}
-const mapDispatch = (dispatch) => {
+const mapState = state => {
   return {
-    getAllBill: () => dispatch(getAllBill())
-  }
-}
+    paidBills: state.bills.paidBills,
+    allBills: state.bills.allBills
+  };
+};
+const mapDispatch = dispatch => {
 
-export default connect(mapState, mapDispatch)(BillPage) 
+  return {
+    getAllBill: () => dispatch(getAllBill()),
+    pay: (idx) => dispatch(payBill(idx)),
+    delete: (idx) => dispatch(deleteBill(idx))
+  };
+};
+
+
+export default connect(
+  mapState,
+  mapDispatch
+)(BillPage);
+
