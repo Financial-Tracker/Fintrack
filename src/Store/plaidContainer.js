@@ -200,15 +200,30 @@ export const getTransactionsByCurrentMonth = () => async dispatch => {
 };
 const initialState = {
   isLoading: false,
-  plaidInfo: {}
+  plaidData: {}
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case LOADING:
+      return {
+        ...state,
+        isLoading: true
+      };
+
     case GET_PLAID:
-      return action.payload;
+      return {
+        ...state,
+        isLoading: false,
+        plaidData: action.payload
+      };
+
     case GET_MONTH:
-      return { ...state, month: action.payload };
+      return {
+        ...state,
+        isLoading: false,
+        month: action.payload
+      };
     case GET_TRANSACTIONS:
       return action.payload;
     case REMOVE_PLAID:

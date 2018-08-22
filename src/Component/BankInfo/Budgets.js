@@ -116,15 +116,24 @@ class Budgets extends Component {
         const reducer = (accumulator, currentVal) => accumulator + currentVal;
         total = spending.reduce(reducer);
         categories = {
-          "Food and Drink": { id: 0, amount: 0, list: [], picture: Food },
-          Shops: { id: 1, amount: 0, list: [], picture: Shop },
-          Travel: { id: 2, amount: 0, list: [], picture: Travel },
-          Payment: { id: 3, amount: 0, list: [], picture: Payment }
+          // "Food and Drink": { id: 0, amount: 0, list: [], picture: Food },
+          // Shops: { id: 1, amount: 0, list: [], picture: Shop },
+          // Travel: { id: 2, amount: 0, list: [], picture: Travel },
+          // Payment: { id: 3, amount: 0, list: [], picture: Payment },
+          // Shops: {id: 4, amount: 0, list: []},
+          // Recreation: {id: 5, amount: 0, list: []}
         };
+        
         for (let i = 0; i < transMonthArray.length; i++) {
           let oneCharge = transMonthArray[i];
-          categories[oneCharge.category[0]].amount += oneCharge.amount;
-          categories[oneCharge.category[0]].list.push(oneCharge);
+          
+          if(!categories[oneCharge.category[0]]){
+            categories[oneCharge.category[0]] = {id: i, amount: oneCharge.amount, list:[oneCharge]}
+          }else {
+            categories[oneCharge.category[0]].amount += oneCharge.amount;
+            categories[oneCharge.category[0]].list.push(oneCharge);
+          }
+          
         }
       }
     }
@@ -212,7 +221,8 @@ class Budgets extends Component {
   }
 }
 const MapStateToProps = state => ({
-  plaidInfo: state.plaidContainer
+  plaidInfo: state.plaidContainer.plaidData,
+  isLoading: state.plaidContainer.isLoading
 });
 const MapDispatchToProps = dispatch => ({
   getDataFromFireStore: () => dispatch(getDataFromFireStore()),

@@ -2,25 +2,29 @@ import React, { Component } from "react";
 import PlaidLink from "react-plaid-link";
 
 import axios from "axios";
-import firebase from 'firebase'
-import {getPlaid} from '../../Store/plaidContainer'
-import{connect} from 'react-redux'
-import { Loader } from 'semantic-ui-react'
-const path = process.env.NODE_ENV==="production"?"": "http://localhost:8000";
+import firebase from "firebase";
+import { getPlaid } from "../../Store/plaidContainer";
+import { connect } from "react-redux";
+import { Loader } from "semantic-ui-react";
+const path =
+  process.env.NODE_ENV === "production" ? "" : "http://localhost:8000";
 const firestore = firebase.firestore();
-const settings = {/* your settings... */ timestampsInSnapshots: true};
+const settings = { /* your settings... */ timestampsInSnapshots: true };
 firestore.settings(settings);
 
 class BankLogInButton extends Component {
-
-    state = {
-      data: {},
-      status: "LOGIN_BUTTON"
-    }
-  
+  state = {
+    data: {},
+    status: "LOGIN_BUTTON"
+  };
+  onClickHandler = () => {
+    this.setState({ status: "LOADING" });
+  };
+  componentWillMount() {
+    this.setState({ states: "LOGIN_BUTTON" });
+  }
 
   onSuccess = async (token, metadata) => {
-
     await axios.post(`${path}/get_access_token`, {
       public_token: metadata.public_token,
       accounts: metadata.accounts,
@@ -37,35 +41,43 @@ class BankLogInButton extends Component {
     const id = idData.data;
     const incomeData = await axios.post(`${path}/income/get`);
     const income = incomeData.data;
-    const plaidObj = {auth, transaction, balance, id, income}
+    const plaidObj = { auth, transaction, balance, id, income };
 
+    const userEmail = firebase.auth().currentUser.email;
 
-    const userEmail = firebase.auth().currentUser.email
-    
-    const newPlaid = {...plaidObj, email: userEmail}
+    const newPlaid = { ...plaidObj, email: userEmail };
 
-    const userRef = await firestore.collection('user').where('email',"==",userEmail.toString()).get()
-    
+    const userRef = await firestore
+      .collection("user")
+      .where("email", "==", userEmail.toString())
+      .get();
 
-    const docRefId = userRef.docs[0].id;
-    
+    const docRefId = await userRef.docs[0].id;
 
+    firestore
+      .collection("user")
+      .doc("" + docRefId + "")
+      .update(newPlaid)
+      .then(() => {
+        console.log("Connected");
+      })
+      .catch(() => {
+        console.log("error");
+      });
+    const dataAPI = await firestore
+      .collection("user")
+      .doc("" + docRefId + "")
+      .get()
+      .then(user => user.data());
+    console.log("Now persistent");
 
-    firestore.collection('user').doc(""+docRefId+"").update(newPlaid).then(() => {
-      console.log("Connected")
-    }).catch(() => {
-      console.log("error")
-    })
-    const dataAPI = await firestore.collection('user').doc(""+docRefId+"").get().then(user=>user.data())
-    console.log("Now persistent")
-    
     this.props.getPlaid(dataAPI);
     // this.props.history.push('/overview')
   };
 
   render() {
-    if(this.state.status){
-      return this.renderLogin()
+    if (this.state.status) {
+      return this.renderLogin();
     }
   }
 
@@ -81,7 +93,7 @@ class BankLogInButton extends Component {
         onLoadStart={this.onLoadStart}
         onLoadEnd={this.onLoadEnd}
         onSuccess={this.onSuccess}
-        onClick={() => this.setState({ status: "LOADING" })}
+        onClick={this.onClickHandler}
       >
         Open and connect to plaid
       </PlaidLink>
@@ -92,7 +104,10 @@ class BankLogInButton extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     getPlaid: data => dispatch(getPlaid(data))
-  }
-}
+  };
+};
 
-export default connect(null,mapDispatchToProps)(BankLogInButton)
+export default connect(
+  null,
+  mapDispatchToProps
+)(BankLogInButton);
