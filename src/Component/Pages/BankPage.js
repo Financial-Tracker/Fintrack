@@ -109,7 +109,8 @@ class BankPage extends Component {
   }
 }
 const MapStateToProps = state => ({
-  plaidInfo: state.plaidContainer
+  plaidInfo: state.plaidContainer.plaidData,
+  isLoading : state.plaidContainer.isLoading
 });
 const MapDispatchToProps = dispatch => ({
   getPlaid: data => dispatch(getPlaid(data)),

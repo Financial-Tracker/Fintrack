@@ -102,7 +102,8 @@ class BillPage extends Component {
 
 const mapState =(state)=>{
   return{
-      plaidObj: state.plaidContainer
+    isLoading:state.plaidContainer.isLoading,
+      plaidObj: state.plaidContainer.plaidData
   }
 }
 const mapDispatch=(dispatch)=>{
