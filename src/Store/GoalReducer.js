@@ -63,8 +63,6 @@ export const getSingleGoal = (goalID) => async dispatch => {
 
 export const editSingleGoal = (edittedGoal, goalId) => async dispatch => {
     try {
-        console.log("edittedGoal: ", edittedGoal)
-        console.log("goalId: ", goalId)
         const user = firebase.auth().currentUser
         const userEmail = user.email;
         const userRef = await db
