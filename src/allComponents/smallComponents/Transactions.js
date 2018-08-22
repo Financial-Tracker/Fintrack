@@ -84,7 +84,8 @@ class Transactions extends Component {
 }
 
 const MapStateToProps = state => ({
-  plaidInfo : state.plaidContainer
+  isLoading : state.plaidContainer.isLoading,
+  plaidInfo: state.plaidContainer.plaidData
 })
 
 const MapDispatchToProps = dispatch => ({

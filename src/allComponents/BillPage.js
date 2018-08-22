@@ -152,9 +152,10 @@ class BillPage extends Component {
 }
 
 
-const mapState = (state) => {
-  return {
-    allBills: state.bills.allBills
+const mapState =(state)=>{
+  return{
+    isLoading:state.plaidContainer.isLoading,
+      plaidObj: state.plaidContainer.plaidData
   }
 }
 const mapDispatch = (dispatch) => {
@@ -163,4 +164,4 @@ const mapDispatch = (dispatch) => {
   }
 }
 
-export default connect(mapState, mapDispatch)(BillPage)
+export default connect(mapState, mapDispatch)(BillPage) 

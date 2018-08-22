@@ -62,7 +62,8 @@ class BudgetPage extends Component {
 }
 
 const mapState = state => ({
-  plaidData: state.plaidContainer
+  isLoading: state.plaidContainer.isLoading,
+  plaidData: state.plaidContainer.plaidData
 });
 const mapDispatch = dispatch => ({
   getPlaidInfo: data => dispatch(getDataFromFireStore(data))
