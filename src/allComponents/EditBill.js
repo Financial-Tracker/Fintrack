@@ -9,7 +9,6 @@ export default class EditBill extends Component {
     super(props);
   }
   render() {
-    console.log(this.props.match.params.Id);
     return (
       <div>
         <NavBar link={"Bills"} />

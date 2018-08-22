@@ -11,13 +11,7 @@ import { Grid, Image } from 'semantic-ui-react'
 // require('./Styling/addAccount.css')
 const anmination = 'animated zoomIn delay-2s'
 class AddAccount extends Component {
-  componentDidMount() {
-
-    console.log(this.props.plaidObj)
-  }
-
-        
-  render() {
+   render() {
     return (
 
 

@@ -26,11 +26,7 @@ class EditBillForm extends Component {
       {
         [event.target.name]: event.target.value,
         Created: this.props.bill.Created
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
+      });
   };
   DateHandler = day => {
     this.setState({ endDate: day.toLocaleDateString() });
@@ -49,7 +45,6 @@ class EditBillForm extends Component {
     await this.props.history.push("/bills")
   }
   render() {
-    console.log(this.props)
     var how_often = ['Daily', 'Weekly', 'Biweekly', 'Monthly', 'Quarterly', 'Biannually','Yearly']
     return (
       <div className="modal-content">

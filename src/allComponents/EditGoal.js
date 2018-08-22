@@ -9,7 +9,6 @@ export default class EditGoal extends Component {
             super(props)
         }
     render() {
-        console.log(this.props.match.params.Id)
         return (
             <div>
                 <NavBar link={'Goals'}/>

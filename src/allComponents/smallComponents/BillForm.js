@@ -24,8 +24,6 @@ class BillForm extends Component {
     onChangeHandler = (evt) => {
         this.setState({
             [evt.target.name] : evt.target.value
-        }, () => {
-            console.log(this.state)
         })
     }
     DateHandler = (day) => {
@@ -35,7 +33,6 @@ class BillForm extends Component {
         evt.preventDefault()
         this.props.add(this.state)
     }
-
     dropDownChange = (event) => {
         this.setState({
             howOften: event.value
