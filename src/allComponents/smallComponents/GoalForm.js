@@ -43,7 +43,6 @@ class GoalForm extends Component {
     }
 
     render() {
-        // console.log(this.props.goals)
         return (
             <div>
                 <div className="modal fade" id="addGoalForm" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">

@@ -1,106 +1,171 @@
-// import React, { Component } from 'react'
-// import {connect} from 'react-redux'
-// import DayPicker from 'react-day-picker';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import DayPicker from "react-day-picker";
+import Dropdown from 'react-dropdown'
+import 'react-dropdown/style.css'
+import { getSingleBill, editSingleBill } from "../../Store/BillReducer";
 
-// import {getSingleGoal, editSingleGoal} from '../../Store/GoalReducer'
-// class EditGoalForm extends Component {
-//   constructor(props) {
-//     super(props)
-//     this.state = {
-//       Created: '',
-//       selectedDay: undefined,
-//       goalTitle: '',
-//       howMuch: '',
-//       additialInformation: '',
-//       error: null,
-//       isActive: true
-//     }
-//     this.onChangeHandler = this.onChangeHandler.bind(this)
-//     this.onSubmitHandler = this.onSubmitHandler.bind(this)
-//     this.DateHandler = this.DateHandler.bind(this)
-//     this.closeHandler = this.closeHandler.bind(this)
-//   } 
-//   async componentWillMount() {
-//     await this.props.fetchGoal(this.props.ID)
-//   }
-//   async onSubmitHandler(evt) {
-//     evt.preventDefault()
-//     await this.props.editGoal(this.state, this.props.ID)
-//     // window.alert('Goal saved')
-//     this.props.history.push('/goal') 
-//   }
+class EditBillForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      Created: new Date().toLocaleDateString(),
+      billTitle: "",
+      howMuch: "",
+      additialInformation: "",
+      howOften: "",
+      endDate: "",
+      paid: false
+    };
+  }
+  async componentDidMount() {
+    this.props.getBill(this.props.ID);
+  }
+  onChangeHandler = event => {
+    this.setState(
+      {
+        [event.target.name]: event.target.value,
+        Created: this.props.bill.Created
+      },
+      () => {
+        console.log(this.state);
+      }
+    );
+  };
+  DateHandler = day => {
+    this.setState({ endDate: day.toLocaleDateString() });
+  };
+  closeHandler = () => {
+    this.props.history.push("/bills");
+  };
+  dropDownChange = event => {
+    this.setState({
+      howOften: event.value
+    });
+  };
+  onSubmitHandler = async (event) => {
+    event.preventDefault()
+    await this.props.editBill(this.state, this.props.ID)
+    await this.props.history.push("/bills")
+  }
+  render() {
+    console.log(this.props)
+    var how_often = ['Daily', 'Weekly', 'Biweekly', 'Monthly', 'Quarterly', 'Biannually','Yearly']
+    return (
+      <div className="modal-content">
+        <form onSubmit={this.onSubmitHandler}>
+          <div className="modal-header">
+            <button
+              type="button"
+              className="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 className="modal-title" id="myModalLabel">
+              Edit Bill
+            </h4>
+          </div>
+          <div className="modal-body">
+            <div className="form-group">
+              <label>Bill Title</label>
+              <input
+                onChange={this.onChangeHandler}
+                value={this.state.billTitle}
+                type="text"
+                name="billTitle"
+                className="form-control"
+                placeholder={this.props.bill.billTitle}
+              />
+            </div>
+            <div className="form-group">
+              <label>How much ?</label>
+              <input
+                onChange={this.onChangeHandler}
+                value={this.state.howMuch}
+                type="text"
+                name="howMuch"
+                className="form-control"
+                placeholder={this.props.bill.howMuch}
+              />
+            </div>
+            <div className="form-group">
+              <label>How Often ?</label>
+              <Dropdown
+                options={how_often}
+                onChange={this.dropDownChange}
+                value={this.state.howOften}
+                placeholder={this.props.bill.howOften}
+              />
+            </div>
+            <div className="form-group">
+              <label>End Date</label>
+              <DayPicker onDayClick={this.DateHandler} />
+              {this.state.endDate ? (
+                <p>You clicked {this.state.endDate}</p>
+              ) : (
+                <p>Please select a day.</p>
+              )}
+            </div>
+            <div className="form-group">
+              <label>
+                Additional Information realated to this bill (optional)
+              </label>
+              <textarea
+                onChange={this.onChangeHandler}
+                value={this.state.additialInformation}
+                name="editor1"
+                name="additialInformation"
+                className="form-control"
+                placeholder={this.props.bill.additialInformation}
+              />
+            </div>
+          </div>
+          <div className="modal-footer">
+            <button
+              type="button"
+              className="btn btn-default"
+              data-dismiss="modal"
+              onClick={this.closeHandler}
+            >
+              Close
+            </button>
+            <button
+              // onClick={this.onSubmitHandler}
+              type="submit"
+              className="btn btn-primary main-color-bg"
+              data-dismiss="modal"
+            >
+              Save changes
+            </button>
+          </div>
+        </form>
+      </div>
+    );
+  }
+}
 
-//   onChangeHandler(evt) {
-//     this.setState({
-//       [evt.target.name]: evt.target.value,
-//       Created: this.props.goal.Created
-//     })
-//   }
-//   DateHandler(day) {
-//     this.setState({ selectedDay: day.toLocaleDateString() });
-//   }
-//   closeHandler() {
-//     this.props.history.push('/goal') 
-//   }
+const mapStateToProps = state => {
+  return {
+    bill: state.bills.allBills
+  };
+};
 
+const mapDispatchToProps = dispatch => {
+  return {
+    getBill: billID => {
+      dispatch(getSingleBill(billID));
+    },
+    editBill: (updatedBill, billID) => {
+      dispatch(editSingleBill(updatedBill, billID))
+    }
+  };
+};
 
-//   render() {
-//     return(
-//             <div className="modal-content">
-//               <form >
-//                 <div className="modal-header">
-//                   <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-//                   <h4 className="modal-title" id="myModalLabel">Edit Goal</h4>
-//                 </div>
-//                 <div className="modal-body">
-//                   <div className="form-group">
-//                     <label>Goal Title</label>
-//                     <input onChange={this.onChangeHandler} value={this.state.goalTitle} type="text" name='goalTitle' className="form-control" placeholder={this.props.goal.goalTitle} />
-//                   </div>
-//                   <div className="form-group">
-//                     <label>How much ?</label>
-//                     <input onChange={this.onChangeHandler} value={this.state.howMuch} type="text" name='howMuch' className="form-control" placeholder={this.props.goal.howMuch} />
-//                   </div>
-//                   <div className="form-group">
-//                     <label>End Date</label>
-//                     <DayPicker onDayClick={this.DateHandler} />
-//                     {this.state.selectedDay ? (
-//                       <p>You clicked {this.state.selectedDay}</p>
-//                       ) : (
-//                       <p>Please select a day.</p> )}
-//                   </div>
-//                   <div className="form-group">
-//                     <label>Additional Information realated to this goal (optional)</label>
-//                     <textarea onChange={this.onChangeHandler} value={this.state.additialInformation} name="editor1" name='additialInformation' className="form-control" placeholder={this.props.goal.additialInformation} ></textarea>
-//                   </div>
-//                 </div>
-//                 <div className="modal-footer">
-//                   <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.closeHandler}>Close</button>
-//                   <button onClick={this.onSubmitHandler} type="submit" className="btn btn-primary main-color-bg" data-dismiss="modal">Save changes</button>
-//                 </div>
-//               </form>  
-//             </div>
-//     )
-//   }
-// }
+const connectedEditBillForm = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
 
-// const mapStateToProps = state => {
-//   return {
-//     goal: state.goals.allGoals
-//   }
-// }
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     fetchGoal: (ID) => {
-//       dispatch(getSingleGoal(ID))
-//     },
-//     editGoal: (newGoal, ID) => {
-//       dispatch(editSingleGoal(newGoal, ID))
-//     }
-//   }
-// }
-
-// const connectedEditGoalForm = connect(mapStateToProps, mapDispatchToProps)
-
-// export default connectedEditGoalForm(EditGoalForm)
+export default connectedEditBillForm(EditBillForm);

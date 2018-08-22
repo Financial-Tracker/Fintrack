@@ -78,7 +78,6 @@ class BillPage extends Component {
 
   render() {
     const bills = this.props.allBills
-    console.log(this.props)
     return (
       <div>
         <NavBar link={'Bills'} />
