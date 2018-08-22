@@ -32,7 +32,7 @@ class OverviewPage extends Component {
   }
   render() {
     console.log(this.props)
-  let AccountTotal = getAccountTotal(this.props.plaidInfo.auth);
+  let AccountTotal = 0;
   let goals = this.props.plaidInfo.Goals ? this.props.plaidInfo.Goals.length : 0
   let transactions = this.props.plaidInfo.transaction ? this.props.plaidInfo.transaction.length : 'Loading';
   let budgets = this.props.plaidInfo.budget ? '$ '+ this.props.plaidInfo.budget : '$0'

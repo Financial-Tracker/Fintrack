@@ -49,7 +49,8 @@ export const updatePlaidBudget = newPlaidData => {
 
 export const getDataFromFireStore = () => async dispatch => {
   try {
-    // dispatch(startLoading())
+    dispatch(startLoading())
+    console.log('get data from firestore')
     const user = firebase.auth().currentUser
       if (user) {
         // User is signed in.
@@ -94,8 +95,8 @@ export const getDataFromFireStore = () => async dispatch => {
 };
 
 export const updateBudget = newBudget => async dispatch => {
-  
   try {
+    dispatch(startLoading())
     const userEmail = firebase.auth().currentUser.email;
     const userRef = await firestore
       .collection("user")
@@ -228,7 +229,10 @@ const reducer = (state = initialState, action) => {
         month: action.payload 
       };
     case GET_TRANSACTIONS:
-      return action.payload;
+      return {
+        isLoading: false,
+        plaidData: action.payload
+      }
     case REMOVE_PLAID:
       return action.payload;
     case UPDATE_BUDGET:

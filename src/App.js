@@ -8,6 +8,8 @@ import { HashRouter, Route, Switch } from "react-router-dom";
 import { withAuth } from "fireview";
 import Plaid from "./Component/Pages/Plaid";
 import store from "./Store";
+import {connect} from 'react-redux'
+
 // import BankHomePage from "./Component/BankInfo/BankHomePage";
 // import Balance from "./Component/BankInfo/BalanceInfo";
 // import SingleBalance from "./Component/BankInfo/SingleBalance";
@@ -43,19 +45,22 @@ import BillForm from "./allComponents/smallComponents/BillForm";
 import GoalForm from "./allComponents/smallComponents/GoalForm";
 import BillPage from './allComponents/BillPage'
 
-
+import BankLogInButton from './allComponents/smallComponents/BankLogInButton'
+import {getDataFromFireStore} from './Store/plaidContainer'
 //----------------------------------------------------------------------------------------------------------
-
 
 class App extends Component {
   constructor(props){
     super(props)
+
+  }
+  componentDidMount(){
+    this.props.getDataFromFireStore()
+
   }
   render() {
     console.log(this.props)
     return (
-      <Provider store={store}>
-
         <div>
           <HashRouter >
             {!this.props._user ? (
@@ -68,7 +73,10 @@ class App extends Component {
               </Switch>
             ) : (
               <Switch>
-                {/* once the user is logged in */}
+                {
+                  this.props.store.plaidContainer.plaidData? 
+                  (
+                  <div>
                 <Route exact path="/" component={OverviewPage} />
                 <Route exact path="/plaid" component={Plaid} />
                 <Route exact path="/transactions" component={TransactionPage} />
@@ -78,63 +86,49 @@ class App extends Component {
                 <Route exact path="/settings" component={UserSettingPage} />
                 <Route exact path={`/editgoal/:Id`} component={EditGoal} />
                 <Route exact path={'/bills'} component={BillPage} />
-                <Route component={OverviewPage} />
+                {/* <Route component={OverviewPage} /> */}
+                    </div>
+                  )
+                  
+                  : 
+                  
+                  (
+                    <Route component={BankLogInButton} />
+                  )
+                }
+                {/* once the user is logged in */}
+
               </Switch>
             )}
           </HashRouter>
           <BillForm />
           <GoalForm />
         </div>
-
-      </Provider>
     );
   }
 }
+const MapStateToprops = state => (
+  {
+    store : state
+  }
+)
 
-export default withAuth(App);
-
-//       <Provider store={store}>
-//       <HashRouter>
-
-//         <div>
-//         <div>
-//           <Nav />
-//         </div>
-
-//         <div className='contant'>
-//         {
-//   this.props._user ?
-//   <Switch>
-//     <Route exact path="/!" component={Overview} />
-//     <Route exact path="/" component={Overview} />
-//     <Route exact path="/homepage" component={Overview} />
-//     <Route exact path='/overview' component={Overview} />
-//     <Route exact path="/plaid" component={Plaid} />
-//     <Route exact path="/balance" component={Balance} />
-//     <Route exact path='/income' component={Income} />
-//     <Route exact path='/account' component={AddAccount} />
-//     <Route exact path='/budgets' component={Budgets} />
-//     <Route exact path='/goals' component={Goals} />
-//     <Route exact path='/profile' component={Profile} />
-//     <Route exact path='/settings' component={Settings} />
-//     <Route exact path='/transaction' component={Transactions} />
-//     <Route exact path='/saves' component={WaysToSave} />
-//     <Route exact path='/bills' component={Bills} />
-//   </Switch>
+const MapDispatchToProps = dispatch => ({
+  getDataFromFireStore : () => dispatch(getDataFromFireStore())
+})
 
 
-//   : 
+App = connect(MapStateToprops, MapDispatchToProps)(withAuth(App))
 
-//   :
 
-//   <Switch>
-//   <Route exact path="/!" component={LogIn} />
-//   <Route exact path="/login" component={LogIn} />
-//   <Route exact path="/signup" component={SignUp} />
-//   <Route component={LogIn} />
-// </Switch>
-// }
-//         </div>
-//         </div>
-//       </HashRouter>
-//       </Provider>
+class Main extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <App />
+      </Provider>
+    )
+  }
+}
+
+export default Main;

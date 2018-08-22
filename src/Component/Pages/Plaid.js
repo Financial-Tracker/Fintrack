@@ -101,7 +101,7 @@ class Plaid extends Component {
     console.log("Now persistent")
     
     this.props.getPlaid(dataAPI);
-    // this.props.history.push('/overview')
+    this.props.history.push('/overview')
   };
   // onMessage = data => {
   //   console.log(data);
