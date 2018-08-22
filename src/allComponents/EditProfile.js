@@ -19,15 +19,13 @@ class EditProfile extends Component {
     this.setState({
       email: this.props.user.email,
       name: this.props.user.name
-    }, () => {
-      console.log(this.state)
     })
   }
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value
     })
-    console.log(this.state)
+
   }
   handleSubmit(event) {
     event.preventDefault()

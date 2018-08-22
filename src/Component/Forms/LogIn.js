@@ -32,7 +32,7 @@ class LogIn extends Component {
   async handleClick() {
     const user = firebase.auth().currentUser;
     user
-      ? this.props.history.push("/homepage")
+      ? this.props.history.push("/")
       : this.props.history.push("/login");
   }
 

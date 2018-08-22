@@ -60,7 +60,7 @@ export default class SignUp extends Component {
         const user = firebase.auth().currentUser
         console.log(user)
         if(user){
-            this.props.history.push('/homepage');
+            this.props.history.push('/');
         }else{
             this.props.history.push('/login')
         }

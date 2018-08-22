@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import DayPicker from 'react-day-picker';
+import DayPicker from 'react-day-picker'
 
 import {getSingleGoal, editSingleGoal} from '../../Store/GoalReducer'
 class EditGoalForm extends Component {
@@ -27,7 +27,7 @@ class EditGoalForm extends Component {
     evt.preventDefault()
     await this.props.editGoal(this.state, this.props.ID)
     // window.alert('Goal saved')
-    this.props.history.push('/goal') 
+    await this.props.history.push('/goal') 
   }
 
   onChangeHandler(evt) {
