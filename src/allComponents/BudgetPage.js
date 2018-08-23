@@ -1,38 +1,21 @@
 import React, { Component } from "react";
-// import BudgetPage from "../Component/BankInfo/Budgets";
-import BankLogInButton from "./smallComponents/BankLogInButton"
-import NavBar from "./smallComponents/Navbar";
-import SideNav from "./smallComponents/SideNav";
-import Transactions from "./smallComponents/Transactions";
-import GoalForm from "./smallComponents/GoalForm";
-import AccountOverViewSection from "./smallComponents/AccountOverViewSection";
-import Footer from "./smallComponents/Footer";
 import Budget from "../Component/BankInfo/Budgets";
 import { connect } from "react-redux";
 import { getDataFromFireStore } from "../Store/plaidContainer";
 
 class BudgetPage extends Component {
-  constructor() {
-    super();
-  }
-  componentDidMount() {
-    this.props.getPlaidInfo();
+
+  async componentDidMount() {
+    await this.props.getPlaidInfo();
   }
   render() {
     return (
       <div>
-        {this.props.plaidData.balance ? (
-
-                  <div className="col-md-9">
-                    <Budget />
-                  </div>
-        ) : (
-                    <div>
-                      <BankLogInButton />
-                    </div>
-        )}
+        <div className="col-md-9">
+          <Budget />
+        </div>
       </div>
-    );
+    )
   }
 }
 
@@ -41,7 +24,7 @@ const mapState = state => ({
   plaidData: state.plaidContainer.plaidData
 });
 const mapDispatch = dispatch => ({
-  getPlaidInfo: data => dispatch(getDataFromFireStore(data))
+  getPlaidInfo: () => dispatch(getDataFromFireStore())
 });
 
 export default connect(
