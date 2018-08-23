@@ -28,7 +28,7 @@ const getAccountTotal = (data) => {
 class OverviewPage extends Component {
 
   componentDidMount() {
-    // this.props.getDataFromFireStore()
+    this.props.getDataFromFireStore()
   }
   render() {
     console.log(this.props)
