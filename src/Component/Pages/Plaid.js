@@ -124,7 +124,7 @@ class Plaid extends Component {
         onLoadStart={this.onLoadStart}
         onLoadEnd={this.onLoadEnd}
         onSuccess={this.onSuccess}
-        onClick={() => console.log('start loading plaid now!!!!')}
+        onClick={() => this.setState({type : "LOADING"})}
       >
         Open and connect to plaid
       </PlaidLink>

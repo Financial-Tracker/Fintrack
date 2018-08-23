@@ -10,23 +10,12 @@ import Footer from './smallComponents/Footer'
 export default class WaysToSavePage extends Component {
   render() {
     return (
-      <div>
-      <NavBar link={'Ways to save'}/>
-    <section id="main">
-      <div className="container">
-        <div className="row">
-      <SideNav link={'Ways to save'}/>
-          <div className="col-md-9">
+          <div>
           This is ways to save
             {/* <AccountOverViewSection />
             <Transactions /> */}
           </div>
-        </div>
-      </div>
-    </section>
-    <Footer />    
-    
-    </div>
+        
     )
   }
 }

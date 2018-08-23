@@ -76,13 +76,7 @@ class BillPage extends Component {
     console.log("allBills: ", this.props.allBills);
     console.log("paidBills: ", this.props.paidBills);
     return (
-      <div>
-        <NavBar link={"Bills"} />
-        <section id="main">
-          <div className="container">
-            <div className="row">
-              <SideNav link={"Bills"} />
-              <div className="col-md-9">
+              <div>
                 <div className="panel panel-default">
                   <div className="panel-heading main-color-bg">
                     <h3 className="panel-title">Pending Bills</h3>
@@ -210,11 +204,7 @@ class BillPage extends Component {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-        <Footer />
-      </div>
+            
     );
   }
 }

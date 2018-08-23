@@ -22,39 +22,14 @@ class BudgetPage extends Component {
     return (
       <div>
         {this.props.plaidData.balance ? (
-          <div>
-            <NavBar link={"Budget"} />
-            <section id="main">
-              <div className="container">
-                <div className="row">
-                  <SideNav link={"Budget"} />
+
                   <div className="col-md-9">
                     <Budget />
-                    {/* <AccountOverViewSection />
-            <Transactions /> */}
                   </div>
-                </div>
-              </div>
-            </section>
-            <Footer />
-          </div>
         ) : (
-          <div>
-            <NavBar link={"Budget"} />
-            <section id="main">
-              <div className="container">
-                <div className="row">
-                  <SideNav link={"Budget"} />
-                  <div className="col-md-9">
                     <div>
                       <BankLogInButton />
                     </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-            <Footer />
-          </div>
         )}
       </div>
     );

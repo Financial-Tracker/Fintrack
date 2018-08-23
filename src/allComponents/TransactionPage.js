@@ -24,45 +24,20 @@ class TransactionPage extends Component {
       <div>
         {this.props.plaidInfo.transaction ?
           (
-            <div>
-              <NavBar link={'Transactions'} />
-              <section id="main">
-                <div className="container">
-                  <div className="row">
-                    <SideNav link={'Transactions'} />
-                    <div className="col-md-9">
+                    <div>
                       <h2 className='row center'>Transaction Table</h2>
-                      {/* <AccountOverViewSection /> */}
-                      {/* <PieChart /> */}
                       <Transactions />
                     </div>
-                  </div>
-                </div>
-              </section>
-              <Footer />
-            </div>
           ) : (
-            <div>
-              <NavBar link={'Transactions'} />
-              <section id="main">
-                <div className="container">
-                  <div className="row">
-                    <SideNav link={'Transactions'} />
-                    <div className="col-md-9">
+                    <div>
                       <h2 className='row center'>Transaction Table</h2>
-                      {/* <AccountOverViewSection /> */}
-                      {/* <PieChart /> */}
                       <div>
                         <button>
                           Log in to your bank account
                       </button>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </section>
-              <Footer />
-            </div>
+                  
           )
         }
       </div>

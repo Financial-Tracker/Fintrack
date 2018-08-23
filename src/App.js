@@ -10,30 +10,13 @@ import Plaid from "./Component/Pages/Plaid";
 import store from "./Store";
 import {connect} from 'react-redux'
 
-// import BankHomePage from "./Component/BankInfo/BankHomePage";
-// import Balance from "./Component/BankInfo/BalanceInfo";
-// import SingleBalance from "./Component/BankInfo/SingleBalance";
-// import Income from "./Component/BankInfo/Income";
-// import TransactionTable from "./Component/BankInfo/TransactionTable";
-// import BankPage from "./Component/Pages/BankPage";
-
-
-// import Nav from "./allComponents/smallComponents/Navbar";
-// import AddAccount from './allComponents/AddAccount'
-// import Balance from './allComponents/Balance'
-// import Budgets from './allComponents/BudgetPage'
-// import Goals from './allComponents/GoalPage'
-// import Income from './allComponents/Income'
-// import Profile from './allComponents/Profile'
-// import Settings from './allComponents/Settings'
-// import WaysToSave from './allComponents/WaysToSavePage'
-// import Bills from './allComponents/Bills'
-// import TransactionTable from "./Component/BankInfo/TransactionTable";
-// import BudgetBeta from './Component/BankInfo/Budgets'
-// import Budgets from "./Component/BankInfo/Budgets";
-
 //----------------------------------------------------------------------------------------------------------
 //new imports
+//smallcomponents
+import Navbar from './allComponents/smallComponents/Navbar'
+import Footer from './allComponents/smallComponents/Footer'
+import SideNav from './allComponents/smallComponents/SideNav'
+//smallcomponents
 import BudgetPage from "./allComponents/BudgetPage";
 import OverviewPage from "./allComponents/OverviewPage";
 import TransactionPage from "./allComponents/TransactionPage";
@@ -59,7 +42,8 @@ class App extends Component {
 
   }
   render() {
-    console.log(this.props.store.plaidContainer.plaidData ? 'yes data from plaid' : 'no data from plaid' )
+    console.log(this.props.store.plaidContainer.plaidData ? this.props.store.plaidContainer.plaidData.auth ? 'yes data from plaid' : 'no data but an object' : 'no data from plaid' )
+    console.log(this.props.store.plaidContainer.plaidData)
     console.log(this.props.store.plaidContainer.isLoading ? 'Loading' : 'Finish')
     return (
         <div>
@@ -74,11 +58,17 @@ class App extends Component {
                 <Route component={LogIn} />
               </Switch>
             ) : (
-              <Switch>
+              <div>
+              <Navbar />
+              <section id="main">
+                <div className="container">
+                <div className='row'>
+                <SideNav />
+                <div className="col-md-9"> 
                 {
                   this.props.store.plaidContainer.plaidData.auth? 
                   (
-                  <div>
+                <Switch>
                 <Route exact path="/" component={OverviewPage} />
                 <Route exact path="/plaid" component={Plaid} />
                 <Route exact path="/transactions" component={TransactionPage} />
@@ -89,19 +79,21 @@ class App extends Component {
                 <Route exact path={`/editgoal/:Id`} component={EditGoal} />
                 <Route exact path={'/bills'} component={BillPage} />
                 <Route exact path={`/editbill/:Id`} component={EditBill} />
-                {/* <Route component={OverviewPage} /> */}
-                    </div>
-                  )
+                </Switch>
                   
+                  )
                   : 
                   
                   (
-                    <Route exact path='/' component={BankLogInButton} />
+                    <Route path='/' component={BankLogInButton} />
                   )
                 }
-                {/* once the user is logged in */}
-
-              </Switch>
+                </div>
+                </div>
+                </div>
+                </section>
+                <Footer />
+                </div>
             )}
           </HashRouter>
           <BillForm />
