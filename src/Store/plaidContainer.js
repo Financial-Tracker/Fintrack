@@ -48,52 +48,38 @@ export const updatePlaidBudget = newPlaidData => {
 };
 
 export const getLoad = () => dispatch => {
-  dispatch(startLoading())
-}
-
+  dispatch(startLoading());
+};
 
 export const getDataFromFireStore = () => async dispatch => {
   try {
-    dispatch(startLoading())
-    console.log('get data from firestore')
-    const user = firebase.auth().currentUser
-      if (user) {
-        // User is signed in.
-        const userEmail = user.email;
-        const userRef = await firestore
-          .collection("user")
-          .where("email", "==", userEmail.toString())
-          .get();
-        const docRefId = await userRef.docs[0].id;
-        const dataAPI = await firestore
-          .collection("user")
-          .doc("" + docRefId + "")
-          .get()
-          .then(user => user.data());
-        const currentDate = new Date();
-        const month = currentDate.getMonth() + 1;
-        const year = currentDate.getFullYear();
-        if(dataAPI.transaction){
-          const transMonth = await dataAPI.transaction.filter(transaction => {
-            if (
-              transaction.date.substring(0, 4) == year &&
-              transaction.date.substring(5, 7) == month
-            ) {
-              return true;
-            } else {
-              return false;
-            }
-          });
-          const budget = dataAPI.budget;
-          const income = dataAPI.income.income_streams[0].monthly_income;
-          dataAPI.action = { transMonth, monthlyIncome: income, budget: budget };
+    const user = firebase.auth().currentUser;
+    if (user) {
+      // User is signed in.
+      const userEmail = user.email;
+      const userRef = await firestore
+        .collection("user")
+        .where("email", "==", userEmail.toString())
+        .get();
+      const docRefId = await userRef.docs[0].id;
+      const dataAPI = await firestore
+        .collection("user")
+        .doc("" + docRefId + "")
+        .get()
+        .then(user => user.data());
+      const currentDate = new Date();
+      const month = currentDate.getMonth() + 1;
+      const year = currentDate.getFullYear();
+      const transMonth = await dataAPI.transaction.filter(transaction => {
+        if (
+          transaction.date.substring(0, 4) == year &&
+          transaction.date.substring(5, 7) == month
+        ) {
+          return true;
+        } else {
+          return false;
         }
-        const action = getPlaid(dataAPI);
-        dispatch(action);
-      } else {
-        // No user is signed in.
-        dispatch(getPlaid('no user'))
-      }
+      });
 
       const budget = dataAPI.budget;
       const income = dataAPI.income.income_streams[0].monthly_income;
@@ -110,7 +96,7 @@ export const getDataFromFireStore = () => async dispatch => {
 
 export const updateBudget = newBudget => async dispatch => {
   try {
-    dispatch(startLoading())
+    dispatch(startLoading());
     const userEmail = firebase.auth().currentUser.email;
     const userRef = await firestore
       .collection("user")
@@ -247,7 +233,7 @@ const reducer = (state = initialState, action) => {
       return {
         isLoading: false,
         plaidData: action.payload
-      }
+      };
     case REMOVE_PLAID:
       return action.payload;
     case UPDATE_BUDGET:
