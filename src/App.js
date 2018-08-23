@@ -30,6 +30,9 @@ import BillPage from './allComponents/BillPage'
 import EditBill from './allComponents/EditBill';
 import BankLogInButton from './allComponents/smallComponents/BankLogInButton'
 import {getDataFromFireStore} from './Store/plaidContainer'
+
+//styling imports
+
 //----------------------------------------------------------------------------------------------------------
 
 class App extends Component {
@@ -39,14 +42,14 @@ class App extends Component {
   }
   componentDidMount(){
     this.props.getDataFromFireStore()
-
   }
   render() {
-    console.log(this.props.store.plaidContainer.plaidData ? this.props.store.plaidContainer.plaidData.auth ? 'yes data from plaid' : 'no data but an object' : 'no data from plaid' )
+    console.log(this.props.store.plaidContainer.plaidData ? this.props.store.plaidContainer.plaidData.auth ? 'yes data from plaid and user is logged in' : 'no data but user is logged in' : 'no data from plaid' )
     console.log(this.props.store.plaidContainer.plaidData)
     console.log(this.props.store.plaidContainer.isLoading ? 'Loading' : 'Finish')
     return (
         <div>
+
           <HashRouter >
             {!this.props._user ? (
               <Switch>
@@ -59,6 +62,7 @@ class App extends Component {
               </Switch>
             ) : (
               <div>
+                <div>
               <Navbar />
               <section id="main">
                 <div className="container">
@@ -66,7 +70,7 @@ class App extends Component {
                 <SideNav />
                 <div className="col-md-9"> 
                 {
-                  this.props.store.plaidContainer.plaidData.auth? 
+                  this.props.store.plaidContainer.plaidData ? 
                   (
                 <Switch>
                 <Route exact path="/" component={OverviewPage} />
@@ -85,14 +89,16 @@ class App extends Component {
                   : 
                   
                   (
-                    <Route path='/' component={BankLogInButton} />
+                    <Route component={BankLogInButton} />
                   )
                 }
                 </div>
                 </div>
                 </div>
                 </section>
+                {this.props.store.plaidContainer.isLoading ? (<div id="loader"></div>) : null }
                 <Footer />
+                </div>
                 </div>
             )}
           </HashRouter>
