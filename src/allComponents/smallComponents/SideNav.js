@@ -8,6 +8,7 @@ componentDidMount(){
      this.props.getDataFromFireStore()
 }
 render() {
+    console.log("SIDENAV: ", this.props.stateData)
     return (
     <div className="col-md-3">
         <div className="list-group">
@@ -152,27 +153,23 @@ render() {
         <table className="table table-hover">
             <thead>
             <tr>
-                <th scope="col">Type</th>
-                <th scope="col">Date</th>
+                <th scope="col">Name</th>
+                <th scope="col">Date Due</th>
                 <th scope="col">Amount</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>Rental</td>
-                <td>2011/04/25</td>
-                <td>$300</td>
-            </tr>
-            <tr>
-                <td>Rental</td>
-                <td>2011/04/25</td>
-                <td>$300</td>
-            </tr>
-            <tr>
-                <td>Rental</td>
-                <td>2011/04/25</td>
-                <td>$300</td>
-            </tr>
+                {this.props.stateData.bills.allBills.map((bill, index) => {
+                    if(index <= 3) {
+                        return (
+                        <tr>
+                            <td>{bill.billTitle}</td>
+                            <td>{bill.endDate}</td>
+                            <td>${bill.howMuch}</td>
+                        </tr>
+                        )
+                    }
+                })}
             </tbody>
         </table>
         </div>
