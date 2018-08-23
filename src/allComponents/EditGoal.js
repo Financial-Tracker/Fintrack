@@ -10,7 +10,7 @@ export default class EditGoal extends Component {
         }
     render() {
         return (
-                    <div className="col-md-9">
+                    <div>
                         <EditGoalForm ID={this.props.match.params.Id} history={this.props.history}/>
                     </div>
                 

@@ -67,8 +67,6 @@ class Settings extends Component {
             <div>
               <h5>Last logged in: {this.props.user.access}</h5>
             </div>
-            {/* <AccountOverViewSection />
-            <Transactions /> */}
           </div>
         
     )

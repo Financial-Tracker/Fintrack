@@ -69,8 +69,8 @@ render() {
                 <DayPicker 
                     onDayClick={this.DateHandler}
                 />
-                {this.state.selectedDay ? (
-                <p>You clicked {this.state.selectedDay}</p>
+                {this.state.endDate ? (
+                <p>You clicked {this.state.endDate}</p>
                 ) : (
                 <p>Please select a day.</p>
                 )}
