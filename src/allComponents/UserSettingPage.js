@@ -42,12 +42,6 @@ class Settings extends Component {
   }
   render() {
     return (
-      <div>
-      <NavBar link={'Settings'}/>
-      <section id="main">
-      <div className="container">
-        <div className="row">
-      <SideNav link={'Settings'}/>
           <div className="col-md-9">
           <div>
             <div className="panel panel-default">
@@ -73,14 +67,8 @@ class Settings extends Component {
             <div>
               <h5>Last logged in: {this.props.user.access}</h5>
             </div>
-            {/* <AccountOverViewSection />
-            <Transactions /> */}
           </div>
-        </div>
-      </div>
-    </section>
-    <Footer />    
-</div>
+        
     )
   }
 }

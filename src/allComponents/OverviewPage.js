@@ -37,21 +37,10 @@ class OverviewPage extends Component {
   let transactions = this.props.plaidInfo.transaction ? this.props.plaidInfo.transaction.length : 'Loading';
   let budgets = this.props.plaidInfo.budget ? '$ '+ this.props.plaidInfo.budget : '$0'
     return (
-      <div>
-        <NavBar />
-        <section id="main">
-          <div className="container">
-            <div className="row">
-              <SideNav />
-              <div className="col-md-9">
+              <div>
                 {this.props.plaidInfo.auth ? <AccountOverViewSection accountTotal={AccountTotal} budgets={budgets} transactions={transactions} goals={goals}/>: null}
                 <Transactions />
               </div>
-            </div>
-          </div>
-        </section>
-        <Footer />
-      </div>
     );
   }
 } 

@@ -10,20 +10,10 @@ export default class EditGoal extends Component {
         }
     render() {
         return (
-            <div>
-                <NavBar link={'Goals'}/>
-                <section id="main">
-                <div className="container">
-                    <div className="row">
-                <SideNav link={'Goals'}/>
-                    <div className="col-md-9">
+                    <div>
                         <EditGoalForm ID={this.props.match.params.Id} history={this.props.history}/>
                     </div>
-                    </div>
-                </div>
-                </section>
-                <Footer />    
-            </div>
+                
         )
     }
 }

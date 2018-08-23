@@ -65,7 +65,7 @@ class BankLogInButton extends Component {
       .get()
       .then(user => user.data());
     this.props.getPlaid(dataAPI);
-    this.props.history.push("/");
+    // this.props.history.push('/')
   };
 
   render() {

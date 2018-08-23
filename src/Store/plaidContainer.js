@@ -235,9 +235,17 @@ const reducer = (state = initialState, action) => {
         plaidData: action.payload
       };
     case REMOVE_PLAID:
-      return action.payload;
+      return {
+        ...state,
+        isLoading: false,
+        plaidData: {}
+      }
     case UPDATE_BUDGET:
-      return action.payload;
+      return {
+        ...state,
+        isLoading: false,
+        plaidData: action.payload
+      }
     default:
       return state;
   }

@@ -74,7 +74,6 @@ app.post("/transaction/get", (req, res, next) => {
     (err, result) => {
       // Handle err
       const transactions = result.transactions;
-      
       res.json(transactions);
     }
   );
