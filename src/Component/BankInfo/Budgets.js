@@ -6,10 +6,6 @@ import {
   updateBudget
 } from "../../Store/plaidContainer";
 import { Dimmer, Loader, Segment, Image } from "semantic-ui-react";
-import Food from "../../pictures/Food.jpg";
-import Payment from "../../pictures/Payment.jpg";
-import Travel from "../../pictures/Travel.jpeg";
-import Shop from "../../pictures/Shop.jpg";
 // import { Collapsible, CollapsibleItem } from "react-materialize";
 import BudgetChart from "./BudgetChart";
 import { Table } from "reactstrap";
@@ -39,9 +35,6 @@ class Budgets extends Component {
     this.setState(
       {
         budget: event.target.value
-      },
-      () => {
-        console.log(this.state);
       }
     );
     if (event.target.value > this.props.plaidInfo.actionlyIncome) {
@@ -82,6 +75,7 @@ class Budgets extends Component {
   }
 
   render() {
+    console.log("Budgets.js this.props:", this.props)
     let total;
     let transMonthArray;
     let spending;
@@ -89,7 +83,6 @@ class Budgets extends Component {
     if (this.props.plaidInfo.action) {
       if (this.props.plaidInfo.action.transMonth) {
         transMonthArray = this.props.plaidInfo.action.transMonth;
-
         spending = transMonthArray.map(transaction => {
           return transaction.amount;
         });
@@ -103,7 +96,6 @@ class Budgets extends Component {
           // Shops: {id: 4, amount: 0, list: []},
           // Recreation: {id: 5, amount: 0, list: []}
         };
-        
         for (let i = 0; i < transMonthArray.length; i++) {
           let oneCharge = transMonthArray[i];
           
@@ -112,8 +104,7 @@ class Budgets extends Component {
           }else {
             categories[oneCharge.category[0]].amount += oneCharge.amount;
             categories[oneCharge.category[0]].list.push(oneCharge);
-          }
-          
+          } 
         }
       }
     }
