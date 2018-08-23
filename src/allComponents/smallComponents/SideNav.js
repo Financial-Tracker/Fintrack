@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {getDataFromFireStore} from '../../Store/plaidContainer'
+import {getAllGoal} from '../../Store/GoalReducer'
+import {getAllBill} from '../../Store/BillReducer'
 
 class SideNav extends Component {
 
 componentDidMount(){
-     this.props.getDataFromFireStore()
+    this.props.getDataFromFireStore()
+    this.props.getAllBill()
+    this.props.getAllGoals()
 }
 render() {
     console.log("SIDENAV: ", this.props.stateData)
@@ -105,51 +109,32 @@ render() {
 
         <div className="well">
         <h3>Goals</h3>
-
-        <h5>Goal 1</h5>
-        <div className="progress">
-            <div
-            className="progress-bar main-color-bg"
-            role="progressbar"
-            aria-valuenow="60"
-            aria-valuemin="0"
-            aria-valuemax="100"
-            style={{ width: "60%" }}
-            >
-            60%
-            </div>
-        </div>
-        <h5>Goal 2 </h5>
-        <div className="progress">
-            <div
-            className="progress-bar main-color-bg"
-            role="progressbar"
-            aria-valuenow="40"
-            aria-valuemin="0"
-            aria-valuemax="100"
-            style={{ width: "40%" }}
-            >
-            40%
-            </div>
-        </div>
-
-        <h6>Goal 3 </h6>
-        <div className="progress">
-            <div
-            className="progress-bar main-color-bg"
-            role="progressbar"
-            aria-valuenow="45"
-            aria-valuemin="0"
-            aria-valuemax="100"
-            style={{ width: "45%" }}
-            >
-            45%
-            </div>
-        </div>
+        <table className="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">By</th>
+                <th scope="col">Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+                {this.props.stateData.goals.allGoals.map((goal, index) => {
+                    if(index <= 3) {
+                        return (
+                        <tr>
+                            <td>{goal.goalTitle}</td>
+                            <td>{goal.selectedDay}</td>
+                            <td>${goal.howMuch}</td>
+                        </tr>
+                        )
+                    }
+                })}
+            </tbody>
+        </table>
         </div>
 
         <div className="well">
-        <h4>Bills</h4>
+        <h3>Bills</h3>
         <table className="table table-hover">
             <thead>
             <tr>
@@ -185,9 +170,11 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        getDataFromFireStore : () => dispatch(getDataFromFireStore())}
+        getDataFromFireStore : () => dispatch(getDataFromFireStore()),
+        getAllGoals: () => dispatch(getAllGoal()),
+        getAllBill: () => dispatch(getAllBill())
     }
-
+}
 
 
 export default connect(mapStateToProps,mapDispatchToProps)(SideNav)
