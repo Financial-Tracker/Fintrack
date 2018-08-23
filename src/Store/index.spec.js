@@ -61,7 +61,32 @@ describe("Action creators", () => {
     });
   });
 });
-
+function exist(val) {
+  if (!val) {
+    return true;
+  }
+  return false;
+}
+describe("Secret Variables are there", () => {
+  describe("Client_ID exist", () => {
+    it("Client ID is not undefined", () => {
+      const clientIdWorks = exist(process.env.CLIENT_ID);
+      expect(clientIdWorks).to.be.deep.equal(true);
+    });
+  });
+  describe("Public Key exist", () => {
+    it("Public Key is not undefined", () => {
+      const publicKeyWorks = exist(process.env.PUBLIC_KEY);
+      expect(publicKeyWorks).to.be.deep.equal(true);
+    });
+  });
+  describe("Secret Key exist", () => {
+    it("Secret Key is not undefined", () => {
+      const SecretKeyWorks = exist(process.env.SECRET_KEY);
+      expect(SecretKeyWorks).to.be.deep.equal(true);
+    });
+  });
+});
 // const middlewares = [thunkMiddleware]
 // const mockStore = configureMockStore(middlewares)
 

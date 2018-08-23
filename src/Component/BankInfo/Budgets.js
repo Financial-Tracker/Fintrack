@@ -32,11 +32,9 @@ class Budgets extends Component {
 
   //Component action handlers
   handleChange(event) {
-    this.setState(
-      {
-        budget: event.target.value
-      }
-    );
+    this.setState({
+      budget: event.target.value
+    });
     if (event.target.value > this.props.plaidInfo.actionlyIncome) {
       event.target.setCustomValidity(
         "Budget cannot be greater than your income!"
@@ -75,14 +73,35 @@ class Budgets extends Component {
   }
 
   render() {
-    console.log("Budgets.js this.props:", this.props)
+    console.log("Budgets.js this.props:", this.props);
     let total;
     let transMonthArray;
     let spending;
     let categories;
+    let weeks = {
+      "Week One": 0,
+      "Week Two": 0,
+      "Week Three": 0,
+      "Week Four": 0
+    };
+
     if (this.props.plaidInfo.action) {
       if (this.props.plaidInfo.action.transMonth) {
         transMonthArray = this.props.plaidInfo.action.transMonth;
+        for (let i = 0; i < transMonthArray.length; i++) {
+          const day = transMonthArray[i].date.substring(8);
+          const amount = Number(transMonthArray[i].amount);
+          if (day <= 8) {
+            weeks["Week One"] += amount;
+          } else if (day > 7 && day <= 14) {
+            weeks["Week Two"] += amount;
+          } else if (day > 14 && day <= 21) {
+            weeks["Week Three"] += amount;
+          } else {
+            weeks["Week Four"] += amount;
+          }
+        }
+
         spending = transMonthArray.map(transaction => {
           return transaction.amount;
         });
@@ -98,17 +117,20 @@ class Budgets extends Component {
         };
         for (let i = 0; i < transMonthArray.length; i++) {
           let oneCharge = transMonthArray[i];
-          
-          if(!categories[oneCharge.category[0]]){
-            categories[oneCharge.category[0]] = {id: i, amount: oneCharge.amount, list:[oneCharge]}
-          }else {
+
+          if (!categories[oneCharge.category[0]]) {
+            categories[oneCharge.category[0]] = {
+              id: i,
+              amount: oneCharge.amount,
+              list: [oneCharge]
+            };
+          } else {
             categories[oneCharge.category[0]].amount += oneCharge.amount;
             categories[oneCharge.category[0]].list.push(oneCharge);
-          } 
+          }
         }
       }
     }
-
     return (
       <React.Fragment>
         {this.props.plaidInfo.action ? (
@@ -139,10 +161,6 @@ class Budgets extends Component {
                     {this.props.plaidInfo.action.budget}
                   </p>
                   <button onClick={this.handleClick}>Modify budget</button>
-                  <BudgetChart
-                    budget={this.props.plaidInfo.budget}
-                    categories={categories}
-                  />
                 </div>
               ) : (
                 <form onSubmit={this.handleSubmit}>
@@ -157,6 +175,11 @@ class Budgets extends Component {
                   <button type="submit">Save</button>
                 </form>
               )}
+              <BudgetChart
+                budget={this.props.plaidInfo.budget}
+                categories={categories}
+                weeks={weeks}
+              />
               <div>
                 <Table bordered>
                   <thead>
