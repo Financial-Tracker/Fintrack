@@ -14,7 +14,7 @@ export default class EditBill extends Component {
                 <EditBillForm
                   ID={this.props.match.params.Id}
                   history={this.props.history}
-                />
+                /> 
               </div>
     );
   }
