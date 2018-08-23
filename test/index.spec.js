@@ -22,6 +22,21 @@ describe("Action creators", () => {
     });
   });
 });
+function exist(val) {
+  if (val !== undefined) {
+    return true;
+  }
+  return false;
+}
+
+describe("Secret keys work", () => {
+  describe("Client_ID exist", () => {
+    it("Client ID is not undefined", () => {
+      const clientIdWorks = exist(process.env.CLIENT_ID);
+      expect(clientIdWorks).to.be.deep.equal(true);
+    });
+  });
+});
 
 // const middlewares = [thunkMiddleware]
 // const mockStore = configureMockStore(middlewares)
