@@ -12,6 +12,9 @@ import { auth } from "../../Firebase";
 import firebase from "firebase";
 import {firestore} from '../../Firebase/firebase'
 import {valid} from "./validation"
+import {addUser} from '../../Store/userContainer'
+
+
 require("./cssForms.css");
 
 
@@ -178,63 +181,3 @@ render() {
 }
 
 
-            {/* <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
-            <Grid.Column style={{ maxWidth: 450 }}>
-                <Header as='h2' textAlign='center'>
-                Sign up
-                </Header>
-                {this.state.error ? <h3 className='error'>Please make sure all information are valid</h3> : null}
-                <Form size='large' onChange={this.handleOnChange} onSubmit={this.handleOnSubmit}>
-                <Segment stacked>
-                
-                    {this.state.firstName.length > 0 ? valid(this.state.firstName,"firstName") ? null : <p className='error'>Enter a valid first name </p> : null }
-                    <Form.Input 
-                    name='firstName'
-                    fluid icon='user' 
-                    iconPosition='left' 
-                    placeholder='First Name' />
-
-
-                    {this.state.lastName.length > 0 ? valid(this.state.lastName,"lastName") ? null : <p className='error'>Enter a valid first name </p> : null }
-                    <Form.Input 
-                    name='lastName'
-                    fluid icon='user' 
-                    iconPosition='left' 
-                    placeholder='Last Name' />
-
-
-                    {this.state.email.length > 0 ? valid(this.state.email,"email") ? null : <p className='error'>Enter a valid email </p> : null}
-                    <Form.Input name='email' fluid icon='user' iconPosition='left' placeholder='E-mail address' />
-
-
-                    {this.state.password.length > 0 ? valid(this.state.password,"password") ? null : <p className='error'>Password must be within the length of 8-20</p> : null }
-                    <Form.Input
-                    fluid
-                    icon='lock'
-                    iconPosition='left'
-                    placeholder='Password'
-                    type='password'
-                    name='password'
-                    />
-                    
-                
-                    {this.state.password === this.state.Cpassword ? null :  <p className='error'> Password does not match</p>}
-                    <Form.Input
-                    fluid
-                    icon='lock'
-                    iconPosition='left'
-                    placeholder='Confirm Password'
-                    type='password'
-                    name='Cpassword'
-                    />
-    
-                    <Button  color='blue' fluid size='large'>
-                    Sign up
-                    </Button>
-                </Segment>
-                </Form>
-                <Message>
-                Have an account ? <Link to="/">Log in</Link>
-                </Message>
-            </Grid.Column>
-            </Grid> */}

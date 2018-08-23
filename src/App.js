@@ -40,13 +40,15 @@ class App extends Component {
     super(props)
 
   }
-  componentDidMount(){
-    this.props.getDataFromFireStore()
+  async componentDidMount(){
+    await this.props.getDataFromFireStore()
+    // await this.props.getUserData()
   }
   render() {
-    console.log(this.props.store.plaidContainer.plaidData ? this.props.store.plaidContainer.plaidData.auth ? 'yes data from plaid and user is logged in' : 'no data but user is logged in' : 'no data from plaid' )
-    console.log(this.props.store.plaidContainer.plaidData)
-    console.log(this.props.store.plaidContainer.isLoading ? 'Loading' : 'Finish')
+    // console.log(this.props._user)
+    // console.log(this.props.store.plaidContainer.plaidData ? this.props.store.plaidContainer.plaidData.auth ? 'yes data from plaid and user is logged in' : 'no data but user is logged in' : 'no data from plaid' )
+    // console.log(this.props.store.plaidContainer.plaidData)
+    // console.log(this.props.store.plaidContainer.isLoading ? 'Loading' : 'Finish')
     return (
         <div>
 
@@ -63,11 +65,11 @@ class App extends Component {
             ) : (
               <div>
                 <div>
-              <Navbar />
+              <Route component={Navbar}/>
               <section id="main">
                 <div className="container">
                 <div className='row'>
-                <SideNav />
+                < Route component={SideNav}/>
                 <div className="col-md-9"> 
                 {
                   this.props.store.plaidContainer.plaidData ? 
@@ -97,7 +99,7 @@ class App extends Component {
                 </div>
                 </section>
                 {this.props.store.plaidContainer.isLoading ? (<div id="loader"></div>) : null }
-                <Footer />
+                <Route  component={Footer} />
                 </div>
                 </div>
             )}

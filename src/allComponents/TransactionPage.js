@@ -16,31 +16,15 @@ class TransactionPage extends Component {
     super()
   }
   componentDidMount() {
-    this.props.getPlaidInfo()
+    // this.props.getPlaidInfo()
   }
   render() {
-    console.log("Props in transaction", this.props)
+    // console.log("Props in transaction", this.props)
     return (
       <div>
-        {this.props.plaidInfo.transaction ?
-          (
-                    <div>
-                      <h2 className='row center'>Transaction Table</h2>
-                      <Transactions />
-                    </div>
-          ) : (
-                    <div>
-                      <h2 className='row center'>Transaction Table</h2>
-                      <div>
-                        <button>
-                          Log in to your bank account
-                      </button>
-                      </div>
-                    </div>
-                  
-          )
-        }
-      </div>
+      <h2 className='row center'>Transaction Table</h2>
+      <Transactions />
+    </div>
     )
   }
 }
