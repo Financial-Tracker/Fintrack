@@ -3,6 +3,10 @@ import {connect} from 'react-redux'
 import {getDataFromFireStore} from '../../Store/plaidContainer'
 
 class SideNav extends Component {
+
+componentDidMount(){
+     this.props.getDataFromFireStore()
+}
 render() {
     return (
     <div className="col-md-3">
@@ -31,16 +35,16 @@ render() {
         <a href="#/transactions" className={`list-group-item active main-color-bg`}>
         <span className="glyphicon glyphicon-list-alt" aria-hidden="true">
         </span> Transactions <span className="badge">
-        {/* {this.props.stateData.plaidContainer.transaction ? this.props.stateData.plaidContainer.transaction.length : 0 } */}
-        122
+        {this.props.stateData.plaidContainer.plaidData.transaction ? this.props.stateData.plaidContainer.plaidData.transaction.length : 0 }
+        
         </span>
         </a>
         : 
         <a href="#/transactions" className={`list-group-item`}>
         <span className="glyphicon glyphicon-list-alt" aria-hidden="true">
         </span> Transactions <span className="badge">
-        {/* {this.props.stateData.plaidContainer.transaction ? this.props.stateData.plaidContainer.transaction.length : 0 } */}
-        122
+        {this.props.stateData.plaidContainer.plaidData.transaction ? this.props.stateData.plaidContainer.plaidData.transaction.length : 0 }
+        
         </span>
         </a>
         }
@@ -50,13 +54,13 @@ render() {
         {/* Budgets */}
         {this.props.link === 'Budget' ? 
         <a href="#/budget" className="list-group-item active main-color-bg"><span className="	glyphicon glyphicon-usd" aria-hidden="true"></span> Budgets <span className="badge">
-        {/* $ {this.props.stateData.plaidContainer.budget ? this.props.stateData.plaidContainer.budget : 0} */}
-        $ 300
+        $ {this.props.stateData.plaidContainer.plaidData.budget ? this.props.stateData.plaidContainer.plaidData.budget : 0}
+        
         </span></a>
         : 
         <a href="#/budget" className="list-group-item"><span className="	glyphicon glyphicon-usd" aria-hidden="true"></span> Budgets <span className="badge">
-        {/* $ {this.props.stateData.plaidContainer.budget ? this.props.stateData.plaidContainer.budget : 0} */}
-        $ 300
+        $ {this.props.stateData.plaidContainer.plaidData.budget ? this.props.stateData.plaidContainer.plaidData.budget : 0}
+     
         </span></a>
         }
     
@@ -64,13 +68,13 @@ render() {
         {/* Goal */}
         {this.props.link === 'Goals' ? 
         <a href="#/goal" className="list-group-item active main-color-bg"><span className="	glyphicon glyphicon-gift" aria-hidden="true"></span> Goals <span className="badge">
-        {/* {this.props.stateData.plaidContainer.Goals ? this.props.stateData.plaidContainer.Goals.length : 0 } */
-    3}
+        {this.props.stateData.goals.allGoals ? this.props.stateData.goals.allGoals.length : 0 }
+    
         </span></a>
         : 
         <a href="#/goal" className="list-group-item"><span className="	glyphicon glyphicon-gift" aria-hidden="true"></span> Goals <span className="badge">
-        {/* {this.props.stateData.plaidContainer.Goals ? this.props.stateData.plaidContainer.Goals.length : 0 } */}
-        3
+        {this.props.stateData.goals.allGoals ? this.props.stateData.goals.allGoals.length : 0 }
+        
         </span></a>
         }
         
@@ -85,7 +89,7 @@ render() {
                 className="glyphicon glyphicon glyphicon-tags"
                 aria-hidden="true"
             />{" "}
-            Bills <span className="badge">2</span>
+            Bills <span className="badge">{this.props.stateData.bills.allBills.length}</span>
             </a>
         ) : (
             <a href="#/bills" className="list-group-item">
@@ -93,7 +97,7 @@ render() {
                 className="glyphicon glyphicon glyphicon-tags"
                 aria-hidden="true"
             />{" "}
-            Bills <span className="badge">2</span>
+            Bills <span className="badge">{this.props.stateData.bills.allBills.length}</span>
             </a>
         )}
         </div>
@@ -184,9 +188,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        getDataFromFireStore : () => dispatch(getDataFromFireStore())
-        
-        }
+        getDataFromFireStore : () => dispatch(getDataFromFireStore())}
     }
 
 
