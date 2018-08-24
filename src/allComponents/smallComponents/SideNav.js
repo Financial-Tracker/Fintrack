@@ -136,7 +136,7 @@ class SideNav extends Component {
               />{" "}
               Bills{" "}
               <span className="badge">
-                {/* {this.props.stateData.bills.allBills.length} */}
+                {this.props.stateData.bills.allBills.length}
               </span>
             </a>
           )}
@@ -153,16 +153,16 @@ class SideNav extends Component {
               </tr>
             </thead>
             <tbody>
-              {/* {this.props.stateData.goals.allGoals.map((goal, index) => {
-                    if(index <= 3) {
-                        return (
-                        <tr>
-                            <td>{goal.goalTitle}</td>
-                            <td>{goal.selectedDay}</td>
-                            <td>${goal.howMuch}</td>
-                        </tr>
-                        )
-                    } */}
+              {this.props.stateData.goals.allGoals.map((goal, index) => {
+                if (index <= 3) {
+                  return (
+                    <tr>
+                      <td>{goal.goalTitle}</td>
+                      <td>{goal.selectedDay}</td>
+                      <td>${goal.howMuch}</td>
+                    </tr>
+                  );
+                }
               })}
             </tbody>
           </table>
@@ -179,7 +179,7 @@ class SideNav extends Component {
               </tr>
             </thead>
             <tbody>
-              {/* {this.props.stateData.bills.allBills.map((bill, index) => {
+              {this.props.stateData.bills.allBills.map((bill, index) => {
                 if (index <= 3) {
                   return (
                     <tr>
@@ -189,7 +189,7 @@ class SideNav extends Component {
                     </tr>
                   );
                 }
-              })} */}
+              })}
             </tbody>
           </table>
         </div>

@@ -96,7 +96,7 @@ export default class BudgetChart extends React.PureComponent {
           mouseMoveHandler={this.mouseMoveHandler}
           lineData={this.defaultLineData}
           data={this.getCategoriesList()}
-          yDomainRange={[0, 4600]}
+          yDomainRange={[0, 6000]}
         />
       </div>
     );
