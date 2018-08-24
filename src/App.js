@@ -30,7 +30,7 @@ import BillPage from './allComponents/BillPage'
 import EditBill from './allComponents/EditBill';
 import BankLogInButton from './allComponents/smallComponents/BankLogInButton'
 import {getDataFromFireStore} from './Store/plaidContainer'
-
+import CalculatorPage from './allComponents/CalculatorPage'
 //styling imports
 
 //----------------------------------------------------------------------------------------------------------
@@ -45,10 +45,6 @@ class App extends Component {
     // await this.props.getUserData()
   }
   render() {
-    // console.log(this.props._user)
-    // console.log(this.props.store.plaidContainer.plaidData ? this.props.store.plaidContainer.plaidData.auth ? 'yes data from plaid and user is logged in' : 'no data but user is logged in' : 'no data from plaid' )
-    // console.log(this.props.store.plaidContainer.plaidData)
-    // console.log(this.props.store.plaidContainer.isLoading ? 'Loading' : 'Finish')
     return (
         <div>
 
@@ -85,6 +81,8 @@ class App extends Component {
                 <Route exact path={`/editgoal/:Id`} component={EditGoal} />
                 <Route exact path={'/bills'} component={BillPage} />
                 <Route exact path={`/editbill/:Id`} component={EditBill} />
+                <Route exact path={'/calculator'} component={CalculatorPage} />
+
                 </Switch>
                   
                   )

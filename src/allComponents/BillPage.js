@@ -133,7 +133,12 @@ class BillPage extends Component {
                             <th>End Date</th>
                             <th />
                           </tr>
-                          <h3>You currently have no pending bills.</h3>
+                          
+                          <tr>
+                            <td>
+                              you currently have no pending bills
+                            </td>
+                          </tr>
                         </tbody>
                       )}
                     </table>
@@ -196,7 +201,11 @@ class BillPage extends Component {
                               <th>Paid On</th>
                               <th />
                             </tr>
-                            <h3>You currently have no paid bills.</h3>
+                            <tr>
+                            <td>
+                              you currently have no pending bills
+                            </td>
+                          </tr>
                           </tbody>
                         )}
                       </table>

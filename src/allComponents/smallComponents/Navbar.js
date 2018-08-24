@@ -43,7 +43,7 @@ render() {
             <span className="icon-bar"></span>
             <span className="icon-bar"></span>
             </button>
-            <a className="navbar-brand" href="#">FinTrack</a>
+            <a className="navbar-brand" href="#"><span className="glyphicon glyphicon-piggy-bank" aria-hidden="true"> </span> FinTrack</a>
         </div>
         <div id="navbar" className="collapse navbar-collapse">
             <ul className="nav navbar-nav">
@@ -52,6 +52,7 @@ render() {
             {link === 'budget'? <li className='active'><a href='#/budget'>Budgets</a></li> :  <li><a href='#/budget'>Budgets</a></li>}
             {link === 'goal' ? <li className='active'><a href='#/goal'>Goals</a></li> : <li><a href='#/goal'>Goals</a></li>}
             {link === 'bills' ? <li className='active'><a href='#/bills'>Bills</a></li> : <li><a href='#/bills'>Bills</a></li>}
+            {link === 'calculator' ? <li className='active'><a href='#/calculator'>Calculator</a></li> : <li><a href='#/calculator'>Calculator</a></li>}
             </ul>
             <ul className="nav navbar-nav navbar-right">
             {link === 'Settings' ? <li className='active'><a href="#/settings">Welcome, {userName ? userName: null}</a></li> : <li><a href="#/settings">Welcome, {userName ? userName: null}</a></li>}
