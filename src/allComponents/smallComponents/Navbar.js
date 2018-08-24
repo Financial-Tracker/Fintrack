@@ -3,6 +3,7 @@ import {auth} from '../../Firebase'
 import { Link } from "react-router-dom";
 import {connect} from 'react-redux'
 import {removeDataFromFireStore} from '../../Store/plaidContainer'
+import {getUserProfileInfo} from '../../Store/userContainer'
 class Navbar extends Component {
     constructor(){
         super()
@@ -11,10 +12,13 @@ class Navbar extends Component {
         }
         
     }
+    componentDidMount(){
+        this.props.getUserData()
+    }
     linkHandler = (evt) =>{
         console.log('clicked', evt, this.state)
     }
-
+userContaineruserContainer
     logOutHandler = () => {
         console.log('logout button clicked')
         auth.signOut()
@@ -25,6 +29,9 @@ class Navbar extends Component {
         console.log('change account')
     }
 render() {
+    let userName = (this.props.user.userContainer.name)
+    console.log('username', userName)
+    let link = this.props.location.pathname.slice(1)
     return (
         <div>
     <nav className="navbar navbar-default">
@@ -36,18 +43,19 @@ render() {
             <span className="icon-bar"></span>
             <span className="icon-bar"></span>
             </button>
-            <a className="navbar-brand" href="#">FinTrack</a>
+            <a className="navbar-brand" href="#"><span className="glyphicon glyphicon-piggy-bank" aria-hidden="true"> </span> FinTrack</a>
         </div>
         <div id="navbar" className="collapse navbar-collapse">
             <ul className="nav navbar-nav">
-            {this.props.link ? <li><a href='#/'>Dashboard</a></li>: <li className='active'><a href='#/'>Dashboard</a></li> }
-            {this.props.link === 'Transactions' ? <li className='active'><a href='#/transactions'>Transactions</a></li> : <li><a href='#/transactions'>Transactions</a></li>}
-            {this.props.link === 'Budget'? <li className='active'><a href='#/budget'>Budgets</a></li> :  <li><a href='#/budget'>Budgets</a></li>}
-            {this.props.link === 'Goals' ? <li className='active'><a href='#/goal'>Goals</a></li> : <li><a href='#/goal'>Goals</a></li>}
-            {this.props.link === 'Bills' ? <li className='active'><a href='#/bills'>Bills</a></li> : <li><a href='#/bills'>Bills</a></li>}
+            {link ? <li><a href='#/'>Dashboard</a></li>: <li className='active'><a href='#/'>Dashboard</a></li> }
+            {link === 'transactions' ? <li className='active'><a href='#/transactions'>Transactions</a></li> : <li><a href='#/transactions'>Transactions</a></li>}
+            {link === 'budget'? <li className='active'><a href='#/budget'>Budgets</a></li> :  <li><a href='#/budget'>Budgets</a></li>}
+            {link === 'goal' ? <li className='active'><a href='#/goal'>Goals</a></li> : <li><a href='#/goal'>Goals</a></li>}
+            {link === 'bills' ? <li className='active'><a href='#/bills'>Bills</a></li> : <li><a href='#/bills'>Bills</a></li>}
+            {link === 'calculator' ? <li className='active'><a href='#/calculator'>Calculator</a></li> : <li><a href='#/calculator'>Calculator</a></li>}
             </ul>
             <ul className="nav navbar-nav navbar-right">
-            {this.props.link === 'Settings' ? <li className='active'><a href="#/settings">Welcome, {this.props.user.plaidContainer.name}</a></li> : <li><a href="#/settings">Welcome, {this.props.user.plaidContainer.name}</a></li>}
+            {link === 'Settings' ? <li className='active'><a href="#/settings">Welcome, {userName ? userName: null}</a></li> : <li><a href="#/settings">Welcome, {userName ? userName: null}</a></li>}
             <li onClick={this.logOutHandler}><a href="#">Logout</a></li>
             </ul>
         </div>
@@ -81,8 +89,8 @@ render() {
     <section id="breadcrumb">
         <div className="container">
         <ol className="breadcrumb">
-        {!this.props.link == '' ?
-<li className="active">Dashboard > {this.props.link}</li>
+        {!link == '' ?
+<li className="active">Dashboard > {link}</li>
         :
         <li className="active">Dashboard </li>
         }
@@ -96,14 +104,14 @@ render() {
 
 const mapStateToProps = state => {
     return {
-        user: state
+        user: state,
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
-        removeDataFromFireStore: () => {
-           dispatch(removeDataFromFireStore())
-        }
+        removeDataFromFireStore: () => {dispatch(removeDataFromFireStore())},
+        getUserData : () => dispatch(getUserProfileInfo())
+
     }
 }
 

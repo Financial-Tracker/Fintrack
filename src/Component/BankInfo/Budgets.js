@@ -208,7 +208,7 @@ class Budgets extends Component {
             </div>
           </React.Fragment>
         ) : (
-          <h1>Loading</h1>
+          <h1>No Budget</h1>
         )}
       </React.Fragment>
     );

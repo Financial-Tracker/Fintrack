@@ -11,7 +11,7 @@ class BudgetPage extends Component {
   render() {
     return (
       <div>
-        <div className="col-md-9">
+        <div className="col-md-9 center">
           <Budget />
         </div>
       </div>

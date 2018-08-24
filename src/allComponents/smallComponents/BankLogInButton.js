@@ -76,7 +76,9 @@ class BankLogInButton extends Component {
 
   renderLogin() {
     return (
+      <div className='center' >
       <PlaidLink
+        className='center'
         clientName="Fintrack"
         onMessage={this.onMessage}
         publicKey="faa176d98c3dd1ab8813a01cc0bc8f"
@@ -90,6 +92,7 @@ class BankLogInButton extends Component {
       >
         Open and connect to plaid
       </PlaidLink>
+      </div>
     );
   }
 }

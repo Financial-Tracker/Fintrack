@@ -186,3 +186,15 @@ a:hover {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.cal-div-style {
+  width:960px; 
+  position:relative;
+}
+
+.cal-iframe {
+  width: 100%;
+  frameborder:0;
+  scrolling:"no";
+  height : 330;
+}
