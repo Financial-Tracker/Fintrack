@@ -29,7 +29,7 @@ class Navbar extends Component {
   };
   render() {
     let userName = this.props.user.userContainer.name;
-    console.log("username", userName);
+
     let link = this.props.location.pathname.slice(1);
     return (
       <div>

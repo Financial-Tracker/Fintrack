@@ -15,10 +15,11 @@ class GoalForm extends Component {
             Created: new Date().toLocaleDateString(),
             selectedDay: undefined,
             goalTitle: '',
-            howMuch: '',
+            howMuch: 0,
             additialInformation: '',
             error: null,
-            isActive: true
+            isActive: true,
+            RecMonthly : 0
         }
     }
     onChangeHandler = (evt) => {
@@ -31,7 +32,11 @@ class GoalForm extends Component {
     }
     onSubmitHandler = (evt) => {
         evt.preventDefault()
+        this.setState({
+            RecMonthly: 60
+        })
         this.props.addAGoal(this.state)
+
         this.setState({
             Created: new Date().toLocaleDateString(),
             selectedDay: undefined,
@@ -59,7 +64,7 @@ class GoalForm extends Component {
                                         <input onChange={this.onChangeHandler} value={this.state.goalTitle} type="text" name='goalTitle' className="form-control" placeholder="Goal Title" />
                                     </div>
                                     <div className="form-group">
-                                        <label>How much ?</label>
+                                        <label>Amount</label>
                                         <input onChange={this.onChangeHandler} value={this.state.howMuch} type="text" name='howMuch' className="form-control" placeholder="How much ?" />
                                     </div>
                                     <div className="form-group">

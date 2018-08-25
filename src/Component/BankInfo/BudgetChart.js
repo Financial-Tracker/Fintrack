@@ -54,7 +54,7 @@ export default class BudgetChart extends React.PureComponent {
     //     });
     //   }
     // }
-    console.log(this.props);
+    
     for (let key in this.props.weeks) {
       let coordinate = {
         x: key,
@@ -62,7 +62,7 @@ export default class BudgetChart extends React.PureComponent {
       };
       finalArr.push(coordinate);
     }
-    console.log(finalArr);
+    
     return finalArr;
   }
   createTooltip() {

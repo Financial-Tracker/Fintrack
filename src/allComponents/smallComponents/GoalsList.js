@@ -25,6 +25,7 @@ class GoalsList extends Component {
   editHandler = () => {};
   render() {
     const goals = this.props.goals.allGoals;
+    console.log(goals)
     return (
       <div className="panel panel-default">
         <div className="panel-heading main-color-bg">
@@ -42,8 +43,8 @@ class GoalsList extends Component {
               <tbody>
                 <tr>
                   <th>Goal</th>
-                  <th>How Much?</th>
-                  <th>Monthly Savings</th>
+                  <th>Amount</th>
+                  <th>Rec Monthly Installment</th>
                   <th>Created</th>
                   <th>End Date</th>
                   <th />
