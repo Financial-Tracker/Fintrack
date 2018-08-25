@@ -6,6 +6,9 @@ const intialState = {}
 
 const GET_USER_PROFILE = "GET_USER_PROFILE"
 const CHANGE_USER_INFO = "CHANGE_USER_INFO"
+const ADD_USER = 'ADD_USER'
+
+const addingUser = (payload) => ({type:ADD_USER, payload})
 
 const changeUser = (changedUser) => {
   return {
@@ -19,6 +22,10 @@ const getUser = (userData) => {
     type: GET_USER_PROFILE,
     payload: userData
   }
+}
+
+export const addUser = (payload) => async dispatch => {
+  dispatch(addingUser(payload))
 }
 
 export const getUserProfileInfo = () => async dispatch => {

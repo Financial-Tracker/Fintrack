@@ -31,7 +31,6 @@ class OverviewPage extends Component {
     this.props.getDataFromFireStore()
   }
   render() {
-    console.log(this.props)
   let AccountTotal = 0;
   let goals = this.props.plaidInfo.Goals ? this.props.plaidInfo.Goals.length : 0
   let transactions = this.props.plaidInfo.transaction ? this.props.plaidInfo.transaction.length : 'Loading';

@@ -141,7 +141,7 @@ class Budgets extends Component {
                   Your monthly income is $
                   {this.props.plaidInfo.action.monthlyIncome}
                 </h3>
-                <h4>You spent ${total} this month</h4>
+                <h4>You spent ${Number(total).toFixed(2)} this month</h4>
               </div>
             ) : (
               <div>
@@ -208,7 +208,7 @@ class Budgets extends Component {
             </div>
           </React.Fragment>
         ) : (
-          <h1>Loading</h1>
+          <h1>No Budget</h1>
         )}
       </React.Fragment>
     );

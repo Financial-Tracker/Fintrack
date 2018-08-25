@@ -39,7 +39,7 @@ export default class BudgetsCard extends Component {
       <React.Fragment>
         <tr>
           <th scope="row">{section}</th>
-          <td>{categories[section].amount}</td>
+          <td>$ {Number(categories[section].amount).toFixed(2)}</td>
           <td>
             <button onClick={this.handleOpenModal}>Click here</button>
             <ReactModal
@@ -60,7 +60,8 @@ export default class BudgetsCard extends Component {
                   {categories[section].list.map((item, index) => (
                     <tr key={index}>
                       <td> {item.name}</td>
-                      <td>{item.amount}</td>
+                      Number(total).toFixed(2)
+                      <td>$ {Number(item.amount).toFixed(2)}</td>
                       <td>{item.date}</td>
                     </tr>
                   ))}

@@ -91,7 +91,9 @@ class GoalsList extends Component {
                   <th>End Date</th>
                   <th />
                 </tr>
-                <h4>You currently have no goals.</h4>
+                <tr>
+                  <td>You currently have no goals!</td>
+                </tr>
               </tbody>
             )}
           </table>

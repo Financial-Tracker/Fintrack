@@ -65,8 +65,8 @@ class BillPage extends Component {
     this.props.pay(index);
   };
   deletePaidBill = index => {
-    this.props.delete(index)
-  }
+    this.props.delete(index);
+  };
   handleOpen = () => this.setState({ modalOpen: true });
   handleClose = () => this.setState({ modalOpen: false });
 
@@ -76,135 +76,138 @@ class BillPage extends Component {
     console.log("allBills: ", this.props.allBills);
     console.log("paidBills: ", this.props.paidBills);
     return (
-              <div>
-                <div className="panel panel-default">
-                  <div className="panel-heading main-color-bg">
-                    <h3 className="panel-title">Pending Bills</h3>
-                  </div>
+      <div>
+        <div className="panel panel-default">
+          <div className="panel-heading main-color-bg">
+            <h3 className="panel-title">Pending Bills</h3>
+          </div>
 
-                  <div className="panel-body">
-                    <div className="row" />
+          <div className="panel-body">
+            <div className="row" />
 
-                    <table className="table table-striped table-hover">
-                      {bills && bills.length ? (
-                        <tbody>
-                          <tr>
-                            <th>Bill</th>
-                            <th>Amount Due</th>
-                            <th>Recurring</th>
-                            <th>How Often</th>
-                            <th>End Date</th>
-                            <th />
-                          </tr>
-                          {bills.map((bill, index) => {
-                            return (
-                              <tr key={index}>
-                                <td>{bill.billTitle}</td>
-                                <td>$ {bill.howMuch}</td>
-                                <td>{bill.howMuch ? "True" : "False"}</td>
-                                <td>{bill.howOften}</td>
-                                <td>{bill.endDate}</td>
-                                <td>
-                                  <a
-                                    className="btn main-color-bg"
-                                    onClick={() => this.paidHandler(index)}
-                                  >
-                                    Paid
-                                  </a>
-                                  <a
-                                    className="btn btn-default"
-                                    href={`#/editbill/${index}`}
-                                    onClick={this.editHandler}
-                                  >
-                                    Edit
-                                  </a>
-                                </td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      ) : (
-                        <tbody>
-                          <tr>
-                            <th>Bill</th>
-                            <th>How Much?</th>
-                            <th>Recurring?</th>
-                            <th>How Often?</th>
-                            <th>End Date</th>
-                            <th />
-                          </tr>
-                          <h3>You currently have no pending bills.</h3>
-                        </tbody>
-                      )}
-                    </table>
-             
-                    <button
-                      data-toggle="modal"
-                      data-target="#addBillForm"
-                      className="btn btn-lg btn-primary main-color-bg center"
-                    >
-                      Add A Bill
-                    </button>
+            <table className="table table-striped table-hover">
+              {bills && bills.length ? (
+                <tbody>
+                  <tr>
+                    <th>Bill</th>
+                    <th>Amount Due</th>
+                    <th>Recurring</th>
+                    <th>How Often</th>
+                    <th>End Date</th>
+                    <th />
+                  </tr>
+                  {bills.map((bill, index) => {
+                    return (
+                      <tr key={index}>
+                        <td>{bill.billTitle}</td>
+                        <td>$ {bill.howMuch}</td>
+                        <td>{bill.howMuch ? "True" : "False"}</td>
+                        <td>{bill.howOften}</td>
+                        <td>{bill.endDate}</td>
+                        <td>
+                          <a
+                            className="btn main-color-bg"
+                            onClick={() => this.paidHandler(index)}
+                          >
+                            Paid
+                          </a>
+                          <a
+                            className="btn btn-default"
+                            href={`#/editbill/${index}`}
+                            onClick={this.editHandler}
+                          >
+                            Edit
+                          </a>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              ) : (
+                <tbody>
+                  <tr>
+                    <th>Bill</th>
+                    <th>How Much?</th>
+                    <th>Recurring?</th>
+                    <th>How Often?</th>
+                    <th>End Date</th>
+                    <th />
+                  </tr>
 
-                    <div className="spaces">           ""                   </div>
-                    <div className="spaces">            ""                  </div>
-                    
+                  <tr>
+                    <td>You currently have no pending bills</td>
+                  </tr>
+                </tbody>
+              )}
+            </table>
 
-                    <div >
-                      <div className="panel-heading main-color-bg">
-                        <h3 className="panel-title">Paid Bills</h3>
-                      </div>
+            <button
+              data-toggle="modal"
+              data-target="#addBillForm"
+              className="btn btn-lg btn-primary main-color-bg center"
+            >
+              Add A Bill
+            </button>
 
-                      <table className="table table-striped table-hover">
-                        {paid && paid.length ? (
-                          <tbody>
-                            <tr>
-                              <th>Bill</th>
-                              <th>Amount Paid</th>
-                              <th>Recurring</th>
-                              <th>How Often</th>
-                              <th>Paid On</th>
-                              <th />
-                            </tr>
-                            {paid.map((bill, index) => {
-                              return (
-                                <tr key={index}>
-                                  <td>{bill.billTitle}</td>
-                                  <td>$ {bill.howMuch}</td>
-                                  <td>{bill.howMuch ? "True" : "False"}</td>
-                                  <td>{bill.howOften}</td>
-                                  <td>{bill.endDate}</td>
-                                  <td>
-                                    <a
-                                      className="btn main-color-bg"
-                                      onClick={() => this.deletePaidBill(index)}
-                                    >
-                                      Remove
-                                    </a>
-                                  </td>
-                                </tr>
-                              );
-                            })}
-                          </tbody>
-                        ) : (
-                          <tbody>
-                            <tr>
-                              <th>Bill</th>
-                              <th>Amount Paid</th>
-                              <th>Recurring</th>
-                              <th>How Often</th>
-                              <th>Paid On</th>
-                              <th />
-                            </tr>
-                            <h3>You currently have no paid bills.</h3>
-                          </tbody>
-                        )}
-                      </table>
-                    </div>
-                  </div>
-                </div>
+            <div className="spaces"> "" </div>
+            <div className="spaces"> "" </div>
+
+            <div>
+              <div className="panel-heading main-color-bg">
+                <h3 className="panel-title">Paid Bills</h3>
               </div>
-            
+
+              <table className="table table-striped table-hover">
+                {paid && paid.length ? (
+                  <tbody>
+                    <tr>
+                      <th>Bill</th>
+                      <th>Amount Paid</th>
+                      <th>Recurring</th>
+                      <th>How Often</th>
+                      <th>Paid On</th>
+                      <th />
+                    </tr>
+                    {paid.map((bill, index) => {
+                      return (
+                        <tr key={index}>
+                          <td>{bill.billTitle}</td>
+                          <td>$ {bill.howMuch}</td>
+                          <td>{bill.howMuch ? "True" : "False"}</td>
+                          <td>{bill.howOften}</td>
+                          <td>{bill.endDate}</td>
+                          <td>
+                            <a
+                              className="btn main-color-bg"
+                              onClick={() => this.deletePaidBill(index)}
+                            >
+                              Remove
+                            </a>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                ) : (
+                  <tbody>
+                    <tr>
+                      <th>Bill</th>
+                      <th>Amount Paid</th>
+                      <th>Recurring</th>
+                      <th>How Often</th>
+                      <th>Paid On</th>
+                      <th />
+                    </tr>
+                    <tr>
+                      <td>You currently have no paid bills!</td>
+                    </tr>
+                  </tbody>
+                )}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
 }
@@ -216,17 +219,14 @@ const mapState = state => {
   };
 };
 const mapDispatch = dispatch => {
-
   return {
     getAllBill: () => dispatch(getAllBill()),
-    pay: (idx) => dispatch(payBill(idx)),
-    delete: (idx) => dispatch(deleteBill(idx))
+    pay: idx => dispatch(payBill(idx)),
+    delete: idx => dispatch(deleteBill(idx))
   };
 };
-
 
 export default connect(
   mapState,
   mapDispatch
 )(BillPage);
-
