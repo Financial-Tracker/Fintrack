@@ -54,7 +54,7 @@ class GoalsList extends Component {
                     <tr key={index}>
                       <td>{goal.goalTitle}</td>
                       <td>{goal.howMuch}</td>
-                      <td>$30</td>
+                      <td>${goal.RecMonthly}</td>
                       <td>{goal.Created}</td>
                       <td>{goal.selectedDay}</td>
                       <td>

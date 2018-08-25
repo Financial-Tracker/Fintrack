@@ -112,6 +112,7 @@ export const getAllGoal = () => async dispatch => {
 }
 export const destroyingGoal = (dataId) => async dispatch => {
     try {
+        
         const user = firebase.auth().currentUser
         const userEmail = user.email;
         const userRef = await db
@@ -131,6 +132,7 @@ export const destroyingGoal = (dataId) => async dispatch => {
         await db.collection("user").doc("" + docRefId + "").update({Goals: newGoals}).then(() => {
             "array updated"
         }).catch(error => console.error(error))
+        
         dispatch(removeGoal(newGoals))
     } catch (error) {
         console.error(error)
