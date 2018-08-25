@@ -18,8 +18,7 @@ class GoalForm extends Component {
             howMuch: 0,
             additialInformation: '',
             error: null,
-            isActive: true,
-            RecMonthly : 0
+            isActive: true
         }
     }
     onChangeHandler = (evt) => {
@@ -32,10 +31,21 @@ class GoalForm extends Component {
     }
     onSubmitHandler = (evt) => {
         evt.preventDefault()
-        this.setState({
-            RecMonthly: 60
-        })
-        this.props.addAGoal(this.state)
+
+        let created = this.state.Created.split('/')
+        created = created.map((el) => Number(el)).reverse()
+        console.log('created: ', created);
+        let a = moment(created)
+        let selectDate = this.state.selectedDay.split('/')
+        selectDate = selectDate.map((el) => Number(el)).reverse()
+        console.log('selectDate: ', selectDate);
+        let b = moment(selectDate)
+        let result = a.diff(b, 'months')
+        console.log(result)
+
+
+
+        this.props.addAGoal({...this.state, RecMonthly: 400})
 
         this.setState({
             Created: new Date().toLocaleDateString(),
