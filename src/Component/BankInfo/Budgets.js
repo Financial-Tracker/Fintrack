@@ -141,7 +141,7 @@ class Budgets extends Component {
                   Your monthly income is $
                   {this.props.plaidInfo.action.monthlyIncome}
                 </h3>
-                <h4>You spent ${total} this month</h4>
+                <h4>You spent ${Number(total).toFixed(2)} this month</h4>
               </div>
             ) : (
               <div>

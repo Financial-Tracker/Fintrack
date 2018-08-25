@@ -93,10 +93,8 @@ class GoalsList extends Component {
                   <th />
                 </tr>
                 <tr>
-                    <td>
-                      you currently have no pending bills
-                    </td>
-                  </tr>
+                  <td>You currently have no goals!</td>
+                </tr>
               </tbody>
             )}
           </table>
