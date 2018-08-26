@@ -11,8 +11,8 @@ export default class AccountOverViewSection extends Component {
           <div className="col-md-3">
             <div className="well dash-box">
               <h2>
-                <span aria-hidden="true" /> 
-                $49378 
+                <span aria-hidden="true" />
+                $49378
                 {/* {this.props.accountTotal} */}
               </h2>
               <h4>Account Total</h4>
@@ -26,7 +26,7 @@ export default class AccountOverViewSection extends Component {
                   aria-hidden="true"
                 />{" "}
                 {/* {this.props.transactions} */}
-              122
+                128
               </h2>
               <h4>Transactions</h4>
             </div>
@@ -34,8 +34,7 @@ export default class AccountOverViewSection extends Component {
           <div className="col-md-3">
             <div className="well dash-box">
               <h2>
-                <span className="" aria-hidden="true" />{" "}
-                $300
+                <span className="" aria-hidden="true" /> $0
                 {/* {this.props.budgets} */}
               </h2>
               <h4>Budgets</h4>
@@ -45,8 +44,7 @@ export default class AccountOverViewSection extends Component {
             <div className="well dash-box">
               <h2>
                 <span className="glyphicon glyphicon-gift" aria-hidden="true" />{" "}
-                3
-                {/* {this.props.goals} */}
+                0{/* {this.props.goals} */}
               </h2>
               <h4>Goals</h4>
             </div>
