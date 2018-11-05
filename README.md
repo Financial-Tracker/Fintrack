@@ -1,6 +1,6 @@
 # What we do
 
-Tired of manually doing your finances? Use Fin-Track. We integrate with 12 different banks and let you track/manage your finances with cool D3 graphs, so that you can be good with your money effortlessly!
+Tired of manually doing your finances? Use Fin-Track. We integrate with 12 different banks and let you track/manage your finances with cool graphs, so that you can be good with your money effortlessly!
 
 # How to use it
 
