@@ -1,12 +1,12 @@
-const path = require('path')
+const path = require("path");
 const bodyParser = require("body-parser");
 const express = require("express");
 const plaid = require("plaid");
 const volleyball = require("volleyball");
 const cors = require("cors");
-const PORT = process.env.PORT || 8000
+const PORT = process.env.PORT || 8000;
 const app = express();
-require('../secret')
+require("../secret");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -22,19 +22,16 @@ const client = new plaid.Client(
 
 app.use(volleyball);
 app.use(cors());
-let file = process.env.NODE_ENV==="production"? "build": "public"
-app.use(express.static(path.join(__dirname, '..', file)))
+let file = process.env.NODE_ENV === "production" ? "build" : "public";
+app.use(express.static(path.join(__dirname, "..", file)));
 
 app.post("/get_access_token", async function(request, response, next) {
-
   PUBLIC_TOKEN = await request.body.public_token;
-
 
   await client.exchangePublicToken(PUBLIC_TOKEN, function(
     error,
     tokenResponse
   ) {
-   
     if (error != null) {
       return response.status(500).json(error);
     }
@@ -43,7 +40,6 @@ app.post("/get_access_token", async function(request, response, next) {
 
     response.json({ error: false });
   });
-
 });
 
 app.post("/auth/get", (req, res, next) => {
@@ -65,8 +61,8 @@ app.post("/auth/get", (req, res, next) => {
 app.post("/transaction/get", (req, res, next) => {
   client.getTransactions(
     ACCESS_TOKEN,
-    "2018-01-01",
-    "2018-09-15",
+    "2019-01-01",
+    "2019-09-15",
     {
       count: 250,
       offset: 0
@@ -101,12 +97,12 @@ app.post("/identity/get", (req, res, next) => {
 app.post("/income/get", (req, res, next) => {
   client.getIncome(ACCESS_TOKEN, function(err, result) {
     // Handle err
-    var income = 0
-    if (result){
+    var income = 0;
+    if (result) {
       var income = result.income;
     }
     res.json(income);
   });
 });
 
-app.listen(PORT)
+app.listen(PORT);

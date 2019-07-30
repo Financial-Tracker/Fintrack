@@ -70,26 +70,26 @@ export const getDataFromFireStore = () => async dispatch => {
       const currentDate = new Date();
       const month = currentDate.getMonth() + 1;
       const year = currentDate.getFullYear();
-      if(dataAPI.transaction){
-      const transMonth = await dataAPI.transaction.filter(transaction => {
-        if (
-          transaction.date.substring(0, 4) == year &&
-          transaction.date.substring(5, 7) == month
-        ) {
-          return true;
-        } else {
-          return false;
-        }
-      });
+      if (dataAPI.transaction) {
+        const transMonth = await dataAPI.transaction.filter(transaction => {
+          if (
+            transaction.date.substring(0, 4) == year &&
+            transaction.date.substring(5, 7) == month
+          ) {
+            return true;
+          } else {
+            return false;
+          }
+        });
 
-      const budget = dataAPI.budget;
-      const income = dataAPI.income.income_streams[0].monthly_income;
-      dataAPI.action = { transMonth, monthlyIncome: income, budget: budget };
-      const action = getPlaid(dataAPI);
-      dispatch(action);
-    }else {
-      dispatch(getPlaid({}))
-    }
+        const budget = dataAPI.budget;
+        const income = dataAPI.income.income_streams[0].monthly_income;
+        dataAPI.action = { transMonth, monthlyIncome: income, budget: budget };
+        const action = getPlaid(dataAPI);
+        dispatch(action);
+      } else {
+        dispatch(getPlaid({}));
+      }
     } else {
       // No user is signed in.
     }
@@ -127,24 +127,24 @@ export const updateBudget = newBudget => async dispatch => {
     const currentDate = new Date();
     const month = currentDate.getMonth() + 1;
     const year = currentDate.getFullYear();
-    if(dataAPI.transaction){
-    const transMonth = await dataAPI.transaction.filter(transaction => {
-      if (
-        transaction.date.substring(0, 4) == year &&
-        transaction.date.substring(5, 7) == month
-      ) {
-        return true;
-      } else {
-        return false;
-      }
-    });
-    const budget = dataAPI.budget;
-    const income = dataAPI.income.income_streams[0].monthly_income;
-    dataAPI.action = { transMonth, monthlyIncome: income, budget: budget };
-    dispatch(updatePlaidBudget(dataAPI));
-  }else {
-    dispatch(updatePlaidBudget({}))
-  }
+    if (dataAPI.transaction) {
+      const transMonth = await dataAPI.transaction.filter(transaction => {
+        if (
+          transaction.date.substring(0, 4) == year &&
+          transaction.date.substring(5, 7) == month
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      const budget = dataAPI.budget;
+      const income = dataAPI.income.income_streams[0].monthly_income;
+      dataAPI.action = { transMonth, monthlyIncome: income, budget: budget };
+      dispatch(updatePlaidBudget(dataAPI));
+    } else {
+      dispatch(updatePlaidBudget({}));
+    }
   } catch (error) {
     console.error(error);
   }
@@ -195,24 +195,24 @@ export const getTransactionsByCurrentMonth = () => async dispatch => {
       const month = currentDate.getMonth() + 1;
       const year = currentDate.getFullYear();
 
-      if(dataAPI.transaction){
-      const transMonth = await dataAPI.transaction.filter(transaction => {
-        if (
-          transaction.date.substring(0, 4) == year &&
-          transaction.date.substring(5, 7) == month
-        ) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-      const budget = dataAPI.budget;
-      const income = dataAPI.income.income_streams[0].monthly_income;
-      const action = { transMonth, monthlyIncome: income, budget: budget };
-      dispatch(getMonth(action));
-    }else {
-      dispatch(getMonth({}))
-    }
+      if (dataAPI.transaction) {
+        const transMonth = await dataAPI.transaction.filter(transaction => {
+          if (
+            transaction.date.substring(0, 4) == year &&
+            transaction.date.substring(5, 7) == month
+          ) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+        const budget = dataAPI.budget;
+        const income = dataAPI.income.income_streams[0].monthly_income;
+        const action = { transMonth, monthlyIncome: income, budget: budget };
+        dispatch(getMonth(action));
+      } else {
+        dispatch(getMonth({}));
+      }
     }
   });
 };
@@ -252,13 +252,13 @@ const reducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         plaidData: {}
-      }
+      };
     case UPDATE_BUDGET:
       return {
         ...state,
         isLoading: false,
         plaidData: action.payload
-      }
+      };
     default:
       return state;
   }

@@ -73,8 +73,8 @@ class BillPage extends Component {
   render() {
     const bills = this.props.allBills;
     const paid = this.props.paidBills;
-    console.log("allBills: ", this.props.allBills);
-    console.log("paidBills: ", this.props.paidBills);
+    // console.log("allBills: ", this.props.allBills);
+    // console.log("paidBills: ", this.props.paidBills);
     return (
       <div>
         <div className="panel panel-default">

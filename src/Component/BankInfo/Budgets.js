@@ -73,7 +73,6 @@ class Budgets extends Component {
   }
 
   render() {
-    console.log("Budgets.js this.props:", this.props);
     let total;
     let transMonthArray;
     let spending;
@@ -87,6 +86,7 @@ class Budgets extends Component {
 
     if (this.props.plaidInfo.action) {
       if (this.props.plaidInfo.action.transMonth) {
+        console.log(this.props.plaidInfo.action);
         transMonthArray = this.props.plaidInfo.action.transMonth;
         for (let i = 0; i < transMonthArray.length; i++) {
           const day = transMonthArray[i].date.substring(8);
@@ -101,32 +101,29 @@ class Budgets extends Component {
             weeks["Week Four"] += amount;
           }
         }
-
+        // console.log(transMonthArray);
         spending = transMonthArray.map(transaction => {
           return transaction.amount;
         });
         const reducer = (accumulator, currentVal) => accumulator + currentVal;
-        total = spending.reduce(reducer);
-        categories = {
-          // "Food and Drink": { id: 0, amount: 0, list: [], picture: Food },
-          // Shops: { id: 1, amount: 0, list: [], picture: Shop },
-          // Travel: { id: 2, amount: 0, list: [], picture: Travel },
-          // Payment: { id: 3, amount: 0, list: [], picture: Payment },
-          // Shops: {id: 4, amount: 0, list: []},
-          // Recreation: {id: 5, amount: 0, list: []}
-        };
-        for (let i = 0; i < transMonthArray.length; i++) {
-          let oneCharge = transMonthArray[i];
+        // console.log(reducer, "reducer", spending, "spending");
+        categories = {};
+        if (spending.length > 0) {
+          total = spending.reduce(reducer);
 
-          if (!categories[oneCharge.category[0]]) {
-            categories[oneCharge.category[0]] = {
-              id: i,
-              amount: oneCharge.amount,
-              list: [oneCharge]
-            };
-          } else {
-            categories[oneCharge.category[0]].amount += oneCharge.amount;
-            categories[oneCharge.category[0]].list.push(oneCharge);
+          for (let i = 0; i < transMonthArray.length; i++) {
+            let oneCharge = transMonthArray[i];
+
+            if (!categories[oneCharge.category[0]]) {
+              categories[oneCharge.category[0]] = {
+                id: i,
+                amount: oneCharge.amount,
+                list: [oneCharge]
+              };
+            } else {
+              categories[oneCharge.category[0]].amount += oneCharge.amount;
+              categories[oneCharge.category[0]].list.push(oneCharge);
+            }
           }
         }
       }
