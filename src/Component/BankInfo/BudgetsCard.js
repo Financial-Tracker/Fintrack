@@ -60,7 +60,6 @@ export default class BudgetsCard extends Component {
                   {categories[section].list.map((item, index) => (
                     <tr key={index}>
                       <td> {item.name}</td>
-                      Number(total).toFixed(2)
                       <td>$ {Number(item.amount).toFixed(2)}</td>
                       <td>{item.date}</td>
                     </tr>

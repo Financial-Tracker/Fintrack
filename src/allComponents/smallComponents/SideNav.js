@@ -210,7 +210,6 @@ class SideNav extends Component {
                 <th scope="col">Amount</th>
               </tr>
             </thead>
-            {console.log(this.props.stateData.bills)}
             {this.props.stateData.bills.allBills ? (
               <tbody>
                 {this.props.stateData.bills.allBills.map((bill, index) => {
