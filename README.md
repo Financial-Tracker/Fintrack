@@ -4,7 +4,7 @@ Tired of manually doing your finances? Use Fin-Track. We integrate with 12 diffe
 
 # How to use it
 
-Since this is still an web progressive app in beta mode, please use our fake user credentials, when adding an account.
+Since this is still in beta mode, please use our fake user credentials, when adding an account.
 Username: user_good
 Password: pass_good
 
